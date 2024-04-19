@@ -48,6 +48,9 @@
     "env": {
       "node": true
     },
+    "ignorePatterns": [
+      "src/*"
+    ],
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended"
