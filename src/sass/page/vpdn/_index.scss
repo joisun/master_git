@@ -1,0 +1,192 @@
+.vpdn-separate{
+  .is-center{
+    .cell{
+      padding-left: 0;
+      padding-right: 0;
+    }
+    border-left: 1px #dfe6ec solid;
+  }
+  &__table{
+
+    &--column{
+      display: block;
+    }
+    &--item{
+      display: block;
+      border-top: 1px #dfe6ec solid;
+      &:first-child{
+        border-top: none;
+      }
+    }
+    &--border{
+      &-right{
+        border-right: 1px #ddd solid;
+      }
+    }
+  }
+}
+
+.item-add-edit{
+  &__search{
+    width: 250px;
+  }
+  &__plan{
+    .el-input{
+      max-width: 70%;
+    }
+    .el-checkbox-group{
+      display: inline-flex;
+    }
+    &--small{
+      width: 150px;
+      margin-left: 5px;
+    }
+    &--text{
+      width: 70%;
+    }
+    &--line{
+      width: 70%;
+
+    }
+    //&--medium{
+    //  width: 120px;
+    //}
+    //&--large{
+    //  width: 200px;
+    //}
+  }
+}
+
+.ip-edit{
+    .el-select{
+      width: 300px;
+    }
+}
+
+.vpdn-ip-list{
+  &__table {
+    &--other{
+      .el-button{
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.speed-limit-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.speed-limit-card {
+    width: 32.5%;
+    display: inline-block;
+    margin: 5px;
+    font-size: 14px;
+    position: relative;
+    line-height: 24px;
+
+    &__title {
+        float: left;
+    }
+
+    &__content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__rules {
+        font-size: 13px;
+        text-align: center;
+        width: 100%;
+        margin-top: 5px;
+
+        td {
+            padding: 5px 3px;
+            border-left: 1px solid #d1dbe5;
+
+            &:first-child {
+                border: none;
+            }
+        }
+
+        tbody tr {
+            border-top: 1px solid #d1dbe5;
+        }
+    }
+
+    &__operation {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+.speed-rule-edit-form {
+  padding-left: 10px;
+
+  &__rules {
+    margin-left: -40px;
+  }
+
+  &__rule {
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &--error {
+      border-color: #ff4949;
+    }
+
+    .el-input {
+      width: 50px;
+    }
+
+    .el-select .el-input {
+      width: 76px;
+    }
+  }
+
+  .long {
+    width: 305px;
+  }
+}
+
+.routing-rules {
+  .input-label {
+    width: 80px;
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.address-translation {
+  textarea {
+    height: 300px;
+  }
+  .btn-wrapper {
+    text-align: center;
+    height: 350px;
+    line-height: 350px;
+  }
+  .el-table {
+    margin-top: 55px;
+    tbody {
+      .el-table_1_column_2 {
+        .cell {
+           max-height: 200px;
+           overflow-y: scroll;
+         }
+        }
+      }
+    }
+  .copyTextArea {
+    width: 1px;
+    height: 1px;
+    border: none;
+    resize: none;
+    outline: none;
+    font-size: 0;
+  }
+}

@@ -1,0 +1,53 @@
+.picture{
+  &__global{
+    .el-dialog__body{
+      padding: 5px 20px;
+    }
+  }
+  &__item{
+    position: relative;
+    width:100%;
+    height:100%;
+    &--img{
+      display: block;
+      margin:0 auto;
+      border: 1px #ddd solid;
+      max-width: 100%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+  &__show{
+    overflow: auto;
+    .el-carousel__item.is-active{
+      display: inline-block;
+    }
+    .el-carousel__item{
+      display: none;
+    }
+    &--tool{
+      //position: absolute;
+      user-select:none;
+      bottom: 0;
+      text-align: center;
+      z-index: 999;
+    }
+    &--button{
+      border: 1px solid #a9a9a9;
+      border-radius: 5px;
+      margin: 5px;
+      line-height: 40px;
+      text-align: center;
+      width: 35px;
+      height: 35px;
+      display: inline-block;
+      cursor: pointer;
+      & i {
+        font-size: 24px;
+      }
+    }
+  }
+}

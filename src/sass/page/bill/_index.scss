@@ -1,0 +1,12 @@
+@import "BillInfoEditor";
+@import "BillCreator";
+@import "billCard";
+@import "billManage";
+@import "order-change";
+
+.bill-comment-editor {
+  .dialog-table tbody tr .cell {
+    line-height: 26px;
+    min-height: 26px;
+  }
+}

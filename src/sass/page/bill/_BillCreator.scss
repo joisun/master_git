@@ -1,0 +1,56 @@
+.bill-creator {
+    .user-info {
+        .record-item > * {
+            vertical-align: middle;
+        }
+
+        .el-autocomplete {
+            width: 200px;
+            display: inline-block;
+
+            .el-input {
+                width: 200px;
+            }
+        }
+
+        .el-input {
+            width: 400px;
+            display: inline-block;
+        }
+
+        .contact-info .el-input {
+            width: 150px;
+
+            &:last-child {
+                width: 400px;
+            }
+        }
+    }
+
+    .add-btn-area {
+        text-align: right;
+        margin: 10px 0;
+    }
+
+    .total-price {
+        text-align: right;
+        font-size: 20px;
+    }
+
+    .pay-info-input {
+        .record-item > * {
+            vertical-align: middle;
+        }
+
+        .el-input {
+            width: 400px;
+        }
+    }
+
+    .el-table {
+        .el-tooltip {
+            display: inline-block;
+        }
+    }
+
+}

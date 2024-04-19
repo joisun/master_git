@@ -1,0 +1,26 @@
+.sale-data{
+  .sale{
+    &__table{
+      .el-table__expand-icon{
+        height: 60px;
+      }
+      .el-table__expanded-cell{
+        padding: 0;
+      }
+    }
+  }
+  .sale__table--inner{
+    .el-table__header-wrapper{
+      display: none;
+    }
+  }
+  .table__inner--style{
+    background-color: rgba(200, 214, 236, 0.2);
+  }
+  tbody .el-table__row:last-child .el-table__expand-icon {
+    display: none;
+  }
+}
+.setOutFile{
+  margin-top: 10px;
+}

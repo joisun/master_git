@@ -1,0 +1,23 @@
+.bill-info-editor {
+    .record-item {
+        > * {
+            vertical-align: middle;
+
+            &.align-top {
+                vertical-align: top;
+            }
+        }
+    }
+
+    .el-select, .el-input, .el-input-number, .el-textarea {
+        width: 200px;
+    }
+
+    .el-checkbox {
+        display: block;
+
+        &+.el-checkbox {
+            margin: 0;
+        }
+    }
+}

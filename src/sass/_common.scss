@@ -1,0 +1,342 @@
+// 覆盖类
+// 本文件中的框架类之后应当被逐渐清除
+
+/* latin-ext */
+//@font-face {
+//  font-family: 'iconfont';  /* project id 181097 */
+//  src: url('//at.alicdn.com/t/font_181097_pz0wwo2hy0l.eot');
+//  src: url('//at.alicdn.com/t/font_181097_pz0wwo2hy0l.eot?#iefix') format('embedded-opentype'),
+//  url('//at.alicdn.com/t/font_181097_pz0wwo2hy0l.woff2') format('woff2'),
+//  url('//at.alicdn.com/t/font_181097_pz0wwo2hy0l.woff') format('woff'),
+//  url('//at.alicdn.com/t/font_181097_pz0wwo2hy0l.ttf') format('truetype'),
+//  url('//at.alicdn.com/t/font_181097_pz0wwo2hy0l.svg#iconfont') format('svg');
+//}
+//
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'iconfont';  /* Project id 4406079 */
+  src: url('//at.alicdn.com/t/c/font_4406079_e371za488lq.woff2?t=1705027068942') format('woff2'),
+  url('//at.alicdn.com/t/c/font_4406079_e371za488lq.woff?t=1705027068942') format('woff'),
+  url('//at.alicdn.com/t/c/font_4406079_e371za488lq.ttf?t=1705027068942') format('truetype');
+}
+/* latin */
+@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  //src: local('Great Vibes'), local('GreatVibes-Regular'), url('/common/font/GreatVibes2.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+.iconfont {
+  font-family: "iconfont";
+  line-height: 16px;
+  font-style: normal;
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  box-sizing: border-box;
+  min-width: 1200px;
+  font-size: 16px;
+
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+}
+
+@for $i from 5 through 30 {
+  .w#{$i} {
+    width: 1% * $i;
+  }
+}
+
+.wh-input {
+  display: block;
+  padding: 3px 10px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  color: #1f2d3d;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #C0CCDA;
+  border-radius: 4px;
+  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  outline: 0;
+  line-height: normal;
+
+  &:hover {
+    border-color: #8492a6;
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: #20a0ff;
+  }
+
+  &[type=password] {
+    letter-spacing: 2px;
+    font-size: 16px;
+  }
+}
+
+.wh-dialog-footer {
+  display: block;
+  text-align: right;
+}
+
+.wh-title {
+  color: $em;
+  float: left;
+  margin-right: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  &--out {
+    min-height: 40px;
+  }
+}
+
+.wh-app-wrap {
+  padding: 30px 40px;
+}
+
+.wh-reset-color {
+  background-color: #ec407a !important;
+  border-color: #ec407a !important;
+
+  &:hover,
+  &:focus {
+    background-color: #a12946 !important;
+    border-color: #a12946 !important;
+  }
+  //
+  //&.el-button:hover,
+  //&.el-button:focus {
+  //  color: #fff !important;
+  //}
+}
+
+.wh-tool {
+  position: relative;
+  margin: 5px 0 10px;
+}
+
+.record-item {
+  margin-bottom: 10px;
+
+  > * {
+    display: inline-block;
+    vertical-align: top;
+
+    &.align-top {
+      vertical-align: top;
+    }
+
+    &.align-middle {
+      vertical-align: middle;
+    }
+  }
+
+  .record-label {
+    width: 100px;
+    text-align: right;
+
+    &:after {
+      content: '：'
+    }
+  }
+}
+
+.el-dialog {
+  h4 {
+    margin: 20px 0 10px 0;
+  }
+}
+
+.el-tabs {
+  margin-bottom: 5px;
+  &__item {
+    padding: 0 10px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  &__active-bar {
+    width: 110px;
+  }
+}
+
+
+.el-table {
+  font-size: 13px;
+  color: #3d3e3f;
+  thead {
+    background: #eaeef0;
+    .cell {
+      padding: 4px 6px;
+      background: #eaeef0;
+      color: #3d3e3f;
+      font-weight: 500;
+    }
+    th {
+      background: #eaeef0;
+      padding: 0;
+    }
+  }
+  tbody {
+    td {
+      font-weight: 400;
+      padding: 4px 0;
+    }
+  }
+
+  .cell,
+  th div {
+    padding-left: 6px;
+  }
+
+  &__expand-icon {
+    height: 30px;
+  }
+
+  .el-form.demo-table-expand {
+    line-height: 30px;
+  }
+  &--border{
+    td:first-child .cell,
+    th:first-child .cell {
+      padding-left: 6px;
+    }
+  }
+}
+
+.el-pager{
+  font-weight: 400;
+}
+.el-pagination{
+  //&__rightwrapper{
+  //  margin-left: 20px;
+  //}
+  &__total{
+    margin:0 10px ;
+  }
+  &__jump{
+    margin: 0 10px;
+  }
+}
+
+.el-loading-mask {
+  top: 0 !important;
+}
+
+.form-not-inline {
+  .el-form-item {
+    display: block;
+    .el-form-item__content {
+      margin-left: 0 !important
+    }
+  }
+}
+
+//.el-button {
+//  &:hover,
+//  &:focus {
+//    color: #ec407a !important;
+//    border-color: #ec407a;
+//  }
+//
+//  &--primary {
+//    background-color: #ec407a;
+//    border-color: #ec407a;
+//    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+//
+//    &:focus,
+//    &:hover {
+//      color: #fff !important;
+//      background-color: #ec407a !important;
+//      border-color: #ec407a !important;
+//    }
+//
+//    &:hover {
+//      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.1), 0 5px 5px -3px rgba(0, 0, 0, 0.25) !important;
+//      transform: matrix(1, 0, 0, 1, 0, -0.5);
+//    }
+//  }
+//
+//  &--text {
+//    color: #ec407a !important;
+//    text-decoration: underline;
+//    user-select: text;
+//
+//    &:hover {
+//      color: #a12946 !important;
+//    }
+//  }
+//
+//  &.is-disabled,
+//  &.is-disabled:focus,
+//  &.is-disabled:hover {
+//    color: #bfcbd9 !important;
+//    cursor: not-allowed !important;
+//    background-image: none !important;
+//    background-color: #eef1f6 !important;
+//    border-color: #d1dbe5 !important;
+//    box-shadow: none !important;
+//    transform: none;
+//  }
+//}
+
+.el-time-panel {
+  box-sizing: content-box;
+}
+
+.el-checkbox {
+    & + .el-checkbox {
+      margin-left: 0px;
+    }
+}
+
+
+// ======================================================
+// ======================================================
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clearfix:after {
+  content: " ";
+  display: block;
+  line-height: 0;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+// .color-info {
+//     color: #ec407a;
+// }
+.color-danger {
+  color: #ec407a;
+}
+
+.color-green {
+  color: #009936;
+}
+
+.color-warning {
+  color: #FFBF00;
+}
+
+.color-grey-666 {
+  color: #666;
+}
+
+.color-grey-999 {
+  color: #999;
+}

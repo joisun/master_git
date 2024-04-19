@@ -1,0 +1,38 @@
+.store-record {
+  tbody {
+    .inner__cell--long {
+      max-height: 1ex;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+  }
+}
+
+.account-add-edit {
+  .account {
+    &__item {
+      &--long {
+        .el-input {
+          width: 250px;
+        }
+      }
+      &--key {
+        .el-input {
+          width: 100px;
+        }
+
+      }
+      &--url {
+        .el-input {
+          width: 350px;
+        }
+      }
+      &--decs {
+
+      }
+    }
+  }
+}
+

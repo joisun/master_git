@@ -1,0 +1,40 @@
+// 卡片辅助风格
+.wh__card{
+  border: 1px solid #d1dbe5;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+  margin-bottom: 10px;
+  &--header{
+    height:45px;
+    line-height: 45px;
+    padding: 0 20px;
+    font-size: 14px;
+    border-bottom: 1px #ddd solid;
+  }
+  &--title{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &--body{
+    padding: 10px;
+    &-item{
+      border-bottom: 1px #ddd solid;
+      &:last-child{
+        border-bottom: none;
+      }
+    }
+  }
+  &--footer{
+    border-top: 1px #ddd solid;
+    min-height: 35px;
+    padding: 10px;
+  }
+  &--hover{
+    cursor: pointer;
+    &:hover{
+      background-color: #e9e9e9;
+    }
+  }
+}

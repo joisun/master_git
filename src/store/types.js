@@ -1,0 +1,38 @@
+// 销售
+export const SALESMAN_SEARCH = 'salesman.search'
+export const SALESMAN_GET = 'salesman.get'
+export const SALESMAN_PUT = 'salesman.put'
+export const SALESMAN_ROLE_SEARCH = 'salesman.role.search'
+
+// 潜在客户
+export const CUSTOMER_POST = 'customer.post'
+export const CUSTOMER_PUT = 'customer.put'
+export const CUSTOMERS_SEARCH = 'customer.search'
+export const CUSTOMER_DELETE = 'customer.delete'
+export const CUSTOMERS_TRANSFER = 'customer.transfer'
+export const CUSTOMER_AUTO_SEND = 'customer.auto.send'
+export const CUSTOMER_DETAIL_GET = 'customer.detail.get'
+export const CUSTOMER_CONTACT_SEARCH = 'customer.contact.search'
+export const CUSTOMER_CONTACT_PUT = 'customer.contact.put'
+export const CUSTOMER_CONTACT_POST = 'customer.contact.post'
+export const CUSTOMER_ABANDON = 'customer.abandon'
+export const CUSTOMER_RECEIVE = 'customer.receive'
+export const CUSTOMER_FOCUS = 'customer.focus'
+export const CUSTOMER_AUDIT_PUT = 'customer.audit.put'
+export const INPUT_TAG_CUSTOMER_POST = 'input.tag.customer.post'
+export const INPUT_TAG_REGISTER_POST = 'input.tag.register.post'
+export const INPUT_TAG_SEARCH = 'input.tag.search'
+export const INPUT_TAG_STATISTICS_SEARCH = 'input.tag.statistics.search'
+export const INPUT_TAG_UPDATE = 'input.tag.update'
+export const INPUT_TAG_POST = 'input.tag.post'
+export const INPUT_TAG_DELETE = 'input.tag.delete'
+export const INPUT_MARK_POST = 'input.mark.post'
+export const INPUT_MARK_SEARCH = 'input.mark.search'
+export const INPUT_MARK_CUSTOMER_POST = 'input.mark.customer.post'
+
+export const DUPLICATE_CHECK = 'duplicate.check.search'
+
+export const CRM_ENUM = 'crm.enum'
+export const CRM_INDUSTRY = 'crm.industry'
+
+export const CPE_ENUM = 'cpe.enum'

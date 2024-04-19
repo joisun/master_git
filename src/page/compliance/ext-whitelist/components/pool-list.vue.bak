@@ -1,0 +1,412 @@
+<script>
+import Download from '@/page/components/wh-download/wh-download'
+import whSaleSelect from '@/page/components/wh-sales-select.vue'
+const carrierGroupMap = {
+  unicomAccountList: '中国联通',
+  cmccAccountList: '中国移动',
+  chinanetAccountList: '中国电信'
+}
+const exportConfigTextMap = {
+  QUERY: '搜索条件',
+  SELECTED: '选中项目'
+}
+const removeEmptyField = (obj) => {
+  for (const key in obj) {
+    const element = obj[key]
+    if (!element) delete obj[key]
+  }
+  return obj
+}
+export default {
+  components: { whSaleSelect },
+  props: {
+    status: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      exportConfigTextMap,
+      search: {},
+      page: {
+        pageIndex: 1,
+        pageSize: 20,
+        total: 0
+      },
+      poolList: [],
+      loading: false,
+      isShowRefuseDialog: false,
+      dialogForm: {
+        type: 'ICCID',
+        reason: '',
+        iccidOrIp: ''
+      },
+      dialogFormRules: {
+        iccidOrIp: { required: true, message: '内容不能为空', trigger: 'blur' },
+        reason: { required: true, message: '原因不能为空', trigger: 'blur' }
+      },
+      poolId: '',
+      selected: [],
+      carrierAccountGroups: [],
+      exportConfigList: []
+    }
+  },
+  computed: {
+    currentExportConfig() {
+      const mapper = {
+        NOT_DEAL: {
+          showCheckbox: true,
+          btns: [
+            {
+              text: '导出',
+              handler: () => this.exportPool(true)
+            },
+            {
+              text: '导出并配置',
+              handler: () => this.exportPool(false)
+            }
+          ]
+        },
+        CONFIGURING: {
+          showCheckbox: true,
+          btns: [
+            {
+              text: '导出',
+              handler: () => this.exportPool(true)
+            },
+            {
+              text: '配置成功',
+              handler: () => this.configSuccess()
+            }
+          ]
+        },
+
+        CONFIG_FAILED: {
+          showCheckbox: true,
+          btns: [
+            {
+              text: '导出',
+              handler: () => this.exportPool(true)
+            },
+            {
+              text: '重新配置',
+              handler: () => this.reConfig()
+            }
+          ]
+        },
+        CONFIGURED: {
+          showCheckbox: false,
+          btns: [
+            {
+              text: '导出',
+              handler: () => this.exportPool(true)
+            }
+          ]
+        }
+      }
+      return mapper[this.status]
+    }
+  },
+  watch: {
+    status(val) {
+      if (val) {
+        this.getList(1)
+      }
+    },
+    '$store.state.carrierAccount': {
+      deep: true,
+      handler: function () {
+        this.genCarrerAccountGroups()
+      }
+    }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    genCarrerAccountGroups(keyword) {
+      const carrierAccount = this.$store.state.carrierAccount
+      const result = Object.keys(carrierAccount).map((key) => {
+        return {
+          label: carrierGroupMap[key],
+          options: this.filerDataByKeyword(keyword, carrierAccount[key], ['id', 'name'])
+        }
+      })
+      this.carrierAccountGroups = result
+    },
+    filerDataByKeyword(keyword, list, fields) {
+      if (!keyword) return list
+      return list.filter((item) => {
+        return fields.some((field) => `${item[field]}`.indexOf(keyword) > -1)
+      })
+    },
+    onSearch() {
+      this.getList(1)
+    },
+    async getList(currentPage = 1) {
+      this.loading = true
+      this.search = removeEmptyField(this.search)
+      const { success, data } = await this.jaxLib.whitelist.getExtWhiteList({
+        ...this.search,
+        currentPage,
+        rowsPerPage: this.page.pageSize,
+        status: this.status
+      })
+      this.loading = false
+      if (!success) return false
+      this.poolList = data.list
+      this.page.pageIndex = currentPage
+      this.page.total = data.page.allCount
+    },
+    closeDialog() {
+      this.dialogForm.reason = ''
+      this.dialogForm.iccidOrIp = ''
+      this.isShowRefuseDialog = false
+    },
+    dialogSubmit() {
+      this.$refs.dialogForm.validate(async (valid) => {
+        if (!valid) return false
+        const params = {
+          poolId: this.poolId,
+          ...this.dialogForm
+        }
+        params.iccidOrIp = params.iccidOrIp.split('\n').join(',')
+        const { success } = await this.jaxLib.whitelist.extWhiteListRefuse(params)
+        if (!success) return false
+        this.$message({ type: 'success', message: '驳回成功' })
+        this.dialogForm.reason = ''
+        this.dialogForm.iccidOrIp = ''
+        this.isShowRefuseDialog = false
+        await this.getList(1)
+      })
+    },
+    showDialog(poolId) {
+      this.poolId = poolId
+      this.isShowRefuseDialog = true
+    },
+    handleSelectionChange(val) {
+      this.selected = val.map((item) => item.poolId)
+    },
+    getExportParams(onlyExport) {
+      let params = {
+        onlyExport,
+        status: this.status
+      }
+      this.search = removeEmptyField(this.search)
+      if (this.exportConfigList.includes(this.exportConfigTextMap.QUERY)) {
+        params = {
+          ...params,
+          ...this.search
+        }
+      }
+      if (this.exportConfigList.includes(this.exportConfigTextMap.SELECTED)) {
+        params = {
+          ...params,
+          poolIds: this.selected.join(',')
+        }
+      }
+      return params
+    },
+    async exportPool(onlyExport) {
+      const params = this.getExportParams(onlyExport)
+      const { success, data } = await this.jaxLib.whitelist.extWhiteListExportPool(params)
+      if (!success) return false
+      await Download({ ...data })
+      await this.getList(1)
+    },
+    async configSuccess() {
+      // if (!this.selected.length) {
+      //   return this.$message({ type: 'warning', message: '请选择白名单池' })
+      // }
+      const params = this.getExportParams(false)
+      const { success } = await this.jaxLib.whitelist.extWhiteListConfigSuccess(params)
+      if (success) {
+        this.$message({ type: 'success', message: '配置成功' })
+        await this.getList(1)
+      }
+    },
+    async reConfig() {
+      // if (!this.selected.length) {
+      //   return this.$message({ type: 'warning', message: '请选择白名单池' })
+      // }
+      const params = this.getExportParams(false)
+      const { success } = await this.jaxLib.whitelist.extWhiteListReConfig(params)
+      if (success) {
+        this.$message({ type: 'success', message: '配置成功' })
+        await this.getList(1)
+      }
+    }
+  }
+}
+</script>
+
+<template>
+  <div class="ext-whitelist-pool-list">
+    <div class="wh__tools">
+      <div class="wh__tools--mix">
+        <el-input
+          v-model.trim="search.orgNameOrId"
+          style="width: 180px"
+          placeholder="请输入客户ID或者名称"
+          @keyup.enter.native="onSearch"
+        >
+        </el-input>
+        <wh-sale-select
+          v-model="search.saleName"
+          style="width: 160px"
+          @change="onSearch"
+        ></wh-sale-select>
+        <el-input
+          v-model.trim="search.poolId"
+          style="width: 160px"
+          placeholder="请输入白名单编号"
+          @keyup.enter.native="onSearch"
+        >
+        </el-input>
+        <el-input
+          v-model.trim="search.iccid"
+          style="width: 160px"
+          placeholder="请输入iccid"
+          @keyup.enter.native="onSearch"
+        >
+        </el-input>
+        <el-input
+          v-model.trim="search.address"
+          style="width: 160px"
+          placeholder="请输入白名单域名"
+          @keyup.enter.native="onSearch"
+        >
+        </el-input>
+        <el-select
+          v-model="search.carrierAccountId"
+          filterable
+          remote
+          clearable
+          reserve-keyword
+          placeholder="运营商账号"
+          :remote-method="genCarrerAccountGroups"
+        >
+          <el-option-group
+            v-for="group in carrierAccountGroups"
+            :key="group.label"
+            :label="group.label"
+          >
+            <el-option
+              v-for="item in group.options"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-option-group>
+        </el-select>
+        <div class="card-manage__search--button mr10">
+          <el-button icon="el-icon-search" @click="getList(1)"></el-button>
+        </div>
+        <div style="display: flex; justify-content: flex-end; align-items: center">
+          <el-checkbox-group
+            v-show="currentExportConfig.showCheckbox"
+            v-model="exportConfigList"
+            style="display: inline-block; margin-right: 10px"
+          >
+            <el-checkbox :label="exportConfigTextMap.QUERY" style="margin-right: 8px" />
+            <el-checkbox :label="exportConfigTextMap.SELECTED" :disabled="selected.length <= 0" />
+          </el-checkbox-group>
+          <el-button
+            v-for="btn in currentExportConfig.btns"
+            :key="btn.text"
+            type="primary"
+            @click="btn.handler"
+            >{{ btn.text }}</el-button
+          >
+        </div>
+      </div>
+    </div>
+    <div v-loading="loading" class="wh__body">
+      <div class="wh__body--table">
+        <el-table :data="poolList" @selection-change="handleSelectionChange">
+          <el-table-column
+            v-if="status !== 'CONFIGURED'"
+            type="selection"
+            width="55"
+          ></el-table-column>
+          <el-table-column
+            label="白名单池ID"
+            prop="poolId"
+            align="center"
+            width="120px"
+          ></el-table-column>
+          <el-table-column label="客户名称(ID)">
+            <template slot-scope="scope">{{ scope.row.orgName }}({{ scope.row.orgId }})</template>
+          </el-table-column>
+          <el-table-column label="销售">
+            <template slot-scope="scope">{{ scope.row.saleName | saleFilter }}</template>
+          </el-table-column>
+          <el-table-column label="白名单池名称" prop="poolName"></el-table-column>
+          <el-table-column label="最后编辑时间" align="center">
+            <template slot-scope="scope">{{ scope.row.submitDate | dateFilter }}</template>
+          </el-table-column>
+          <el-table-column
+            label="白名单IP/域名变更数"
+            prop="addressCount"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            label="关联ICCID变更数"
+            prop="iccidCount"
+            align="center"
+          ></el-table-column>
+          <el-table-column label="操作" align="center" width="100px">
+            <template slot-scope="scope">
+              <el-button type="primary" @click="showDialog(scope.row.poolId)">驳回</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="wh__body--page">
+        <el-pagination
+          :current-page="page.pageIndex"
+          :page-size="page.pageSize"
+          layout="total, prev, pager, next"
+          :total="page.total"
+          @current-change="getList"
+        >
+        </el-pagination>
+      </div>
+    </div>
+    <el-dialog :visible="isShowRefuseDialog" title="白名单驳回" width="600px" :show-close="false">
+      <el-form ref="dialogForm" label-width="130px" :model="dialogForm" :rules="dialogFormRules">
+        <el-form-item label="白名单类型：" prop="type">
+          <el-radio-group v-model="dialogForm.type">
+            <el-radio label="ICCID">ICCID</el-radio>
+            <el-radio label="ADDRESS">白名单IP/域名</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item
+          :label="dialogForm.type === 'ICCID' ? 'ICCID：' : '白名单IP/域名：'"
+          prop="iccidOrIp"
+        >
+          <el-input
+            v-model="dialogForm.iccidOrIp"
+            type="textarea"
+            placeholder="请输入"
+            :rows="5"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="原因：" prop="reason">
+          <el-input
+            v-model="dialogForm.reason"
+            type="textarea"
+            placeholder="请输入驳回原因"
+            :rows="5"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="closeDialog">取 消</el-button>
+        <el-button type="primary" @click="dialogSubmit">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
+</template>

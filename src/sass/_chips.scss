@@ -1,0 +1,155 @@
+// 变量和基础类
+
+$pr: #78909c;
+$em: #261645;
+$ig: #95aeba;
+$ex: #ec407a;
+$ig-2: #eaeef0;
+
+$bl: #20a0ff;
+$rd: #f03946;
+$gr: #46d469;
+$yl: #e4c946;
+
+.shadow {
+  display: none !important;
+}
+
+.justify {
+  text-align: justify;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    width: 100%;
+  }
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.clean-float {
+  clear: both;
+  float: none;
+}
+
+//生成mr5、mt15、 pr5 、pl10等
+$gap-type: (l: left, r: right, b: bottom, t: top);
+@each $i in 5 10 15 20 25 {
+  @each $name, $value in $gap-type {
+    .m#{$name}#{$i} {
+      margin-#{$value} : #{$i}px;
+    }
+    .p#{$name}#{$i} {
+      padding-#{$value} : #{$i}px;
+    }
+  }
+}
+
+@mixin m($t, $value) {
+  margin-#{$gap-type($t)} : $value px;
+}
+
+@mixin p($t, $value) {
+  padding-#{$gap-type($t)} : $value px;
+}
+
+// 生成字体 .font10
+$fontSizeInt: 10;
+@while $fontSizeInt < 36 {
+  .font#{$fontSizeInt} {
+    font-size: #{$fontSizeInt}px !important;
+  }
+  $fontSizeInt: $fontSizeInt + 1;
+}
+
+.tar {
+  text-align: right;
+}
+
+.tac {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+$flexValue: 1;
+@while $flexValue < 10 {
+  .flex#{$flexValue} {
+    flex: #{$flexValue};
+  }
+  $flexValue: $flexValue + 1;
+}
+
+$widthValue: 0;
+@while $widthValue <= 100 {
+  .width#{$widthValue} {
+    width: #{$widthValue + '%'} !important;
+  }
+  $widthValue: $widthValue + 5;
+}
+
+
+.underline {
+  text-decoration: underline;
+}
+
+.flex-column{
+  flex-direction: column;
+}
+
+.flex-content-start {
+  align-content: flex-start;
+}
+
+.flex-content-end {
+  align-content: flex-end;
+}
+
+.flex-content-center {
+  align-content: center;
+}
+
+.space-between {
+  align-content: space-between;
+}
+
+.space-around {
+  align-content: space-around;
+}
+
+.flex-content-stretch {
+  align-content: stretch;
+}
+
+.flex-items-start {
+  align-items: flex-start;
+}
+
+.flex-items-end {
+  align-items: flex-end;
+}
+
+.flex-items-center {
+  align-items: center;
+}
+
+.flex-items-baseline {
+  align-items: baseline;
+}
+
+.flex-items-stretch {
+  align-items: stretch;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
