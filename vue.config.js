@@ -27,7 +27,7 @@ module.exports = defineConfig({
       "Access-Control-Allow-Headers": "*",
     },
   },
-  publicPath: "/",
+  publicPath: "/client/",
   configureWebpack: {
     plugins: [
       new NodePolyfillPlugin()
