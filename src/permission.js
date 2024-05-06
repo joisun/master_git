@@ -47,7 +47,7 @@ export async function getAuthAndAddRoutes() {
     if (to.query.code) {
       const res = await commonApis.getToken({ code: to.query.code });
       if (res.success) {
-        window.location.replace("./consumer");
+        window.location.replace("./client");
       } else {
         window.location.replace("./login");
       }
