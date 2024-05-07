@@ -9,13 +9,15 @@ import cardPanel from '@/page/components/panel/card-info-panel.vue'
 import clientPanel from '@/page/components/panel/client-info-panel.vue'
 import Download from '@/page/components/wh-download/wh-download'
 import DialogBatchIccidInputSearch from '@/page/components/DialogBatchIccidInputSearch'
+import RetiredRecover from "@/page/card/card-operation/eliminate-card/components/retired-recover.vue";
 
 export default {
   components: {
     'wh-sales-select': whSalesSelect,
     'card-panel': cardPanel,
     'client-panel': clientPanel,
-    DialogBatchIccidInputSearch
+    DialogBatchIccidInputSearch,
+    RetiredRecover
   },
   data() {
     return {
@@ -116,6 +118,9 @@ export default {
         this.form.iccids = ''
       }
     },
+    recover() {
+      this.$refs.retiredRecover.open()
+    },
     async outExcel() {
       if (this.form.iccids) {
         // 如果单条输入框存在值则需要清除批量搜索的值
@@ -135,6 +140,7 @@ export default {
 
 <template>
   <div class="eliminate-result-supplier">
+    <retired-recover ref="retiredRecover" @confirm="simpleSearch"/>
     <dialog-batch-iccid-input-search
       ref="dialogBatchIccidInputSearch"
       :file-list="batchDialogData.fileList"
@@ -218,7 +224,10 @@ export default {
           </el-option>
         </el-select>
         <el-button type="primary" size="small" @click.native="simpleSearch">搜索</el-button>
-        <el-button size="small" class="float-right" @click.native="outExcel">导出</el-button>
+      </div>
+      <div class="clearfix">
+        <el-button size="small"class="float-right" @click.native="outExcel" style="margin-left: 10px">导出</el-button>
+        <el-button size="small"  type="primary"  class="float-right" @click.native="recover">销卡恢复</el-button>
       </div>
     </div>
     <div v-loading="loading" class="wh__body">

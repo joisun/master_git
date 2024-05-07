@@ -126,7 +126,7 @@ export default {
       const batchTarget = []
       Object.keys(this.flowStatusData).forEach((type) => {
         Object.keys(this.flowStatusData[type]).forEach((category) => {
-          if (this.flowStatusData[type][category]) {
+          if (!!this.flowStatusData[type][category]) {
             batchTarget.push({
               category,
               type

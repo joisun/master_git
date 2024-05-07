@@ -34,6 +34,7 @@ import crm from './crm-api'
 
 import cpe from './ironman-api'
 import flowWarning from '@/api/captain-api/flow-warning'
+import international from './international'
 const ajaxHelpers = {
   bill,
   card,
@@ -62,7 +63,8 @@ const ajaxHelpers = {
   cardOwnershipQuery,
   customerServices,
   flowWarning,
-  tools
+  tools,
+  international
 }
 
 export default ajaxHelpers

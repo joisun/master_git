@@ -28,6 +28,9 @@ import financeCostStatistic from '@/page/manage/children/finance/children/financ
 import salesComission from '@/page/manage/children/finance/children/sales-comission/sales-comission.vue'
 import salesComissionList from '@/page/manage/children/finance/children/sales-comission/list/sales-comission-list.vue'
 import salesComissionDetail from '@/page/manage/children/finance/children/sales-comission/detail/sales-comission-detail.vue'
+import salesComissionList2024 from '@/page/manage/children/finance/children/sales-comission-2024/list/sales-comission-list.vue'
+import salesComissionDetail2024 from '@/page/manage/children/finance/children/sales-comission-2024/detail/sales-comission-detail.vue'
+
 import salesComissionCost from '@/page/manage/children/finance/children/sales-comission-cost/sales-comission-cost.vue'
 import salesComissionConfig from '@/page/manage/children/finance/children/sales-comission-config/index.vue'
 import salesComissionCostList from '@/page/manage/children/finance/children/sales-comission-cost/list/sales-comission-cost-list.vue'
@@ -128,6 +131,16 @@ export default {
       },
       children: [
         {
+          name: 'sales-comission-list2024',
+          path: 'sales-comission-list2024',
+          component: salesComissionList2024
+        },
+        {
+          path: 'sales-comission-detail2024',
+          name: 'sales-comission-detail2024',
+          component: salesComissionDetail2024
+        },
+        {
           name: 'sales-comission-list',
           path: 'sales-comission-list',
           component: salesComissionList
@@ -139,6 +152,29 @@ export default {
         }
       ]
     },
+    // {
+    //   path: 'sales-comission-2024',
+    //   name: 'sales-comission-2024',
+    //   component: salesComission2024,
+    //   redirect: {
+    //     name: 'sales-comission-list-2024',
+    //     query: {
+    //       enter: true
+    //     }
+    //   },
+    //   children: [
+    //     {
+    //       name: 'sales-comission-list-2024',
+    //       path: 'sales-comission-list-2024',
+    //       component: salesComissionList2024
+    //     },
+    //     {
+    //       path: 'sales-comission-detail-2024',
+    //       name: 'sales-comission-detail-2024',
+    //       component: salesComissionDetail2024
+    //     }
+    //   ]
+    // },
     {
       path: 'sales-comission-cost',
       name: 'sales-comission-cost',

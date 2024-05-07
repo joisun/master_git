@@ -28,7 +28,7 @@
       >
         <el-row>
           <el-col :span="6">
-            <el-form-item label="流程编号" v-if="formData.flowNo">
+            <el-form-item v-if="formData.flowNo" label="流程编号">
               {{ formData.flowNo }}
             </el-form-item>
             <el-form-item label="变更类型" prop="type">
@@ -252,7 +252,7 @@
             </el-form-item>
           </template>
           <ip-domain-table-form
-            :operateType="formData.extWhitelistWorkOrderSaveDTO.operateType"
+            :operate-type="formData.extWhitelistWorkOrderSaveDTO.operateType"
             :cidr-max-count="formData.carrier === 'cmcc' ? 10 : 256"
             :carrier="formData.carrier"
             :address-list="formData.addressList"
@@ -264,10 +264,10 @@
         <el-form-item v-if="!disabledWithSellerRole">
           <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
           <el-button :loading="loading" @click="goBack">取消</el-button>
-          <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"
-            >关闭</el-button
-          >
         </el-form-item>
+        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"
+          >关闭</el-button
+        >
       </el-form>
     </el-card>
     <process v-if="flowNo && formData.status" :flow-no="flowNo" :flow-data="formData" />
@@ -349,6 +349,7 @@ const submitSchemas = {
 }
 export default {
   components: { Process, IpDomainTableForm, SalePrice },
+  mixins: [mixins],
   data() {
     const { flowNo = '' } = this.$route.query
     return {
@@ -430,14 +431,12 @@ export default {
       )
     }
   },
-  created() {
+  async created() {
     if (this.flowNo) {
       this.getDetail()
-      // this.checkCanCLose()
     }
     this.getRole()
   },
-  mixins: [mixins],
   methods: {
     // async handleFlowClose() {
     //   const res = await this.jaxLib.whitelist.forceClose({ flowNo: this.flowNo })
@@ -496,7 +495,7 @@ export default {
                 return {
                   ...item,
                   address: (item.address || '').trim(),
-                  action: isClearAddress ? '' : 'ADD',
+                  action: !!isClearAddress ? '' : 'ADD',
                   isExist: !!isClearAddress
                 }
               })

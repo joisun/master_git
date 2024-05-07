@@ -17,9 +17,15 @@ import finance from '@/router/manage/finance'
 import develop from '@/router/manage/develop'
 import other from '@/router/manage/other'
 import vpdn from '@/router/manage/vpdn'
+import Gotham from '@/page/gotham.vue'
+import Login from "@/page/login.vue";
 
 export default [
-  // manage,
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
   client,
   store,
   order,
@@ -39,6 +45,33 @@ export default [
     path: 'qual-script',
     name: 'qual-script',
     component: QualScript
+  },
+  {
+    path: '/ota-admin/*',
+    name: 'ota-admin',
+    component: Gotham,
+    children: [
+      {
+        path: '/ota-admin/card-manage/seed-list',
+        name: 'ota-admin-seed-list',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/card-manage/affiliate-list',
+        name: 'ota-admin-affiliate-list',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/system-manage/link-records',
+        name: 'ota-admin-link-records',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/card-manage/ota-card-list',
+        name: 'ota-admin-ota-card-list',
+        component: Gotham
+      }
+    ]
   },
   {
     path: '/international/*',
@@ -103,7 +136,13 @@ export default [
 
 const initRouter = () => {
   return new Router({
-    routes: []
+    routes: [
+      {
+        path: '/login',
+        name: 'login',
+        component: Login
+      },
+    ]
   })
 }
 export const router = initRouter()

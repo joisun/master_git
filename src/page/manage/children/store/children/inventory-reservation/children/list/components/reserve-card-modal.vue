@@ -217,7 +217,7 @@ export default {
     open(content) {
       this.content = content
       this.disabledSome = false
-      if (content) {
+      if (!!content) {
         const { carrier, signCarrierId, material, specification, netType } = content
         const reg = /(4G)?(5G)?(NB)?/g
         const netTypes = (netType.match(reg) || []).filter((item) => !!item)

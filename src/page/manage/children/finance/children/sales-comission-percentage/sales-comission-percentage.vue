@@ -8,7 +8,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <keep-alive include="sales-comission-cost-list">
-      <router-view/>
+      <router-view />
     </keep-alive>
   </transition>
 </template>

@@ -1,4 +1,5 @@
 <script>
+import moment from 'moment'
 import ImageUpload from './image-upload.vue'
 import ZipUpload from './ZipUpload.vue'
 const uploadType = [
@@ -82,7 +83,7 @@ export default {
           this.$emit('refresh')
         })
       } else {
-        this.$refs.zipRef.submit()
+        this.$refs.zipRef.submit() 
       }
     },
     onSuccess(data) {
@@ -133,7 +134,7 @@ export default {
             placeholder="可以直接复制excel中的整列ICCID；手动输入ICCID，一行一个，最多输入1000个"
             resize="none"
             style="width:440px">
-          </el-input>
+          </el-input>  
         </el-form-item>
         <el-form-item label="设备图片" prop="photos">
           <image-upload ref="imgRef" :picUrls="addForm.photos"/>

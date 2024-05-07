@@ -91,7 +91,7 @@ export default {
       let startTime = ''
       let endTime = ''
       if (timeRange && timeRange.length === 2) {
-        [startTime, endTime] = [
+        ;[startTime, endTime] = [
           dateFormat(timeRange[0], 'YYYY-MM-DD HH:mm:ss'),
           dateFormat(timeRange[1], 'YYYY-MM-DD HH:mm:ss')
         ]

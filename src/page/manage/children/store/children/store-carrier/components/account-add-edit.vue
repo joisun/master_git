@@ -51,17 +51,17 @@ export default {
       let data = { ...this.form }
       console.log(data)
       if (this.carrier === 'unicom') {
-        ['smsChannelApiKey'].forEach((e) => {
+        ;['smsChannelApiKey'].forEach((e) => {
           delete data[e]
         })
       }
       if (this.carrier === 'chinanet') {
-        ['planType', 'smsChannelApiKey'].forEach((e) => {
+        ;['planType', 'smsChannelApiKey'].forEach((e) => {
           delete data[e]
         })
       }
       if (this.carrier === 'cmcc') {
-        ['planType'].forEach((e) => {
+        ;['planType'].forEach((e) => {
           delete data[e]
         })
       }

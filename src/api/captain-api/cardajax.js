@@ -345,6 +345,11 @@ export default {
   },
   ...cardLocationBind,
   eliminateRules: {
+    // 销卡恢复
+    cardRetiringRecover(data) {
+      const url = '/ajax/cardRetiring/recover'
+      return ajax(url, data)
+    },
     // 根据订单号和客户ID搜索
     retireRuleList(data) {
       const url = '/ajax/retire/rule/list'

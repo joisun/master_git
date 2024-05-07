@@ -17,7 +17,6 @@
           <wh-std-icon :sign="menuToIcon[topMenu.code]" />
         </div>
       </div>
-
     </div>
     <el-drawer
       :show-close="false"

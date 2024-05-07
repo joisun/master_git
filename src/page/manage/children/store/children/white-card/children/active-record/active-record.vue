@@ -79,7 +79,7 @@ export default {
       let outputTimeStart = ''
       let outputTimeEnd = ''
       if (timeRange && timeRange.length === 2) {
-        [outputTimeStart, outputTimeEnd] = [
+        ;[outputTimeStart, outputTimeEnd] = [
           dateFormat(timeRange[0], 'YYYY-MM-DD'),
           dateFormat(timeRange[1], 'YYYY-MM-DD')
         ]

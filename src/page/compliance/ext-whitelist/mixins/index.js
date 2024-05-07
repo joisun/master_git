@@ -15,7 +15,7 @@ export default {
         flowNo: this.flowNo
       })
       if (success) {
-        this.canClose = data
+        this.canClose = Boolean(data)
       }
     },
     async handleFlowClose() {
@@ -26,14 +26,13 @@ export default {
         closeOnClickModal: true
       })
         .then(async () => {
-          const res = await this.jaxLib.whitelist.forceClose({ flowNo: this.flowNo })
+          const res = await this.jaxLib.whitelist.complianceClose({ flowNo: this.flowNo })
           if (res && res.success) {
             this.$message.success('关闭成功')
             this.$router.go(-1)
           }
         })
         .catch(() => {})
-
-    },
+    }
   }
 }

@@ -67,6 +67,18 @@ const commissionConfig = {
    * */
   getButlerSaleArea: (data) => ajax('/ajax/salesCommissionConfig/list/butler/sale/area', data)
 }
+const salesCommission2024 = {
+  summary: (data) => ajax('/ajax/salesCommission2024/summary', data),
+  getLastModifyTime: (data) => ajax('/ajax/salesCommission2024/getLastModifyTime', data),
+  // 销售提成数据详情 客户纬度
+  detail: (data) => ajax('/ajax/salesCommission2024/detail', data),
+  detailModifyCost: (data) => ajax('/ajax/salesCommission2024/detail/modifyCost', data),
+  detailModifyRecord: (data) => ajax('/ajax/salesCommission2024/detail/modifyRecord', data),
+  addDetail: (data) => ajax('/ajax/salesCommission2024/addDetail', data),
+  batchImportCheck: (data) => ajax('/ajax/salesCommission2024/import/check', data),
+  batchImport: (data) => ajax('/ajax/salesCommission2024/import', data),
+  export: (data) => ajax('/ajax/salesCommission2024/export', data)
+}
 
 export default {
   query: (data) => ajax('/ajax/salesCommission/summary', data),
@@ -89,5 +101,6 @@ export default {
   importCost: (data) => ajax('/ajax/salesCost/import', data),
   getSalesList: () => ajax('/ajax/sales/list'),
   ...projectOrder,
-  ...commissionConfig
+  ...commissionConfig,
+  salesCommission2024
 }

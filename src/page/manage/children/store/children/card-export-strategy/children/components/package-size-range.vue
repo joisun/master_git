@@ -104,7 +104,7 @@ const DEFAULT_CARRIER = JSON.stringify({
 const DEFAULT_ITEM = JSON.stringify({
   lowerLimit: '',
   upperLimit: '',
-  // carrierAccount: [...JSON.parse(DEFAULT_CARRIER)]
+  carrierAccount: [JSON.parse(DEFAULT_CARRIER)]
 })
 export default {
   components: {
@@ -159,7 +159,7 @@ export default {
       const data = [...this.data]
       data[index].carrierAccount.splice(i, 1)
       if (data[index].carrierAccount.length === 0) {
-        data[index].carrierAccount = [...JSON.parse(DEFAULT_CARRIER)]
+        data[index].carrierAccount = [JSON.parse(DEFAULT_CARRIER)]
       }
       this.$emit('change', data)
     },

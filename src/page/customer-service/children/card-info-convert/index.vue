@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     onChange(exceptField) {
-      ['iccids', 'msisdns', 'imsis', 'ips'].forEach((field) => {
+      ;['iccids', 'msisdns', 'imsis', 'ips'].forEach((field) => {
         if (field === exceptField) {
           return
         }

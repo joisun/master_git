@@ -113,11 +113,11 @@ body::-webkit-scrollbar {
     background-color: #a12946 !important;
     border-color: #a12946 !important;
   }
-  //
-  //&.el-button:hover,
-  //&.el-button:focus {
-  //  color: #fff !important;
-  //}
+
+  &.el-button:hover,
+  &.el-button:focus {
+    color: #fff !important;
+  }
 }
 
 .wh-tool {
@@ -242,53 +242,53 @@ body::-webkit-scrollbar {
   }
 }
 
-//.el-button {
-//  &:hover,
-//  &:focus {
-//    color: #ec407a !important;
-//    border-color: #ec407a;
-//  }
-//
-//  &--primary {
-//    background-color: #ec407a;
-//    border-color: #ec407a;
-//    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-//
-//    &:focus,
-//    &:hover {
-//      color: #fff !important;
-//      background-color: #ec407a !important;
-//      border-color: #ec407a !important;
-//    }
-//
-//    &:hover {
-//      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.1), 0 5px 5px -3px rgba(0, 0, 0, 0.25) !important;
-//      transform: matrix(1, 0, 0, 1, 0, -0.5);
-//    }
-//  }
-//
-//  &--text {
-//    color: #ec407a !important;
-//    text-decoration: underline;
-//    user-select: text;
-//
-//    &:hover {
-//      color: #a12946 !important;
-//    }
-//  }
-//
-//  &.is-disabled,
-//  &.is-disabled:focus,
-//  &.is-disabled:hover {
-//    color: #bfcbd9 !important;
-//    cursor: not-allowed !important;
-//    background-image: none !important;
-//    background-color: #eef1f6 !important;
-//    border-color: #d1dbe5 !important;
-//    box-shadow: none !important;
-//    transform: none;
-//  }
-//}
+.el-button {
+  &:hover,
+  &:focus {
+    color: #ec407a !important;
+    border-color: #ec407a;
+  }
+
+  &--primary {
+    background-color: #ec407a;
+    border-color: #ec407a;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:focus,
+    &:hover {
+      color: #fff !important;
+      background-color: #ec407a !important;
+      border-color: #ec407a !important;
+    }
+
+    &:hover {
+      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.1), 0 5px 5px -3px rgba(0, 0, 0, 0.25) !important;
+      transform: matrix(1, 0, 0, 1, 0, -0.5);
+    }
+  }
+
+  &--text {
+    color: #ec407a !important;
+    text-decoration: underline;
+    user-select: text;
+
+    &:hover {
+      color: #a12946 !important;
+    }
+  }
+
+  &.is-disabled,
+  &.is-disabled:focus,
+  &.is-disabled:hover {
+    color: #bfcbd9 !important;
+    cursor: not-allowed !important;
+    background-image: none !important;
+    background-color: #eef1f6 !important;
+    border-color: #d1dbe5 !important;
+    box-shadow: none !important;
+    transform: none;
+  }
+}
 
 .el-time-panel {
   box-sizing: content-box;

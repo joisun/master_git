@@ -19,6 +19,7 @@ import DialogFailure from './../components/dialog-failure'
 import FollowRecords from './follow-records.vue'
 import MissionRecords from './mission-records.vue'
 import apis from '@/api/ajax'
+import crmApi from "@/api/crm-api";
 
 const catalogs = [
   { name: '基础信息', id: 'baseInfo', mToStage: '4', finished: false },
@@ -227,7 +228,7 @@ export default {
       this.fetch(customerId)
     },
     async getRemoteInputTagList() {
-      const res = await apis.crm.inputTagSearch({ keyword: '无效客户' })
+      const res = await crmApi.inputTagSearch({ keyword: '无效客户' })
       if (res && res.success) {
         return res.data.records ? res.data.records[0] : null
       }

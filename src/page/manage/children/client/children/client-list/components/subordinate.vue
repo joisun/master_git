@@ -6,8 +6,13 @@
   import { iccidsTransfer } from '@/global/function/iccids-tool'
   import goSystem from '@/global/function/go-system'
   import regexps from '@/constant/regexps'
+import ReverseAssignDialog
+  from "@/page/manage/children/client/children/client-list/components/reverse-assign-dialog.vue";
 
   export default {
+    components: {
+      ReverseAssignDialog
+    },
     mixins: [DialogMixin],
     props: {
       orgId: {
@@ -198,42 +203,7 @@
         }
       },
       toTransferIccids(val) {
-        this.transferValidateForm = { iccids: '', remark: '' }
-        let vNode = function(h, name) {
-          return (
-            <div>
-              <el-input ref="iccidRef" type="textarea" value={name.transferValidateForm.iccids}
-                onInput={value => {
-                  name.transferValidateForm.iccids = value
-                  name.$refs.iccidRef.value = value
-                }}
-                placeholder="请输入iccid,用逗号或者换行分割"
-                size="small" className="subordinate__box--input">
-              </el-input>
-            </div>
-          )
-        }
-        this.$msgbox({
-          title: '划拨工具',
-          message: vNode(this.$createElement, this),
-          showCancelButton: true,
-          beforeClose: async function(action, instance, done) {
-            if (action === 'confirm') {
-              if (!this.transferValidateForm.iccids.trim()) {
-                this.$message({ type: 'error', message: '请输入iccid' })
-                return false
-              }
-              let res = await this.jaxLib.customer.subordinate.transferReverseValidate({
-                orgId: val.id,
-                iccids: iccidsTransfer(this.transferValidateForm.iccids).join(',')
-              })
-              if (!res.success) return false
-              this.transferCheckResult = res.data
-              setTimeout(() => this.toTransfer(val))
-              done()
-            } else done()
-          }.bind(this)
-        })
+        this.$refs.reverseAssignDialog.open(val)
       },
       // 划拨工具
       toTransfer(val) {
@@ -427,6 +397,7 @@
 
 <template>
   <div class="subordinate">
+    <reverse-assign-dialog ref="reverseAssignDialog" @confirm="getList" />
     <div class="wh__dialog--header">
       <el-input
         placeholder="组织id、账户名、企业名称"
@@ -476,11 +447,19 @@
             {{ scope.row.lastLoginTime | dateFilter }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" min-width="110">
+        <el-table-column label="操作" min-width="60" align="right">
           <template slot-scope="scope">
-            <el-button size="small" @click="toQuota(scope.row)">配额工具</el-button>
-            <el-button size="small" @click="toTransferIccids(scope.row)">划拨工具</el-button>
-            <el-button size="small" @click="toConfigWx(scope.row)">微信配置</el-button>
+            <el-button
+              type="primary"
+              style="margin-bottom: 2px"
+              size="mini"
+              @click="toQuota(scope.row)"
+              >配额工具</el-button
+            >
+            <el-button style="margin-bottom: 2px" size="mini" @click="toTransferIccids(scope.row)"
+              >逆划拨工具</el-button
+            >
+            <el-button size="mini" @click="toConfigWx(scope.row)">微信配置</el-button>
           </template>
         </el-table-column>
       </el-table>

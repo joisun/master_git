@@ -355,7 +355,7 @@ export default {
       }
     },
     async initData() {
-      [
+      ;[
         'carrier',
         'isNBIoTAccount',
         'carrierAccountId',

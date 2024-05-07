@@ -502,11 +502,5 @@ export default {
   async listSameSignedCarrierAccountList(data) {
     const url = '/ajax/carrierAccount/listSameSignedCarrierAccountList'
     return ajax(url, data)
-  },
-
-  // 强制关闭接口
-  async forceClose(data) {
-    const url = '/ajax/compliance/forceClose'
-    return ajax(url, data)
-  },
+  }
 }

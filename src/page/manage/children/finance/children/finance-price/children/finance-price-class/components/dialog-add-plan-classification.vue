@@ -13,7 +13,7 @@
       cb()
     } else cb()
   }
-  const dateRanges = Array(13).map((item, index) => ({
+  const dateRanges = Array.from({ length: 31 }).map((item, index) => ({
     label: index + 1,
     value: index + 1
   }))

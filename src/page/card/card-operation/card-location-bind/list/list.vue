@@ -91,7 +91,7 @@ export default {
       let dateStart = ''
       let dateEnd = ''
       if (dateRange && dateRange.length === 2) {
-        [dateStart, dateEnd] = [
+        ;[dateStart, dateEnd] = [
           dateFormat(dateRange[0], 'YYYY-MM-DD 00:00:00'),
           dateFormat(dateRange[1], 'YYYY-MM-DD 23:59:59')
         ]

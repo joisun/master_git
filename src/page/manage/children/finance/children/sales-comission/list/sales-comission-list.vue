@@ -230,6 +230,7 @@ import DialogImportSalesComission from '../components/DialogImportSalesComission
 import { calculateGPM } from '@/global/function/calculator'
 import OverviewItem from '../components/OverviewItem'
 import { mapState } from 'vuex'
+import moment from 'moment'
 const orderMap = {
   income: 'income',
   recharge: 'recharge',
@@ -250,8 +251,9 @@ export default {
         disabledDate(time) {
           const currentDate = new Date()
           return (
-            time.getFullYear() >= currentDate.getFullYear() &&
-            time.getMonth() > currentDate.getMonth()
+            (time.getFullYear() >= currentDate.getFullYear() &&
+              time.getMonth() > currentDate.getMonth()) ||
+            moment(time).isAfter(moment('2024-02-01'))
           )
         }
       },
@@ -308,7 +310,7 @@ export default {
     }
   },
   created() {
-    this.search.monthDate = getFirstDayOfMonth()
+    this.search.monthDate = '2024-02-01'
     this.getArea()
     this.getRole()
   },
