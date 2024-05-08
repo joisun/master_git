@@ -326,7 +326,7 @@ export default {
   cancelPlanApplyRestart: (data) => ajax('/ajax/cardModifyTool/sendExportMsg', data),
 
   getSaleRenewData: (data) => ajax('/ajax/crm/customerRecharge/info', data),
-  getSaleRenewExportPath: (data) => ajax('ajax/crm/customerRecharge/export', data),
+  getSaleRenewExportPath: (data) => ajax('/ajax/crm/customerRecharge/export', data),
 
   organizationSearch: (data) => ajax('/ajax/organization/search', data),
   retainNumber: {

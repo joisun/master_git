@@ -11,7 +11,7 @@ export default {
       return ajax(url, { ...data })
     },
     saveNewCarrierConfig(data) {
-      const url = 'ajax/costingEvaluate/saveNewCarrierConfig'
+      const url = '/ajax/costingEvaluate/saveNewCarrierConfig'
       return ajax(url, { ...data })
     }
   },

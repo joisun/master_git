@@ -7,10 +7,10 @@ module.exports = defineConfig({
   runtimeCompiler: true,
   devServer: {
     proxy: {
-      '^/ajax': {  // Key: A path prefix to trigger the proxy
+      '^/': {  // Key: A path prefix to trigger the proxy
         // target: 'http://simboss-whitehouse-feature-sale-commission-240130.test.simboss.com', // Target of the proxy (your API server)
-        target: 'http://localhost:3031', // Target of the proxy (your API server)
-        changeOrigin: true,             // Modifies the origin header in requests
+        target: 'http://localhost:9999', // Target of the proxy (your API server)
+        changeOrigin: false,             // Modifies the origin header in requests
         // pathRewrite: { '^/api': '' }    // Remove the '/api' prefix
       },
       '^/international': {  // Key: A path prefix to trigger the proxy

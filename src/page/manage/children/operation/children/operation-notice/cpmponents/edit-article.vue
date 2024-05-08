@@ -84,7 +84,7 @@ export default {
     editor.config.uploadImgMaxSize = 3 * 1024 * 1024
     editor.config.uploadImgMaxLength = 1
     editor.config.uploadImgTimeout = 1000 * 30
-    editor.config.uploadImgServer = 'ajax/common/image/upload'
+    editor.config.uploadImgServer = '/ajax/common/image/upload'
     editor.config.showLinkImg = false
     editor.create()
     editor.txt.html(this.formData.content)

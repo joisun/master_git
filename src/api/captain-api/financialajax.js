@@ -172,15 +172,15 @@ export default {
   // 卡功能分类
   function: {
     getFunctionList(params) {
-      const url = 'ajax/price/function/list'
+      const url = '/ajax/price/function/list'
       return ajax(url, params)
     },
     saveFunction(params) {
-      const url = 'ajax/price/function/save'
+      const url = '/ajax/price/function/save'
       return ajax(url, params)
     },
     deleteFunction(params) {
-      const url = 'ajax/price/function/delete'
+      const url = '/ajax/price/function/delete'
       return ajax(url, params)
     },
     exportData() {

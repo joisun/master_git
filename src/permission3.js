@@ -15,7 +15,7 @@ const initRouter = () => {
 }
 
 const isTestOrDev =
-  window.location.href.indexOf('3031') !== -1 || window.location.href.indexOf('test') !== -1
+  window.location.href.indexOf('9999') !== -1 || window.location.href.indexOf('test') !== -1
 export async function getAuthAndAddRoutes() {
   const router = initRouter()
 

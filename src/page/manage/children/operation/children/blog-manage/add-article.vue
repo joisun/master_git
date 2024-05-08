@@ -309,7 +309,7 @@ export default {
     this.editor.config.uploadImgMaxSize = 3 * 1024 * 1024
     this.editor.config.uploadImgMaxLength = 1
     this.editor.config.uploadImgTimeout = 1000 * 30
-    this.editor.config.uploadImgServer = 'ajax/common/blog/content/upload'
+    this.editor.config.uploadImgServer = '/ajax/common/blog/content/upload'
     this.editor.config.showLinkImg = false
     this.editor.config.zIndex = 400
     this.editor.config.height = 600

@@ -13,6 +13,7 @@ import Vlf from 'vlf'
 import localforage from 'localforage'
 import { commonMessageConfig } from './plugins'
 import { getAuthAndAddRoutes } from './permission'
+import App from "@/page/app.vue";
 
 Vue.use(Router)
 Vue.mixin(tools)
@@ -74,10 +75,10 @@ if (module.hot) {
 
 function initApp(router) {
   return new Vue({
-    el: '#app',
+    // el: '#app',
     router,
     store
-  })
+  }).$mount("#app");
 }
 
 function initEnum() {

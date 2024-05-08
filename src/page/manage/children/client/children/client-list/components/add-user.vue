@@ -77,7 +77,7 @@
         }
         let postData = this.addUserForm
         postData.filter = 'phone&email&description'
-        let rst = await this.jaxLib.customer.orgUser.create_user('ajax/customers/create_user', postData)
+        let rst = await this.jaxLib.customer.orgUser.create_user('/ajax/customers/create_user', postData)
         if (rst.success) {
           this.msg('添加新用户成功', 'success')
           this.$emit('closeDialog', this.dialogName, true)

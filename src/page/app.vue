@@ -109,8 +109,8 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="sass">
-@import "../sass/style-output.scss"
+<style rel="stylesheet/scss" lang="scss">
+@import "../sass/style-output.scss";
 </style>
 
 <style lang="scss">
