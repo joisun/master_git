@@ -45,14 +45,14 @@ export async function getAuthAndAddRoutes() {
   })
   router.beforeEach(async (to, from, next) => {
     console.log('🎸 DEBUG_47 permission.js 👉', to)
-    if (to.query.code) {
-      const res = await commonApis.getToken({ code: to.query.code });
-      if (res.success) {
-        window.location.replace("./client");
-      } else {
-        window.location.replace("./login");
-      }
-    }
+    // if (to.query.code) {
+    //   const res = await commonApis.getToken({ code: to.query.code });
+    //   if (res.success) {
+    //     window.location.replace("./client");
+    //   } else {
+    //     window.location.replace("./login");
+    //   }
+    // }
     try {
       const { name } = from
       if (name) {

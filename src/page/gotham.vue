@@ -27,7 +27,7 @@ export default {
       name: 'gotham',
       entry: '/ota-admin',
       container: '#ota-admin-container',
-      sandbox : { experimentalStyleIsolation: true },
+      // sandbox : { experimentalStyleIsolation: true },
       props: {
         ajax,
         whImgShow
@@ -35,7 +35,7 @@ export default {
     })
   },
   beforeDestroy() {
-    this.microApp.unmount()
+    // this.microApp.unmount()
   },
   methods: {}
 }
