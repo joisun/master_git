@@ -52,7 +52,8 @@ import removeCodeSuffix from '@/global/function/remove-code-suffix'
 import { MENUS } from '@/constant/constants'
 import SideBar from '@/page/components/side-bar.vue'
 
-const isOnline = window.location.host === 'whitehouse.simboss.com'
+// TODO 分离相关
+const isOnline = window.location.host === 'whitehouse.simboss.com' || window.location.host === 'whitehouse-new.simboss.com'
 export default {
   components: {
     WhGlobalSearch,
