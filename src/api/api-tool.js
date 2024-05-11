@@ -72,8 +72,7 @@ export const ajax = (url, data = {}, option = {}, isFile = false) => {
         type: 'error',
         offset: 70
       })
-      console.log('🎸 DEBUG_75 api-tool.js 👉', window.location.origin)
-      window.location.href = `${window.location.origin}`
+      window.location.href = `${window.location.origin}?redirect=${window.location.hash}`
     } else {
       _normalizeMessage(res, option)
       return res.body

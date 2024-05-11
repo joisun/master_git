@@ -84,6 +84,7 @@ function initApp(router) {
 function initEnum() {
   return new Promise((resolve) => {
     api.common.getEnum().then((resp) => {
+      if (!resp) return
       const finalEnums = {
         ...resp.data,
         platformTypes: {
