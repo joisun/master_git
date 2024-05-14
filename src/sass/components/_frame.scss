@@ -1,0 +1,205 @@
+// 框架结构类
+.wh{
+  &__warp{
+    height: 100%;
+    padding: 20px 30px 10px;
+  }
+  &__header{
+      display: block;
+      height:30px;
+      margin-bottom: 5px;
+      position: relative;
+      &--title{
+        // 页面标题
+        color: $em;
+        float: left;
+        margin-right: 30px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      &--title-grounp{
+        font-weight: normal;
+        color:$ig;
+        font-size: 28px;
+        // 页面多标题方案
+        .wh__header--title{
+          margin-right: 0px;
+          font-size: 28px;
+          color:$ig;
+          float: none;
+          cursor: pointer;
+          transition: all 10ms;
+          user-select: none;
+          &.active{
+            color: $em;
+          }
+        }
+      }
+      &--close{
+        z-index: 999;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        .iconfont {
+          font-size: 30px;
+          color: #aaa;
+          cursor: pointer;
+          transition: ts(.3);
+          &:hover {
+            color: #666;
+          }
+        }
+      }
+      &--operate{
+        z-index: 999;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+  }
+  &__info{
+    margin: 20px 0;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 2px 2px #c4c4c4;
+    &--title{
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px #c4c4c4 solid;
+    }
+  }
+  &__tabs{
+    .el-tabs__header{
+      margin-bottom: 0;
+    }
+  }
+  &__tools{
+    min-height: 36px;
+    margin-bottom: 5px;
+    &--search{
+      // 搜索条内容
+      min-height: 36px;
+      &-name{
+        width:120px;
+      }
+      &-filter{
+        width:150px;
+      }
+      &-simple{
+        width:100px;
+      }
+      &-input{
+        width:220px;
+      }
+      &-btn{
+        vertical-align: top;
+      }
+      &-text {
+        margin-right: 48px;
+      }
+    }
+    &--operate{
+      &:after{
+        content: '';
+        display: block;
+        clear: both;
+      }
+    }
+    &--mix{
+      min-height: 36px;
+      &-btn{
+        vertical-align: top;
+        margin-left: 10px;
+      }
+    }
+    &--filter{
+      &-item{
+        display: block;
+      }
+      .el-checkbox+.el-checkbox{
+        margin-left: 0;
+      }
+      .el-radio+.el-radio{
+        margin: 0;
+      }
+    }
+    .collect-content{
+      &__box{
+        margin: 10px 0;
+        display: flex;
+        span {
+          flex: 1;
+          position: relative;
+          font-size: 14px;
+          border: 1px solid #ddd;
+          padding: 20px;
+          text-align: center;
+          margin-right: 10px;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+  &__body{
+    .el-table thead.is-group th {
+      background: #eaeef0;
+    }
+    &--page{
+      // 统一页码
+      padding: 5px 0;
+      text-align: center;
+      .el-pagination{
+        display: inline-block;
+      }
+      &-other{
+        display: inline-block;
+        padding: 2px 5px;
+        font-size: 13px;
+        min-width: 28px;
+        height: 28px;
+        line-height: 28px;
+        vertical-align: middle;
+        box-sizing: border-box;
+      }
+    }
+    &--footer{
+      text-align: left;
+      margin: 10px 0px;
+      font-size: 14px;
+    }
+  }
+  &__dialog{
+    &--header{
+      &-title{
+        display: inline-block;
+        margin-right: 20px;
+      }
+    }
+    &--body{
+      margin: 20px 0;
+    }
+    &--footer{
+      text-align: right;
+    }
+  }
+  &__link{
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  &__iccid--box {
+    min-height: 20vh;
+    .el-checkbox-group{
+      display: flex;
+      flex-wrap: wrap;
+      .el-checkbox {
+        + .el-checkbox {
+          margin-left: 0;
+        }
+        margin: 0 20px 10px 0;
+      }
+    }
+  }
+  &__content {
+    height: 100%;
+  }
+}

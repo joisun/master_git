@@ -1,0 +1,31 @@
+// 动画
+
+@keyframes breath {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes logoFont {
+    0%{  text-shadow: none;  }
+    12%{  text-shadow: 0 0 5px #ec8ea9, 0 0 20px #ec769e, 0 0 20px #ec407a;  }
+    25%{  text-shadow:none;  }
+    37%{  text-shadow: 0 0 5px #b590ec, 0 0 20px #b769ec, 0 0 20px #a111ec;  }
+    50%{  text-shadow: none;  }
+    63%{  text-shadow: 0 0 5px #84d0ec, 0 0 20px #47b4ec, 0 0 20px #05b0ec;  }
+    75%{  text-shadow: none;  }
+    88%{  text-shadow: 0 0 5px #9aec8f, 0 0 20px #56ec52, 0 0 20px #14ec0a;  }
+    100%{  text-shadow: none;  }
+}
+
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

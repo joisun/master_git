@@ -1,0 +1,351 @@
+$progress-grey: #E0E6ED;
+$device-card-large-size: 20px;
+$device-card-small-size: 14px;
+.grid-content {
+  margin: 12px 5px;
+  border: 1px solid #d1dbe5;
+  display: inline-block;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
+
+  &.warn {
+    border: 1px red solid;
+  }
+
+  &.warn .device-card {
+    background-color: rgb(255, 214, 209);
+  }
+
+  &.warn div {
+    border-color: #fff !important;
+  }
+
+  .middle {
+    vertical-align: middle;
+  }
+
+  .float-right {
+    float: right;
+  }
+
+  .grey {
+    color: #8c8c8c;
+  }
+
+  .light-blue {
+    color: #0095e2;
+  }
+
+  .large-size {
+    font-size: $device-card-large-size;
+  }
+
+  .small-size {
+    font-size: $device-card-small-size;
+  }
+
+  .margin-bottom-10 {
+    margin-bottom: 10px;
+  }
+
+  .device-card {
+    background-color: #fff;
+    padding: 0 15px 5px 15px;
+
+    .card-header {
+      height: 45px;
+      line-height: 45px;
+      border-bottom: 1px solid #eee;
+      text-align: right;
+
+      .title {
+        font-size: $device-card-large-size;
+        font-weight: bold;
+        float: left;
+      }
+      .info {
+        vertical-align: 2px;
+        font-size: 12px;
+        padding: 3px 6px;
+        border: 1px #ddd solid;
+        border-radius: 20px;
+        background-color: #f1f1f1;
+        color: #777;
+      }
+    }
+
+    .card-content {
+
+      margin-top: 5px;
+
+      .progress-wrapper {
+        height: 10px;
+
+        .progress-bar {
+          height: 18px;
+          width: 100%;
+          border-radius: 100px;
+          background-color: $progress-grey;
+          overflow: hidden;
+          position: relative;
+
+          &__none {
+            z-index: 999;
+            background-color: #bbb !important;
+          }
+
+          &.thin {
+            z-index: 1;
+            overflow: hidden;
+          }
+
+          .seg-first, .seg-second, .seg-three, .seg-four, .seg-fir {
+            height: 100%;
+            position: absolute;
+            display: inline-block;
+          }
+
+          .seg-first {
+            background-color: #FFBF00;
+            border-radius: 100px 0 0 100px;
+          }
+
+          .seg-second {
+            background-color: #FA5E5B;
+            border-radius: 0;
+          }
+
+          .seg-three {
+            background-color: #20A0FF;
+            border-radius: 0;
+          }
+
+          .seg-four {
+            background-color: #13CE66;
+            border-radius: 0;
+          }
+
+          .seg-fir {
+            background-color: #4DD0E1;
+            border-radius: 0;
+          }
+
+          .progress-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            line-height: 1.4;
+            border-radius: 100px;
+
+            &.warn {
+              background-color: #d0011b;
+            }
+
+            &.normal {
+              background-color: #20a0ff;
+            }
+          }
+
+          .progress-inner-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+      }
+
+      .card-content-l1 {
+
+      }
+
+      .progress-bar {
+        height: 30px;
+        background-color: #bbbbbb;
+        font-size: 0;
+        &__item {
+          display: inline-block;
+          height: 100%;
+          font-size: 14px;
+          text-align: center;
+          line-height: 30px;
+        }
+        .seg-first {
+          background-color: #4dd0e1;
+        }
+        .seg-second {
+          background-color: #ffbf00;
+        }
+      }
+      .card-content-l2 {
+        .detail-title {
+          margin: 5px 0;
+          display: flex;
+
+          span {
+            flex: 1;
+            position: relative;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            padding: 2px;
+            text-align: center;
+            margin-right: 10px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+        .statistic {
+          display: flex;
+          justify-content: space-between;
+          margin: 10px 0;
+          &__item {
+            width: 23%;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            padding: 4px 8px;
+            background-color: #ddd3;
+            &--title {
+              font-size: 12px;
+              margin-bottom: 3px;
+            }
+            &--value {
+              text-align: center;
+              font-weight: bold;
+            }
+          }
+        }
+        .red-bold-nomal {
+          color: red;
+          font-weight: bold;
+        }
+      }
+
+      .card-content-l3 {
+        border-top: 1px #ddd solid;
+        padding-top: 5px;
+        font-size: 12px;
+        margin-bottom: 5px;
+
+        .oversell-detail {
+          font-size: 12px;
+          color: #111;
+        }
+      }
+    }
+
+    .card-footer {
+
+    }
+
+    &__use {
+      height: 145px;
+      font-size: 22px;
+
+      &--lasted {
+        font-size: 22px;
+      }
+
+      &--overVolume {
+        font-size: 16px;
+      }
+    }
+
+    &__volume {
+      min-height: 120px;
+      display: flex;
+
+      &--picture {
+        position: relative;
+        margin-right: 5px;
+        width: 120px;
+
+        &-none {
+          text-align: center;
+          line-height: 120px;
+          height: 120px;
+          border: 1px #ddd solid;
+          border-radius: 50%;
+          background: #ddd;
+        }
+
+        &-rate {
+          position: absolute;
+          text-align: center;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+          & p {
+            width: 50px;
+            font-size: 13px;
+            color: #4cb37a;
+
+            &:first-child {
+              border-bottom: 1px #ddd solid;
+              color: #2c9cff;
+            }
+          }
+        }
+      }
+
+      &--text {
+        margin-left: 5px;
+        font-size: 13px;
+        line-height: 18px;
+        flex: 1;
+        height: 145px;
+      }
+
+      &--big {
+        font-size: 18px;
+      }
+
+      &--used {
+        color: red;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      &--left-margin {
+        margin-left: 5px;
+      }
+
+      &--small {
+        font-size: 13px;
+        color: #aaa;
+      }
+
+      &--other {
+        color: #2c9cff;
+      }
+
+      &--user {
+        color: #4cb37a;
+      }
+    }
+
+    &__set {
+      &--info {
+        vertical-align: 2px;
+        font-size: 12px;
+        padding: 3px 6px;
+        border: 1px #ddd solid;
+        border-radius: 20px;
+        background-color: #f1f1f1;
+        color: #777;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes load {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

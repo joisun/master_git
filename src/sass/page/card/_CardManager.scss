@@ -1,0 +1,254 @@
+.card-manage {
+  &__info {
+    margin: 20px 0;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 2px 2px #c4c4c4;
+    position: relative;
+
+    &--top {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+
+      &-title {
+        font-size: 16px;
+      }
+    }
+
+    &--body {
+      display: flex;
+
+      &-content {
+        width: 800px;
+        display: block;
+        border: 1px #ddd solid;
+
+        .cell {
+          text-align: center;
+          padding: 0px 18px !important;
+          min-height: 24px !important;
+          line-height: 24px !important;
+        }
+      }
+
+      &-tools {
+        overflow-y: auto;
+        margin-left: 20px;
+        width: 40%;
+        display: block;
+        .el-button {
+          display: inline-block;
+          margin-bottom: 10px;
+          margin-left: 0;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    &--toolbox {
+      position: absolute;
+      right: 0;
+      top: -22px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #1d8ce0;
+      opacity: 0.3;
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+
+    &.hidden {
+      height: 55px;
+      padding: 10px 20px;
+
+      .card-manage__info--body {
+        &-content {
+          display: none;
+        }
+
+        &-tools {
+          margin-left: 0;
+          width: 100%;
+          .el-button {
+            width: auto;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  &__search {
+    background-color: #fff;
+    margin: 10px 0 0;
+    padding: 20px;
+
+    &--input {
+      width: 280px
+    }
+
+    &--input-lg {
+      width: 320px;
+    }
+
+    &--select {
+      display: inline-block;
+      width: 120px;
+    }
+
+    &--button {
+      display: inline-block;
+      margin-left: 3px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__body {
+    background-color: #fff;
+    min-height: 180px;
+    margin-bottom: 15px;
+  }
+
+  &__table {
+    width: auto;
+    margin: 0 20px;
+
+    &.el-table {
+      tbody tr .cell {
+        min-height: 30px !important;
+        line-height: 30px !important;
+      }
+    }
+
+    &--content {
+      letter-spacing: -0.5px;
+      overflow: hidden;
+      .el-button{
+        padding: 0;
+      }
+    }
+
+    &--fail {
+      .import__status {
+        border: 2px red solid;
+        padding: 2px 8px;
+        border-radius: 5px;
+        background: #ce6c6c;
+        color: #fff;
+      }
+    }
+
+    &--tips {
+      font-size: 13px;
+      color: #777;
+      letter-spacing: -0.5px;
+    }
+
+    &--import {
+      position: relative;
+      width: 25px;
+
+      & i {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+      }
+
+      &-success {
+        color: #00d449;
+      }
+
+      &-error {
+        color: red;
+      }
+
+      &-info {
+        flex: 1;
+      }
+    }
+  }
+
+  &__page {
+    padding: 5px 0;
+  }
+
+  &__detail {
+    overflow-x: auto;
+    letter-spacing: -1px;
+    font-size: 14px;
+    color: #333;
+    padding: 10px 0;
+    line-height: 30px;
+    p {
+      overflow: hidden;
+
+      &:hover {
+        background-color: #dce5ff;
+      }
+    }
+
+    &--item {
+      padding: 0 1%;
+      border-right: 1px #ddd solid;
+      margin-bottom: 10px;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &.active {
+        .card-manage__detail--title {
+          background-color: #009936;
+        }
+      }
+
+      &.prior {
+        .card-manage__detail--title {
+          background-color: #009936;
+        }
+      }
+
+      &.over {
+        .card-manage__detail--title {
+          background-color: #47524e;
+        }
+      }
+
+      &.import.prior {
+        .card-manage__detail--title {
+          background-color: #ab4d47;
+        }
+      }
+    }
+
+    &--title {
+      text-align: center;
+      background-color: #676f9b;
+      color: #fff;
+    }
+
+    &--key {
+      flex: 1;
+      text-align: left;
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 13px;
+      color: #575757;
+    }
+
+    &--value {
+      letter-spacing: -0.7px;
+      float: right;
+      color: #111111;
+    }
+  }
+
+  .el-table__expanded-cell {
+    padding: 0;
+  }
+}

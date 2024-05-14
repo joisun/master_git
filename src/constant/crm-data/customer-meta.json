@@ -1,0 +1,99 @@
+{
+  "id": "",
+  "stage": 1,
+  "beforeFailStage": "",
+  "manager": "",
+  "isSpecialFocus": "0",
+  "isSubCustomer": false,
+  "needUpdate": false,
+  "baseInfo": {
+    "createTime": "",
+    "sourceId": "0",
+    "industryId": [],
+    "company": "",
+    "address": "",
+    "orgId": "",
+    "areaId": "",
+    "incompleteLinkId": "",
+    "registerAccount": "",
+    "saleId": "",
+    "saleName": "",
+    "newIndustry": "",
+    "usageScenario": [],
+    "remarks": [],
+    "invitationCode": ""
+  },
+  "conflict": {
+    "conflictId": "",
+    "reason": ""
+  },
+  "clues": {
+    "entryTime": "",
+    "stayDays": "",
+    "prePurchaseNum": 0,
+    "prePurchaseTime": "",
+    "mark": "",
+    "useScenes": ""
+  },
+  "preliminary": {
+    "entryTime": "",
+    "stayDays": "",
+    "useFor": "",
+    "buyTime": "",
+    "customerType": "",
+    "currentSuppliers": [],
+    "otherSuppliers": "",
+    "currentProblem": "",
+    "yearMoney": "",
+    "useMeal": [],
+    "competitor": [],
+    "otherCompetitor": "",
+    "hasCompetitor": 1,
+    "notice": ""
+  },
+ "demandConfirm": {
+   "entryTime": "",
+   "stayDays": "",
+   "match": 1,
+   "buyTime": "",
+   "useMeal": [],
+   "firstIncome": "",
+   "yearIncome": "",
+   "specialNeed": "",
+   "hasCompetitor": 1,
+   "competitor": [],
+   "otherCompetitor": "",
+   "notice": ""
+  },
+ "negotiation": {
+   "entryTime": "",
+   "stayDays": "",
+   "price": 0,
+   "useMeal": [],
+   "firstIncome": "",
+   "num": "",
+   "bidding": "1",
+   "payMethod": "1",
+   "settle": "1",
+   "customerStage": ""
+  },
+ "win": {
+   "entryTime": "",
+   "stayDays": "",
+    "contract": 1,
+    "invoice": 1,
+    "rechargeM": 0,
+    "rechargeC": 1,
+    "consumeM": 1,
+    "consumeC": 1,
+    "payMethod": 1
+  },
+  "relativeCustomer": {
+    "id": 0,
+    "orgId": 0,
+    "company": "",
+    "saleId": 0,
+    "saleName": "",
+    "similarCustomer": false
+  }
+}

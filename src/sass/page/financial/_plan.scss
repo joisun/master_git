@@ -1,0 +1,146 @@
+.plan-manager-list{
+  .el-table__expanded-cell{
+    .el-form-item{
+        min-width: 22%;
+        margin-bottom: 0;
+    }
+    .el-form-item__label{
+        font-weight: 600;
+    }
+  }
+  .table__extra--color{
+    background-color: #f7f7f7;
+  }
+  .volume-slider {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    cursor: pointer;
+    border: 1px solid #bfcbd9;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 10px;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 0;
+    &--name {
+      display: inline-block;
+      width: 70px;
+      height: 100%;
+      font-size: 14px;
+      color: #98a8be;
+    }
+    &--range {
+      display: inline-block;
+      min-width: 100px;
+      font-size: 14px;
+      color: #1f2d3d;
+    }
+  }
+}
+.plan__dialog{
+  .wh__dialog--body{
+    margin-bottom: 0;
+  }
+  .el-dialog{
+    min-width: 700px;
+    .el-dialog__body{
+      padding-top: 0px;
+      .el-form-item{
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .el-form-item__content{
+    line-height: 32px;
+  }
+  &--unit{
+    width:60px;
+  }
+  &--block{
+    border-bottom: 1px #ddd solid;
+    margin-bottom: 12px;
+    &-title {
+      width: 110px;
+      text-align: right;
+      margin: 4px 0;
+    }
+  }
+  &--tags{
+    .el-form-item{
+      margin-bottom: 5px;
+    }
+  }
+  &--fee{
+    &.el-form-item{
+      margin-bottom: 12px;
+    }
+    & .el-input{
+      width:200px;
+    }
+  }
+  &--fee-type {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+    .el-checkbox-group {
+      margin-left: 20px;
+    }
+  }
+  .wh-manage-finance &--step{
+    min-width: 320px;
+  }
+  &--step{
+    position: relative;
+    margin-right: 40px;
+    &-input{
+      width: 100px;
+    }
+
+  }
+  &--price{
+    display: flex;
+    &-box{
+      display: flex;
+    }
+    &-cloums{
+      //border: 1px #ddd solid;
+      //border-right: none;
+      //&:last-child{
+      //  border-right: 1px #ddd solid;
+      //}
+      flex:1;
+      padding: 0 20px;
+    }
+    &-value{
+      width: 45%;
+      display: inline-block;
+    }
+    &-computed{
+      margin-top: 22px;
+    }
+
+  }
+}
+.plan-manager-classification{
+  .classifications__table.el-table{
+    tbody tr .cell{
+      .cell-wrapper{
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+  .dialog-add-classification{
+
+    .classification__features .feature__item--label{
+      width: 28%;
+      display: inline-block;
+    }
+    .classification__footer{
+      margin-left: 110px;
+    }
+
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "gotham",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve --skip-plugins @vue/cli-plugin-eslint",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint --fix --ext .js,.vue src"
+  },
+  "dependencies": {
+    "cidr-overlap": "0.0.4",
+    "core-js": "^3.8.3",
+    "echarts": "^4.3.0",
+    "element-ui": "2.12.0",
+    "format-rmb": "^1.2.3",
+    "html2pdf.js": "^0.10.1",
+    "ip": "^2.0.1",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.29.4",
+    "mysql2": "^2.3.3",
+    "os-browserify": "^0.3.0",
+    "psl": "^1.9.0",
+    "qiankun": "^2.10.6",
+    "utility": "^1.16.3",
+    "vlf": "^1.1.0",
+    "vue": "^2.6.14",
+    "vue-resource": "^1.3.4",
+    "vue-router": "3.6.5",
+    "vuex": "^3.1.1",
+    "wangeditor": "^4.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.62.0",
+    "sass-loader": "^13.2.2",
+    "node-polyfill-webpack-plugin": "^3.0.0",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "eslintConfig": {
+    "root": false,
+    "env": {
+      "node": true
+    },
+    "ignorePatterns": [
+      "src/*"
+    ],
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

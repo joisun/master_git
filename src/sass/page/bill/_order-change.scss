@@ -1,0 +1,45 @@
+.order-change {
+  $tableBorder: 1px #ddd solid;
+  &__table {
+    background: #fff;
+    font-size: 0;
+    margin: 10px 0 20px;
+    .cell{
+      width: 100%;
+      border: $tableBorder;
+      border-left: none;
+      border-top: none;
+      align-items: center;
+      font-size: 14px;
+      text-align: center;
+      &:not(.total){
+        line-height: 40px;
+      }
+    }
+    .first-cell{
+      border-left: $tableBorder;
+    }
+    &--body{
+      &>div{
+        display: flex;
+        align-content: stretch;
+        flex-direction: column;
+      }
+    }
+    &--header{
+      background: #e5eaec;
+      border-top: $tableBorder;
+    }
+    &--input{
+      padding: 3px 10px;
+      width: 100%;
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+      }
+      input[type="number"]{
+        -moz-appearance: textfield;
+     }
+    }
+  }
+}

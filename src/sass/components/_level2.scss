@@ -1,0 +1,21 @@
+.level2 {
+    position: relative;
+    &__p-name {
+        //font-size: 15px;
+    }
+    &__back {
+        z-index: 999;
+        position: absolute;
+        top: 35px;
+        right: 70px;
+        .iconfont {
+            font-size: 30px;
+            color: #aaa;
+            cursor: pointer;
+            transition: ts(.3);
+            &:hover {
+                color: #666;
+            }
+        }
+    }
+}

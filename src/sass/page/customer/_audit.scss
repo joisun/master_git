@@ -1,0 +1,62 @@
+.qualification {
+  &__img {
+    display: inline-block;
+    max-height: 100px;
+    overflow: hidden;
+    cursor: pointer;
+    &--half {
+      width: 49%;
+    }
+    &--full {
+      width: 99%;
+    }
+    &-inner {
+      width: 100%;
+    }
+    &-view {
+      max-width: 70vw;
+    }
+  }
+  .el-table tbody tr,
+  .el-table tbody tr .cell{
+    line-height: 1.5;
+  }
+}
+.audit{
+  &__table{
+    &--img{
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      & img{
+        width:100%;
+        height:100%;
+        border: none;
+      }
+    }
+    &--operate{
+      text-align: center;
+      &-font{
+        margin:0 10px;
+        font-size: 12px;
+      }
+    }
+  }
+  .verify-action{
+    &__img{
+      padding: 0 20px;
+      min-width: 700px;
+    }
+    &__content{
+      padding-left: 20px;
+      width: 400px;
+    }
+    &__item{
+      padding: 10px 0;
+    }
+    &__action{
+      padding: 20px 0;
+      line-height: 30px;
+    }
+  }
+}

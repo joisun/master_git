@@ -1,0 +1,370 @@
+.close-order {
+  .close {
+    &__title {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.order-require {
+  overflow-y: auto;
+  &__block {
+    position: relative;
+  }
+  &__line {
+    display: flex;
+    line-height: 30px;
+    padding-left: 20px;
+    &--one{
+      background-color: #de4018;
+      color: #fff;
+    }
+  }
+  &__history {
+    position: relative;
+    width: 100%;
+    font-size: 12px;
+    &--title{
+      background-color: cornflowerblue;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: #fff;
+    }
+    &--item{
+      margin-bottom: 8px;
+      &-account{
+        max-width: 30%;
+        display: inline-block;
+        vertical-align: bottom;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+    }
+  }
+  &__item {
+    flex: 1;
+    span {
+      font-weight: 600;
+    }
+  }
+  &__red {
+    color: red;
+  }
+  &__header {
+    line-height: 26px;
+    font-size: 14px;
+    margin: 0 0 10px;
+    position: relative;
+  }
+  &__import{
+    height: 36px;
+    font-size: 16px;
+    font-weight: 600;
+    color: red;
+    &--block{
+      background: #ddd;
+    }
+  }
+  &__operations {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    button {
+      min-width: 72px;
+    }
+  }
+}
+
+.goods-list {
+  @media print {
+    &__dialog .el-dialog__header {
+      display: none;
+    }
+  }
+  &__title {
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__body {
+    &--title {
+      font-size: 0px;
+      font-weight: 600;
+      &-text {
+        font-size: 20px;
+        height: 25px;
+        line-height: 25px;
+        display: inline-block;
+        width: calc(100% - 320px);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      &-time {
+        height: 25px;
+        line-height: 25px;
+        vertical-align: top;
+        font-size: 20px;
+        display: inline-block;
+        text-align: right;
+        width: 320px;
+      }
+    }
+    &--table {
+      width: 100%;
+      border-right: 1px #000 solid;
+      border-bottom: 1px #000 solid;
+      font-size: 18px;
+      td, th, tr {
+        border: 1px #000 solid;
+        padding: 15px 0;
+        text-align: center;
+      }
+    }
+  }
+  &__footer {
+    margin-top: 10px;
+    position: absolute;
+    bottom: 20px;
+    font-size: 18px;
+    width: calc(100% - 40px);
+    &-img {
+      flex: 1;
+      text-align: right;
+      margin-right: -10px;
+    }
+    .logo {
+      width: 300px;
+      height: 60px;
+    }
+    .qcCode {
+      width: 200px;
+      height: 200px;
+    }
+    .tips-font {
+      line-height: 22px;
+      font-size: 16px;
+    }
+    &--font {
+      font-size: 26px;
+      vertical-align: text-bottom;
+    }
+    hr {
+      margin: 5px 0;
+    }
+  }
+}
+
+.bill-card {
+  position: relative;
+  text-align: left;
+  .salebar {
+    margin-right: 10px
+  }
+  .certify-dialog {
+    .el-dialog {
+      min-width: 430px;
+    }
+  }
+
+  .el-card__header {
+    padding: 10px
+  }
+
+  @mixin headBlock() {
+    line-height: 25px;
+  }
+
+  $positiveColor: #00db84;
+  $negativeColor: #ff7985;
+
+  &__head {
+    font-size: 13px;
+
+    &-createTime {
+      float: right;
+    }
+    &-billId {
+      color: rgb(123, 178, 249);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &__status {
+    margin-top: 10px;
+    color: lightgrey;
+
+    .status-icons {
+      float: right;
+
+      .el-tooltip {
+        display: inline-block;
+      }
+    }
+
+    .card-status {
+      cursor: default;
+      height: 24px;
+      width: 24px;
+      line-height: 22px;
+      border: 1px solid lightgrey;
+      border-radius: 20px;
+      text-align: center;
+      margin-left: 3px;
+
+      &.positive {
+        color: $positiveColor;
+        border-color: $positiveColor;
+      }
+
+      &.negative {
+        color: $negativeColor;
+        border-color: $negativeColor;
+      }
+
+      // 可点击状态标签样式
+      &.bill-deliver, &.company-certify, &.bill-done {
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+
+    }
+  }
+  &__body {
+
+    > div {
+      margin: 5px 0;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+
+      .info-title {
+        text-align: center;
+        padding: 5px;
+        background-color: #8391a5;
+        color: white;
+      }
+
+      .info-body {
+        padding: 10px;
+        font-size: 13px;
+        line-height: 20px;
+        min-height: 70px;
+        > div{
+          display: flex;
+          justify-content: space-between;
+        }
+        > div > span:first-child{
+          width: 70px;
+        }
+        > div > span:last-child{
+          flex: 1;
+          text-align: left;
+        }
+
+        a {
+          color: #2294ff;
+          text-decoration: underline;
+        }
+
+        .shipping-address {
+          height: 3em;
+        }
+
+        .no-express-tip {
+          text-align: center;
+          line-height: 36px;
+        }
+
+        .express-info {
+          height: 36px;
+        }
+      }
+    }
+  }
+  &__actions {
+    text-align: center;
+    margin-top: 20px;
+
+    .std-icon {
+      color: white;
+      background-color: #20a0ff;
+      font-size: 15px;
+      display: inline-block;
+      line-height: 24px;
+      width: 24px;
+      height: 24px;
+      border-radius: 20px;
+      margin: 0 3px;
+
+      &:hover {
+        background-color: #1c72bc;
+      }
+
+      //&.disable {
+      //    cursor: not-allowed;
+      //    background-color: lightgrey;
+      //
+      //    &:hover {
+      //        background-color: lightgrey;
+      //    }
+      //}
+    }
+
+    > * {
+      cursor: pointer;
+    }
+  }
+  .add-comment-win {
+    .el-dialog--small {
+      width: 750px;
+
+      * {
+        font-size: 13px;
+      }
+    }
+
+    .record-content {
+      width: 600px;
+    }
+  }
+  .input-express-info-win {
+    .record-item > * {
+      vertical-align: middle;
+    }
+
+    .el-input, .el-select {
+      width: 200px;
+    }
+  }
+  .contact-info-item {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+      color: grey;
+    }
+  }
+  &__specification--item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    & li {
+      line-height: 30px;
+      flex: 1;
+    }
+    & li:only-of-type {
+      line-height: 60px;
+    }
+  }
+}
