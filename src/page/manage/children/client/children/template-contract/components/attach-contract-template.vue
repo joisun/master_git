@@ -243,46 +243,73 @@
         <div
           class="html2pdf__avoid-break"
           style="
-            page-break-inside: avoid;
-            break-inside: avoid;
-            page-break-before: avoid;
-            page-break-after: avoid;
+            page-break-inside: avoid!important;
+            break-inside:avoid!important;
+            page-break-before:avoid!important;
+            page-break-after: avoid!important;
           "
         >
-          <table
-            class="pdf-content-table-dot html2pdf__avoid-break"
-            border="1"
-            cellspacing="0"
-            cellpadding="0"
-            width="654"
-          >
-            <tbody class="html2pdf__avoid-break">
-              <tr>
-                <td width="327" valign="top">
-                  <p class="pdf-content-p bold" style="margin-bottom: 20px">
-                    甲方（采购方）：{{ allData.firstParty }}（盖章）
-                  </p>
-                </td>
-                <td width="327" valign="top">
-                  <p class="pdf-content-p bold" style="margin-bottom: 20px">
-                    乙方（供应商）： {{ secoundParty }}（盖章）
-                  </p>
-                </td>
-              </tr>
-              <tr style="border-top: none">
-                <td width="327" valign="top">
-                  <p class="pdf-content-p bold">
-                    日期: {{ allData.signDate | dateFilter('YYYY-MM-DD') }}
-                  </p>
-                </td>
-                <td>
-                  <p class="pdf-content-p bold">
-                    日期: {{ allData.signDate | dateFilter('YYYY-MM-DD') }}
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="pdf-content-container html2pdf__avoid-break">
+            <div class="pdf-content-row html2pdf__avoid-break pdf-table-container">
+              <div class="pdf-content-cell html2pdf__avoid-break">
+                <p class="pdf-content-p bold" style="margin-bottom: 20px">
+                  甲方（采购方）：{{ allData.firstParty }}（盖章）
+                </p>
+              </div>
+              <div class="pdf-content-cell html2pdf__avoid-break ">
+                <p class="pdf-content-p bold" style="margin-bottom: 20px">
+                  乙方（供应商）：{{ secoundParty }}（盖章）
+                </p>
+              </div>
+            </div>
+            <div class="pdf-content-row html2pdf__avoid-break  pdf-table-container" style="border-top: none">
+              <div class="pdf-content-cell html2pdf__avoid-break">
+                <p class="pdf-content-p bold">
+                  日期: {{ allData.signDate | dateFilter('YYYY-MM-DD') }}
+                </p>
+              </div>
+              <div class="pdf-content-cell html2pdf__avoid-break">
+                <p class="pdf-content-p bold">
+                  日期: {{ allData.signDate | dateFilter('YYYY-MM-DD') }}
+                </p>
+              </div>
+            </div>
+          </div>
+<!--          <table-->
+<!--            class="pdf-content-table-dot html2pdf__avoid-break"-->
+<!--            border="1"-->
+<!--            cellspacing="0"-->
+<!--            cellpadding="0"-->
+<!--            width="654"-->
+
+<!--          >-->
+<!--            <tbody class="html2pdf__avoid-break">-->
+<!--              <tr class="html2pdf__avoid-break">-->
+<!--                <td width="327" valign="top" class="html2pdf__avoid-break">-->
+<!--                  <p class="pdf-content-p bold" style="margin-bottom: 20px">-->
+<!--                    甲方（采购方）：{{ allData.firstParty }}（盖章）-->
+<!--                  </p>-->
+<!--                </td>-->
+<!--                <td width="327" valign="top"  class="html2pdf__avoid-break">-->
+<!--                  <p class="pdf-content-p bold" style="margin-bottom: 20px">-->
+<!--                    乙方（供应商）： {{ secoundParty }}（盖章）-->
+<!--                  </p>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr style="border-top: none" class="html2pdf__avoid-break">-->
+<!--                <td width="327" valign="top"  class="html2pdf__avoid-break">-->
+<!--                  <p class="pdf-content-p bold">-->
+<!--                    日期: {{ allData.signDate | dateFilter('YYYY-MM-DD') }}-->
+<!--                  </p>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <p class="pdf-content-p bold html2pdf__avoid-break">-->
+<!--                    日期: {{ allData.signDate | dateFilter('YYYY-MM-DD') }}-->
+<!--                  </p>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
         </div>
       </template>
     </vue-html2pdf>
@@ -552,6 +579,23 @@ export default {
     font-family: 'pdf-font';
   }
 
+  .pdf-table-container {
+    display: flex;
+    .pdf-content-cell{
+      flex-grow: 0;
+      flex-shrink: 0;
+      display: inline-block;
+      width: 50%;
+      padding: 2px 4px;
+      border: 1px solid #333;
+      &:first-child { border-right: 0; }
+    }
+    &:first-child {
+      .pdf-content-cell {
+        border-bottom: 0;
+      }
+    }
+  }
   .pdf-content-h1 {
     text-align: center;
     font-size: 21px;
@@ -586,12 +630,12 @@ export default {
 
   .pdf-content-table-dot {
     width: 100%;
-    page-break-before: avoid;
-    page-break-after: avoid;
+    page-break-before: avoid!important;
+    page-break-after: avoid!important;
     //display: inline-block;
     //display: inline-table;
     //page-break-inside: avoid;
-    break-inside: avoid;
+    break-inside:  avoid!important;
     border-collapse: collapse;
     mso-table-layout-alt: fixed;
     border: none;
