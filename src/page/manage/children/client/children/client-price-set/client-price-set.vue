@@ -43,6 +43,7 @@ export default {
           <el-tab-pane label="专属套餐" name="client-price-exclusive" />
           <el-tab-pane label="组合套餐" name="client-price-combine" />
           <el-tab-pane label="国际卡" name="international-client-price-set" />
+          <el-tab-pane label="OTA卡" name="ota-admin-client-price-set" />
         </el-tabs>
       </div>
       <transition name="fade" mode="out-in">

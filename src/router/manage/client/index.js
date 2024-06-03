@@ -14,6 +14,8 @@ import TemplateContractList from '@/page/manage/children/client/children/templat
 import H5Manage from '@/page/manage/children/client/children/h5-manage/h5-manage'
 import PicCheck from '@/page/manage/children/client/children/client-verify/pic-check.vue'
 import LadyLiberty from '@/page/lady-liberty.vue'
+import Gotham from '@/page/gotham.vue'
+
 export default {
   path: 'client',
   name: 'client',
@@ -85,6 +87,11 @@ export default {
           path: '/international/price-manage/client-price-set',
           name: 'international-client-price-set',
           component: LadyLiberty
+        },
+        {
+          path: '/ota-admin/price-manage/client-price-set',
+          name: 'ota-admin-client-price-set',
+          component: Gotham
         }
       ]
     },

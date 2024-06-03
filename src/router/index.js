@@ -70,6 +70,11 @@ export default [
         path: '/ota-admin/card-manage/ota-card-list',
         name: 'ota-admin-ota-card-list',
         component: Gotham
+      },
+      {
+        path: '/ota-admin/price-manage/price-list',
+        name: 'ota-admin-price-list',
+        component: Gotham
       }
     ]
   },
