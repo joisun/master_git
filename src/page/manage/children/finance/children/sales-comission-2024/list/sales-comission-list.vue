@@ -86,7 +86,7 @@
       <div class="wh__tools">
         <div class="collect-content">
           <p class="collect-content__box align-middle">
-            <overview-item title="总收入" tooltip="所有提成记录明细收入总和">
+            <overview-item title="总业绩" tooltip="所有提成记录明细收入总和">
               <div style="display: inline-block">
                 <div>{{ sum.totalIncome | numberFilter }}</div>
               </div>
