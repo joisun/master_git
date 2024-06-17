@@ -10,11 +10,11 @@
     justify-content: space-between;
     background-color: #fff;
     z-index: 100001;
-    box-shadow: 0 1px 1px 1px  #ddd;
+    //box-shadow: 0 1px 1px 1px  #ddd;
     transition: all 0.1s;
     height:60px;
     overflow: visible;
-    //border-bottom: 1px #ddd solid;
+    border-bottom: 1px #ddd solid;
     &--menu{
       display: inline-block;
       width: auto;
@@ -213,17 +213,18 @@
     align-items: center;
     justify-content: space-around;
     padding: 0;
-    width: 268px;
+    width: 225px;
     height:60px;
-    margin-left: 10px;
     color: #261645;
     text-align: center;
     user-select: none;
+    font-family: 'Great Vibes', cursive;
+
     &--font{
-      margin-top: 6px;
+      margin-top: 0;
       display: inline-block;
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
       span{
         display: inline-block;
         width:100%;

@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-CN-HANS">
 <head>
-  <meta charset="UTF-8">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/client/theme/element.css">
-  <title>Whitehouse-SIMBOSS管理后台</title>
-  <script>
-    const host = window.location.host
-    window.__bl = {
-      config: {
-        pid: "ctel8hp9j6@c94c1311e226163",
-        appType: "web",
-        imgUrl: "https://arms-retcode.aliyuncs.com/r.png?",
-        behavior: false,
-        disableHook: true,
-        disabled:
-          host.indexOf("prepare.simboss.com") !== -1 ||
-          host.indexOf("test.simboss.com") !== -1 ||
-          host.indexOf("localhost") !== -1 ||
-          window.location.port === "8090"
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/client/theme/element.css">
+    <style>
+        /* latin */
+        @font-face {
+            font-family: 'Great Vibes';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Great Vibes'), local('GreatVibes-Regular'), url('theme/fonts/GreatVibes2.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    <title>Whitehouse-SIMBOSS管理后台</title>
+    <script>
+      const host = window.location.host
+      window.__bl = {
+        config: {
+          pid: "ctel8hp9j6@c94c1311e226163",
+          appType: "web",
+          imgUrl: "https://arms-retcode.aliyuncs.com/r.png?",
+          behavior: false,
+          disableHook: true,
+          disabled:
+            host.indexOf("prepare.simboss.com") !== -1 ||
+            host.indexOf("test.simboss.com") !== -1 ||
+            host.indexOf("localhost") !== -1 ||
+            window.location.port === "8090"
+        }
+      };
+    </script>
+    <script type="text/javascript" src="https://sdk.rum.aliyuncs.com/v1/bl.js" crossorigin></script>
+    <script>
+      function browser() {
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) window.location = "/mobile";
       }
-    };
-  </script>
-  <script type="text/javascript" src="https://sdk.rum.aliyuncs.com/v1/bl.js" crossorigin></script>
-  <script>
-    function browser() {
-      var sUserAgent = navigator.userAgent.toLowerCase();
-      var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-      var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-      var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-      var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-      var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-      var bIsAndroid = sUserAgent.match(/android/i) == "android";
-      var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-      var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-      if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) window.location = "/mobile";
-    }
 
-    if (!location.hash) browser();
-  </script>
+      if (!location.hash) browser();
+    </script>
 </head>
 
 <body>
 <div id="app">
-  <router-view>
-  </router-view>
+    <router-view>
+    </router-view>
 </div>
 </body>
 

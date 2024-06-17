@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="services-selector">
 <!--    <div class="status-bar">-->
 <!--&lt;!&ndash;      <span v-for="item in aliaList" :key="item.apiKey">{{item.name}}: {{formData[item.apiKey]}}</span>&ndash;&gt;-->
 <!--    </div>-->
@@ -12,7 +12,8 @@
         title="服务选择"
         :visible.sync="visible"
         direction="btt"
-        size="40%"
+        size="50%"
+        class="services-selector"
         :before-close="handleClose">
       <el-form :model="formData" :rules="rules" ref="form" label-width="100px" class="demo-formData" inline>
         <el-form-item :label="item.name" :prop="item.apiKey" v-for="item in aliaList" :key="item.apiKey">
@@ -133,6 +134,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .status-bar {
   position: fixed;
   bottom: 0;
@@ -158,5 +160,26 @@ export default {
   line-height: 30px;
   color: #333;
   cursor: pointer;
+}
+</style>
+<style lang="scss">
+.services-selector {
+  .el-drawer {
+    color: #333;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    .el-drawer__header, .el-form-item__label{
+      color: #fff;
+    }
+    .el-drawer__body{
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .el-input__inner {
+    }
+  }
 }
 </style>

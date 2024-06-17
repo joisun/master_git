@@ -6,8 +6,8 @@
           <img
             src="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/pentagon/img/frame/simboss-logo-active.png"
             alt=""
-            width="120px"
-            height="30px"
+            width="96px"
+            height="24px"
           />
         </router-link>
         <router-link to="/customers" class="app__logo--font">
