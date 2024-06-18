@@ -15,6 +15,11 @@
         size="50%"
         class="services-selector"
         :before-close="handleClose">
+      <template #title>
+        服务选择
+        <p style="font-size: 12px; margin-left: 20px;">注：前端项目默认使用 master 分支， 后端项目默认使用服务发现获取到的分支</p>
+
+      </template>
       <el-form :model="formData" :rules="rules" ref="form" label-width="100px" class="demo-formData" inline>
         <el-form-item :label="item.name" :prop="item.apiKey" v-for="item in aliaList" :key="item.apiKey">
           <el-select v-model="formData[item.apiKey]" placeholder="请选择服务地址" :name="item.apiKey" allow-create
