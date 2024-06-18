@@ -94,6 +94,18 @@
               :label="header.name"
             />
             <el-table-column
+                v-if="header.value === 'test'"
+                :key="header.value"
+                column-key="test"
+                prop="silent"
+                :label="header.name"
+                width="50"
+                header-align="center"
+                align="center"
+            >
+              <template #default="{ row }"> {{ row.test }} </template>
+            </el-table-column>
+            <el-table-column
               v-if="header.value === 'silent'"
               :key="header.value"
               column-key="silent"
