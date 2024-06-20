@@ -6,8 +6,8 @@
           <img
             src="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/pentagon/img/frame/simboss-logo-active.png"
             alt=""
-            width="120px"
-            height="30px"
+            width="96px"
+            height="24px"
           />
         </router-link>
         <router-link to="/customers" class="app__logo--font">
@@ -39,26 +39,23 @@
         </transition>
       </keep-alive>
     </section>
-    <menu-setting ref="menuSetting" @confirm="onMenuSetting" />
+    <services-selector v-if="showApiSelector" ref="servicesSelector" />
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import menuMap from '@/collect/menu-map'
 import WhGlobalSearch from '@/page/components/wh-global-search/wh-global-search'
-import * as menuByGroup from '@/collect/menu-by-group'
-import MenuSetting from '@/global/components/menu-setting'
 import removeCodeSuffix from '@/global/function/remove-code-suffix'
 import { MENUS } from '@/constant/constants'
 import SideBar from '@/page/components/side-bar.vue'
-
+import ServicesSelector from "@/global/components/services-selector.vue";
 // TODO 分离相关
 const isOnline = window.location.host === 'whitehouse.simboss.com' || window.location.host === 'whitehouse-new.simboss.com'
 export default {
   components: {
     WhGlobalSearch,
-    MenuSetting,
-    SideBar
+    SideBar,
+    ServicesSelector
   },
   data() {
     return {
@@ -69,6 +66,11 @@ export default {
       userDep: ''
     }
   },
+  computed: {
+    showApiSelector() {
+      return process.env.NODE_ENV === 'development' || window.location.host.indexOf('test.simboss')!==-1 || window.location.host.indexOf('3031')!==-1
+    }
+  },
   created() {
     this.loadUser()
     this.$store.dispatch('getSales')
@@ -76,22 +78,10 @@ export default {
     this.$store.dispatch('getUrl')
   },
   methods: {
-    onMenuSetting({ userDep }) {
-      this.userDep = userDep
-      this.navMenu = menuByGroup[userDep] || menuMap
-      localStorage.setItem('USER_DEP', userDep || '')
-    },
-
     async getMenusFromAuthing() {
       const res = await this.jaxLib.common.auth.getMenus({ isOnline })
       this.navMenu = removeCodeSuffix(res.data)
       localStorage.setItem(MENUS, JSON.stringify(this.navMenu))
-    },
-    openSearch() {
-      this.$refs.whGlobalSearch.open()
-    },
-    openMenuSetting() {
-      this.$refs.menuSetting.open({ userDep: this.userDep })
     },
     async loadUser() {
       this.loadingUser = true
