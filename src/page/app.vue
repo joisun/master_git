@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     showApiSelector() {
-      return process.env.NODE_ENV === 'development' || window.location.host.indexOf('test.simboss')!==-1 || window.location.host.indexOf('3031')!==-1
+      return process.env.NODE_ENV === 'development' || window.location.host.indexOf('test.simboss')!==-1 || window.location.host.indexOf('3031')!==-1 || window.location.host.indexOf('test-ack.simboss')!==-1
     }
   },
   created() {
