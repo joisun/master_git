@@ -251,9 +251,8 @@ export default {
         disabledDate(time) {
           const currentDate = new Date()
           return (
-            (time.getFullYear() >= currentDate.getFullYear() &&
-              time.getMonth() > currentDate.getMonth()) ||
-            moment(time).isAfter(moment('2024-02-01'))
+              time.getFullYear() >= currentDate.getFullYear() &&
+              time.getMonth() > currentDate.getMonth()
           )
         }
       },
