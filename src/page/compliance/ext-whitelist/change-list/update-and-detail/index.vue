@@ -432,10 +432,10 @@ export default {
     }
   },
   async created() {
+    await this.getRole()
     if (this.flowNo) {
       this.getDetail()
     }
-    this.getRole()
   },
   methods: {
     // async handleFlowClose() {
