@@ -10,6 +10,7 @@ import clientPanel from '@/page/components/panel/client-info-panel.vue'
 import Download from '@/page/components/wh-download/wh-download'
 import DialogBatchIccidInputSearch from '@/page/components/DialogBatchIccidInputSearch'
 import RetiredRecover from "@/page/card/card-operation/eliminate-card/components/retired-recover.vue";
+const defaultDate = [moment().subtract(1, 'M'), moment()]
 
 export default {
   components: {
@@ -21,6 +22,21 @@ export default {
   },
   data() {
     return {
+      defaultDate,
+      pickDate: '',
+      pickerOptions: {
+        onPick: this.getPickDate,
+        disabledDate: (time) => {
+          const {minDate, maxDate} = this.pickDate;
+          if (minDate && !maxDate) {
+            const diff = Math.abs(minDate.valueOf() - time.valueOf());
+            if (diff > 1000 * 3600 * 24 * 90) {
+              return true;
+            }
+          }
+          return time.getTime() > Date.now();
+        },
+      },
       columns: restltSupplierList,
       iccidsOssKey: '',
       tableDate: [],
@@ -35,7 +51,7 @@ export default {
         orgId: '',
         saleName: '',
         carrier: '',
-        gmtCreated: [],
+        gmtCreated: defaultDate,
         cardRetiringType: '',
         submitter: ''
       },
@@ -67,6 +83,17 @@ export default {
     this.simpleSearch()
   },
   methods: {
+    onDateChange(v) {
+      if (!v || !v.length) {
+        this.$nextTick(() => {
+          this.form.gmtCreated = defaultDate
+          this.onSearch()
+        })
+      }
+    },
+    getPickDate(pick) {
+      this.pickDate = pick;
+    },
     onBatchInputConfirm($event) {
       this.batchIccids = $event.iccids.filter((item) => !!item).join()
       this.iccidsOssKey = $event.iccidsOssKey
@@ -192,12 +219,15 @@ export default {
         >
         </el-input>
         <el-date-picker
-          v-model="form.gmtCreated"
-          type="daterange"
-          style="width: 220px"
-          start-placeholder="开始时间"
-          end-placeholder="结束时间"
-          @change="simpleSearch"
+            v-model="form.gmtCreated"
+            :default-value="defaultDate"
+            type="daterange"
+            style="width: 230px"
+            clearable
+            start-placeholder="开始时间"
+            end-placeholder="结束时间"
+            @change="onDateChange"
+            :picker-options="pickerOptions"
         >
         </el-date-picker>
         <el-input
