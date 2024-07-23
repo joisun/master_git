@@ -198,6 +198,15 @@ export default {
         }
       })
     },
+    goIntlPriceSetting(name, org) {
+      this.$router.push({
+        name: name,
+        query: {
+          orgName: org.orgName,
+          orgId: org.id,
+        }
+      })
+    },
     // 进入用户详情
     enterUserInfo(id) {
       this.$router.push({ name: 'client-detail', query: { orgId: id } })
@@ -346,6 +355,14 @@ export default {
                     <el-button
                       size="mini"
                       @click="interSettingPrice('client-price-set-package', org)"
+                    >
+                      <wh-std-icon sign="xe6b6"></wh-std-icon>
+                    </el-button>
+                  </el-tooltip>
+                  <el-tooltip content="国际卡设置报价" placement="top" effect="light">
+                    <el-button
+                        size="mini"
+                        @click="goIntlPriceSetting('ota-admin-platform-service-client-price-set', org)"
                     >
                       <wh-std-icon sign="xe6b6"></wh-std-icon>
                     </el-button>

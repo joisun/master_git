@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      activeName: 'client-price-set-package'
+      activeName: 'ota-admin-platform-service-client-price-set'
     }
   },
   computed: {
@@ -27,7 +27,7 @@ export default {
   <div class="plan-manager">
     <div class="wh__warp">
       <div class="wh__header">
-        <h2 class="wh-title">客户报价</h2>
+        <h2 class="wh-title">国际卡客户报价</h2>
         <span class="level2__back">
           <el-tooltip content="返回一级组织列表" placement="left" effect="dark">
             <wh-std-icon sign="xe6aa" @click="backToCustomerList"></wh-std-icon>
@@ -37,11 +37,10 @@ export default {
       <div>客户名:{{ customerName }}</div>
       <div class="wh__tabs">
         <el-tabs v-model="activeName" @tab-click="changeRoute">
-          <el-tab-pane label="套餐列表" name="client-price-set-package"></el-tab-pane>
-          <el-tab-pane label="网络产品" name="client-price-set-network"></el-tab-pane>
-          <el-tab-pane label="定位产品" name="client-price-set-lbs"></el-tab-pane>
-          <el-tab-pane label="专属套餐" name="client-price-exclusive" />
-          <el-tab-pane label="组合套餐" name="client-price-combine" />
+          <el-tab-pane label="普通国际卡" name="international-client-price-set" />
+          <el-tab-pane label="OTA卡" name="ota-admin-client-price-set" />
+          <el-tab-pane label="无正式期套餐" name="ota-admin-no-formal-client-price-set" />
+          <el-tab-pane label="卡平台服务费" name="ota-admin-platform-service-client-price-set" />
         </el-tabs>
       </div>
       <transition name="fade" mode="out-in">

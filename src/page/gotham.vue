@@ -27,7 +27,6 @@ export default {
       name: 'gotham',
       entry: '/ota-admin',
       container: '#ota-admin-container',
-      // sandbox : { experimentalStyleIsolation: true },
       props: {
         ajax,
         whImgShow
