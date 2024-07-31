@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      activeName: 'ota-admin-platform-service-client-price-set'
+      activeName: 'international-client-price-set'
     }
   },
   computed: {
