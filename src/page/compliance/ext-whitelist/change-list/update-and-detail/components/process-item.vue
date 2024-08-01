@@ -341,6 +341,10 @@ export default {
       this.formData = {
         ...this.flowData
       }
+      if (this.flowData.salePriceChangeDTOList && this.flowData.salePriceChangeDTOList.length > 0) {
+        const data = this.flowData.salePriceChangeDTOList
+        this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
+      }
     } else {
       this.formData = {
         ...this.formData,
