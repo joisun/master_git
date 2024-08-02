@@ -44,7 +44,9 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="所有卡套餐变更总计变更金额">
-              {{ calculateMoney(formData.salePriceChangeDTOList, 'changeMoney') }}
+              <span :style="formData.isFree ? {textDecoration:' line-through'} : {}">
+                 {{ calculateMoney(formData.salePriceChangeDTOList, 'changeMoney') }}
+              </span>
             </el-form-item>
           </el-col>
         </el-row>
