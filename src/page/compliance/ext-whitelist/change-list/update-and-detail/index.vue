@@ -194,8 +194,8 @@
               </el-upload>
             </el-form-item>
             <el-form-item label="是否套餐变更差价直接为0" prop="freePlanChange" label-width="300">
-              <el-radio v-model="formData.freePlanChange" :label="true" :disabled="commonDisabled">是</el-radio>
-              <el-radio v-model="formData.freePlanChange" :label="false" :disabled="commonDisabled">否</el-radio>
+              <el-radio v-model="formData.freePlanChange" :label="true" :disabled="disabledWithSellerRole">是</el-radio>
+              <el-radio v-model="formData.freePlanChange" :label="false" :disabled="disabledWithSellerRole">否</el-radio>
             </el-form-item>
             <el-form-item
                 v-if="formData.iccidInputType !== '4'"
