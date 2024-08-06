@@ -44,9 +44,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="所有卡套餐变更总计变更金额">
-              <span :style="formData.isFree ? {textDecoration:' line-through'} : {}">
                  {{ calculateMoney(formData.salePriceChangeDTOList, 'changeMoney') }}
-              </span>
             </el-form-item>
           </el-col>
         </el-row>
@@ -67,18 +65,18 @@
           >
         </el-form-item>
       </template>
-      <template v-if="currentSchema.IS_FREE">
-        <h4 style="margin-bottom: 12px; color: #666">是否免单</h4>
-        <el-form-item prop="isFree">
-          <el-radio-group
-              v-model="formData.isFree"
-              :disabled="isHistory"
-          >
-            <el-radio :label="1">是</el-radio>
-            <el-radio :label="0">否</el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </template>
+<!--      <template v-if="currentSchema.IS_FREE">-->
+<!--        <h4 style="margin-bottom: 12px; color: #666">是否免单</h4>-->
+<!--        <el-form-item prop="isFree">-->
+<!--          <el-radio-group-->
+<!--              v-model="formData.isFree"-->
+<!--              :disabled="isHistory"-->
+<!--          >-->
+<!--            <el-radio :label="1">是</el-radio>-->
+<!--            <el-radio :label="0">否</el-radio>-->
+<!--          </el-radio-group>-->
+<!--        </el-form-item>-->
+<!--      </template>-->
       <template v-if="formData.processStatus !== 'NOT_PASS'">
         <template v-if="currentSchema.GROUP_NO_LIST">
           <group-no-list
@@ -175,7 +173,7 @@ const processSchemas = {
     SALE_PRICE_SUM: 1,
     AUDIT_RESULT: 1,
     AUDIT_REMARK: 1,
-    IS_FREE: 1,
+    // IS_FREE: 1,
 
   }, // 销售修改变更后价格
   SALES_CONFIRMATION: {
@@ -320,7 +318,7 @@ export default {
         whiteHousePriceChangeDTOList: [],
         salePriceChangeDTOList: [],
         remark: '',
-        isFree: 0
+        // isFree: 0
       }
     }
   },
@@ -343,10 +341,10 @@ export default {
       this.formData = {
         ...this.flowData
       }
-      if (this.flowData.salePriceChangeDTOList && this.flowData.salePriceChangeDTOList.length > 0) {
-        const data = this.flowData.salePriceChangeDTOList
-        this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
-      }
+      // if (this.flowData.salePriceChangeDTOList && this.flowData.salePriceChangeDTOList.length > 0) {
+      //   const data = this.flowData.salePriceChangeDTOList
+      //   this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
+      // }
     } else {
       this.formData = {
         ...this.formData,
@@ -381,7 +379,7 @@ export default {
     },
     salePriceAlertListChange(data) {
       this.formData.salePriceChangeDTOList = data
-      this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
+      // this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
     },
     packageGroupWHChange(data) {
       this.formData.whiteHousePriceChangeDTOList = data
@@ -403,7 +401,7 @@ export default {
         return data.map((item) => {
           return {
             ...item,
-            isFree: this.formData.isFree
+            // isFree: this.formData.isFree
           }
         })
       }
