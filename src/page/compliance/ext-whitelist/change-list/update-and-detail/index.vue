@@ -704,7 +704,7 @@ export default {
     bathInputChange() {
     },
     filterParams() {
-      const {type, fileUrl, iccids, iccidInputType, addressList, remark, carrier} = this.formData
+      const {type, fileUrl, iccids, iccidInputType, addressList, remark, carrier, isFreePlanChange} = this.formData
       const params = {}
       if (type === 'TW') {
         this.formData.extWhitelistWorkOrderSaveDTO = {
@@ -720,7 +720,8 @@ export default {
                 }))
           },
           remark,
-          carrier
+          carrier,
+          isFreePlanChange
         }
       }
       Object.keys(submitSchemas[type]).forEach((key) => {
