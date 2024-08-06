@@ -194,8 +194,8 @@
               </el-upload>
             </el-form-item>
             <el-form-item label="是否套餐变更差价直接为0" prop="isFreePlanChange" label-width="300">
-              <el-radio v-model="formData.isFreePlanChange" :label="true" :disabled="formData.flowNo">是</el-radio>
-              <el-radio v-model="formData.isFreePlanChange" :label="false" :disabled="formData.flowNo">否</el-radio>
+              <el-radio v-model="formData.isFreePlanChange" :label="true" :disabled="commonDisabled">是</el-radio>
+              <el-radio v-model="formData.isFreePlanChange" :label="false" :disabled="commonDisabled">否</el-radio>
             </el-form-item>
             <el-form-item
                 v-if="formData.iccidInputType !== '4'"
@@ -305,6 +305,8 @@ const submitSchemas = {
     effectiveType: '', //-生效类型
     iccids: [],
     remark: '', //-备注
+    isFreePlanChange: false,
+
     priceOfferShows: [],
     iccidsOssKey: '' //-oss文件地址
   },
@@ -317,8 +319,9 @@ const submitSchemas = {
     effectiveType: '', //-生效类u
     iccids: [],
     remark: '', //-备注
+    isFreePlanChange: false,
     priceOfferShows: [],
-    iccidsOssKey: '' //-oss文件地址
+    iccidsOssKey: '', //-oss文件地址
   },
   TW: {
     flowNo: '',
@@ -328,6 +331,7 @@ const submitSchemas = {
     orgId: '',
     iccids: [],
     remark: '',
+    isFreePlanChange: false,
     priceOfferShows: [],
     extWhitelistWorkOrderSaveDTO: {
       carrier: '',
