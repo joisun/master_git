@@ -44,7 +44,10 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="所有卡套餐变更总计变更金额">
+              <span :style="!flowData.freePlanChange ? {textDecoration:' line-through'} : {}">
                  {{ calculateMoney(formData.salePriceChangeDTOList, 'changeMoney') }}
+              </span>
+              <span style="margin-left: 10px" v-if="!flowData.freePlanChange">0.00</span>
             </el-form-item>
           </el-col>
         </el-row>
@@ -65,18 +68,18 @@
           >
         </el-form-item>
       </template>
-<!--      <template v-if="currentSchema.IS_FREE">-->
-<!--        <h4 style="margin-bottom: 12px; color: #666">是否免单</h4>-->
-<!--        <el-form-item prop="isFree">-->
-<!--          <el-radio-group-->
-<!--              v-model="formData.isFree"-->
-<!--              :disabled="isHistory"-->
-<!--          >-->
-<!--            <el-radio :label="1">是</el-radio>-->
-<!--            <el-radio :label="0">否</el-radio>-->
-<!--          </el-radio-group>-->
-<!--        </el-form-item>-->
-<!--      </template>-->
+      <!--      <template v-if="currentSchema.IS_FREE">-->
+      <!--        <h4 style="margin-bottom: 12px; color: #666">是否免单</h4>-->
+      <!--        <el-form-item prop="isFree">-->
+      <!--          <el-radio-group-->
+      <!--              v-model="formData.isFree"-->
+      <!--              :disabled="isHistory"-->
+      <!--          >-->
+      <!--            <el-radio :label="1">是</el-radio>-->
+      <!--            <el-radio :label="0">否</el-radio>-->
+      <!--          </el-radio-group>-->
+      <!--        </el-form-item>-->
+      <!--      </template>-->
       <template v-if="formData.processStatus !== 'NOT_PASS'">
         <template v-if="currentSchema.GROUP_NO_LIST">
           <group-no-list
