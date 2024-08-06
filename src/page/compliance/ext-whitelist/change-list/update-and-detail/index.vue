@@ -193,9 +193,9 @@
                 </div>
               </el-upload>
             </el-form-item>
-            <el-form-item label="是否套餐变更差价直接为0" prop="isFreePlanChange" label-width="300">
-              <el-radio v-model="formData.isFreePlanChange" :label="true" :disabled="commonDisabled">是</el-radio>
-              <el-radio v-model="formData.isFreePlanChange" :label="false" :disabled="commonDisabled">否</el-radio>
+            <el-form-item label="是否套餐变更差价直接为0" prop="freePlanChange" label-width="300">
+              <el-radio v-model="formData.freePlanChange" :label="true" :disabled="commonDisabled">是</el-radio>
+              <el-radio v-model="formData.freePlanChange" :label="false" :disabled="commonDisabled">否</el-radio>
             </el-form-item>
             <el-form-item
                 v-if="formData.iccidInputType !== '4'"
@@ -206,7 +206,7 @@
                   :is-op-or-su="isOpOrSu"
                   :form-data="formData"
                   style="margin-bottom: 22px"
-                  :disabled="disabledWithSellerRole || formData.isFreePlanChange"
+                  :disabled="disabledWithSellerRole || formData.freePlanChange"
               />
             </el-form-item>
           </el-col>
@@ -305,7 +305,7 @@ const submitSchemas = {
     effectiveType: '', //-生效类型
     iccids: [],
     remark: '', //-备注
-    isFreePlanChange: false,
+    freePlanChange: false,
 
     priceOfferShows: [],
     iccidsOssKey: '' //-oss文件地址
@@ -319,7 +319,7 @@ const submitSchemas = {
     effectiveType: '', //-生效类u
     iccids: [],
     remark: '', //-备注
-    isFreePlanChange: false,
+    freePlanChange: false,
     priceOfferShows: [],
     iccidsOssKey: '', //-oss文件地址
   },
@@ -331,7 +331,7 @@ const submitSchemas = {
     orgId: '',
     iccids: [],
     remark: '',
-    isFreePlanChange: false,
+    freePlanChange: false,
     priceOfferShows: [],
     extWhitelistWorkOrderSaveDTO: {
       carrier: '',
@@ -372,7 +372,7 @@ export default {
       flowNo,
       orgNameList: [],
       formData: {
-        isFreePlanChange: false,
+        freePlanChange: false,
         status: '',
         iccids: '',
         iccidInputType: '2',
@@ -405,7 +405,7 @@ export default {
     }
   },
   watch: {
-    'formData.isFreePlanChange'() {
+    'formData.freePlanChange'() {
       this.formData.priceOfferShows = this.formData.priceOfferShows.map(item => {
         return {
           ...item,
@@ -708,7 +708,7 @@ export default {
     bathInputChange() {
     },
     filterParams() {
-      const {type, fileUrl, iccids, iccidInputType, addressList, remark, carrier, isFreePlanChange} = this.formData
+      const {type, fileUrl, iccids, iccidInputType, addressList, remark, carrier, freePlanChange} = this.formData
       const params = {}
       if (type === 'TW') {
         this.formData.extWhitelistWorkOrderSaveDTO = {
@@ -725,7 +725,7 @@ export default {
           },
           remark,
           carrier,
-          isFreePlanChange
+          freePlanChange
         }
       }
       Object.keys(submitSchemas[type]).forEach((key) => {
