@@ -8,7 +8,7 @@
         <el-row :gutter="20">
           <el-col :span="5">
             <el-form-item>
-              <el-input v-model="searchForm.cardNo" placeholder="ICCID、MSISDN" @change="queryWhiteList" :clearable="true"></el-input>
+              <el-input v-model="searchForm.cardNo" placeholder="请输入ICCID" @change="queryWhiteList" :clearable="true"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="3">
@@ -107,7 +107,8 @@ export default {
       searchForm: {
         cardNo: '',
         reason: '',
-        status: ''
+        status: '',
+        type: ''
       },
       reasonList: [],
       whiteLists: [],
@@ -125,11 +126,14 @@ export default {
     }
   },
   created() {
-    this.queryWhiteList()
     this.getReasonList()
   },
   methods: {
     async queryWhiteList() {
+      if (Object.keys(this.searchForm).every(key => !this.searchForm[key])) {
+        return this.$message.warning('禁止无条件查询')
+      }
+
       this.loading = true
       let param = {
         pageNo: this.page.pageNo,
