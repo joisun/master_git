@@ -109,9 +109,9 @@
       </el-form-item>
       <el-form-item v-if="!isHistory && !['FINISHED', 'CLOSED'].includes(currentStatus)">
         <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
-        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"
-          >关闭</el-button
-        >
+<!--        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"-->
+<!--          >关闭</el-button-->
+<!--        >-->
       </el-form-item>
     </el-form>
   </el-card>
