@@ -44,10 +44,10 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="所有卡套餐变更总计变更金额">
-              <span :style="!flowData.freePlanChange ? {textDecoration:' line-through'} : {}">
+              <span :style="flowData.freePlanChange ? {textDecoration:' line-through'} : {}">
                  {{ calculateMoney(formData.salePriceChangeDTOList, 'changeMoney') }}
               </span>
-              <span style="margin-left: 10px" v-if="!flowData.freePlanChange">0.00</span>
+              <span style="margin-left: 10px" v-if="flowData.freePlanChange">0.00</span>
             </el-form-item>
           </el-col>
         </el-row>
