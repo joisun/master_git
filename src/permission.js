@@ -14,7 +14,7 @@ const initRouter = () => {
 }
 
 const isTestOrDev =
-  window.location.href.indexOf('9999') !== -1 || window.location.href.indexOf('test') !== -1
+  window.location.href.indexOf('3031') !== -1 || window.location.href.indexOf('test') !== -1
 export async function getAuthAndAddRoutes() {
   const res = await commonApis.auth.getAuth({})
   const map = getRouterCodeMap(res.data)
@@ -44,7 +44,6 @@ export async function getAuthAndAddRoutes() {
     ]
   })
   router.beforeEach(async (to, from, next) => {
-    console.log('🎸 DEBUG_47 permission.js 👉', to)
     // if (to.query.code) {
     //   const res = await commonApis.getToken({ code: to.query.code });
     //   if (res.success) {
