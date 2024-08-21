@@ -123,9 +123,9 @@
       </el-form-item>
       <el-form-item v-if="!isHistory && !['FINISHED', 'CLOSED'].includes(currentStatus)">
         <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
-<!--        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"-->
-<!--          >关闭</el-button-->
-<!--        >-->
+        <!--        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"-->
+        <!--          >关闭</el-button-->
+        <!--        >-->
       </el-form-item>
     </el-form>
   </el-card>
@@ -420,9 +420,28 @@ export default {
       params.flowNo = this.flowNo
       return params
     },
+    async processCheck() {
+      if (this.currentStatus === 'PRICE_MODIFICATION_AFTER_SALES_CHANGE') {
+        const checkRes = await this.jaxLib.whitelist.complianceProcessCheck(this.filterParams())
+        if (!checkRes.success) return false
+        if (checkRes.data !== 'ok') {
+          const alertRes = await this.$alert(`${checkRes.data.message}`
+              , "提醒", {
+                dangerouslyUseHTMLString: true,
+                showClose: true,
+                showCancelButton: true,
+              });
+          return alertRes === "confirm";
+        }
+        return true
+      }
+      return true
+    },
     async onSubmit() {
       await this.$refs.form.validate(async (valid) => {
         if (valid) {
+          const checkRes = await this.processCheck()
+          if (!checkRes) return
           const res = await this.jaxLib.whitelist.complianceProcess(this.filterParams())
           if (res && res.success) {
             this.$message.success('提交成功')
