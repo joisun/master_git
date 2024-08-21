@@ -447,6 +447,11 @@ export default {
     const url = '/ajax/compliance/process'
     return ajax(url, data)
   },
+  // 审核检查接口
+  async complianceProcessCheck(data) {
+    const url = '/ajax/compliance/processCheck'
+    return ajax(url, data)
+  },
   // 提交运营商变更时excel文件的获取
   async complianceGetFile(data) {
     const url = '/ajax/compliance/getFile'
