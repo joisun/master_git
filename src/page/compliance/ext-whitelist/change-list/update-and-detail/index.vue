@@ -675,6 +675,7 @@ export default {
       }))
     },
     async queryPackagesByIccids() {
+      if (this.commonDisabled) return
       const {iccids, fileUrl, iccidInputType} = this.formData
       if (iccidInputType === '4') {
         return
