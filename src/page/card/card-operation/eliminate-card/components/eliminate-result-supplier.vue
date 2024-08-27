@@ -83,11 +83,14 @@ export default {
     this.simpleSearch()
   },
   methods: {
+    onIccidChange(v) {
+      this.simpleSearch()
+    },
     onDateChange(v) {
       if (!v || !v.length) {
         this.$nextTick(() => {
-          this.form.gmtCreated = defaultDate
-          this.onSearch()
+          this.form.gmtCreated = ''
+          this.simpleSearch()
         })
       }
     },
@@ -109,11 +112,15 @@ export default {
     },
     // 搜索
     async simpleSearch() {
-      this.loading = true
       if (this.form.iccids) {
         // 如果单条输入框存在值则需要清除批量搜索的值
         this.resetSameIccidSearch('batchIccids')
       }
+      if (!this.form.iccids && (!this.form.gmtCreated || this.form.gmtCreated.length !== 2)) {
+        this.$message.warning('数据量过大，请选择时间范围或者指定ICCIDs查询')
+        return
+      }
+      this.loading = true
       let rst = await this.jaxLib.card.retiring.listOver({
         ...this.computedForm,
         pageNo: this.page.pageIndex,
@@ -181,7 +188,7 @@ export default {
           v-model.trim="form.iccids"
           placeholder="请输入ICCID或者手机号"
           class="wh__tools--search-input"
-          @keyup.native.enter="simpleSearch"
+          @keyup.native.enter="onIccidChange"
         >
         </el-input>
         <el-badge is-dot class="item" :hidden="noBatchSearchData">
