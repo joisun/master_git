@@ -99,13 +99,15 @@ export default {
     this.onSearch()
   },
   methods: {
-    onDateChange(v) {
-      if (!v || !v.length) {
-        this.$nextTick(() => {
-          this.form.gmtCreated = defaultDate
-          this.onSearch()
-        })
-      }
+    onDateChange() {
+      this.onSearch()
+
+      // if (!v || !v.length) {
+      //   this.$nextTick(() => {
+      //     // this.form.gmtCreated = defaultDate
+      //     this.onSearch()
+      //   })
+      // }
     },
     getPickDate(pick) {
       this.pickDate = pick;
@@ -133,11 +135,17 @@ export default {
       }
     },
     async onSearch() {
-      this.loading = true
+
       if (this.form.iccids) {
         // 如果单条输入框存在值则需要清除批量搜索的值
         this.resetSameIccidSearch('batchIccids')
       }
+
+      if (!this.form.iccids && (!this.form.gmtCreated || this.form.gmtCreated.length !== 2)) {
+        this.$message.warning('数据量过大，请选择时间范围或者指定ICCIDs查询')
+        return
+      }
+      this.loading = true
       let rst = await this.jaxLib.card.retiring.list({
         ...this.computedForm,
         pageNo: this.page.pageIndex,

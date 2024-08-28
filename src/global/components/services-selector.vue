@@ -100,7 +100,6 @@ export default {
     this.aliaList.forEach(item => {
       this.formData[item.apiKey] = getCookie(item.apiKey) || ''
     })
-    console.log('🎸 DEBUG_97 services-selector.vue 👉', this.formData)
   },
   methods: {
     open() {

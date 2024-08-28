@@ -3,48 +3,51 @@
     <template #header>
       {{ currentStatus | complianceStatusFilter }}
       <span
-        v-if="isHistory"
-        style="font-size: 14px; color: #666; margin-left: 20px; line-height: 100%"
+          v-if="isHistory"
+          style="font-size: 14px; color: #666; margin-left: 20px; line-height: 100%"
       >
         处理人：{{ flowData.submitter }}
         <span style="margin-left: 10px"> 处理时间：{{ flowData.gmtCreated | dateFilter }} </span>
       </span>
     </template>
     <el-form
-      ref="form"
-      :model="formData"
-      label-width="80px"
-      size="small"
-      label-position="top"
-      :rules="formRules"
+        ref="form"
+        :model="formData"
+        label-width="80px"
+        size="small"
+        label-position="top"
+        :rules="formRules"
     >
       <el-form-item v-if="currentSchema.FILE" label="提交附件">
-        <file-list :flow-no="flowNo" />
+        <file-list :flow-no="flowNo"/>
       </el-form-item>
       <el-form-item v-if="currentSchema.SALE_PRICE_ALERT_LIST" label="套餐变更情况">
         <sale-price-alert-list
-          :data="formData.salePriceChangeDTOList"
-          :flow-no="flowNo"
-          :is-history="isHistory"
-          @change="salePriceAlertListChange"
+            :data="formData.salePriceChangeDTOList"
+            :flow-no="flowNo"
+            :is-history="isHistory"
+            @change="salePriceAlertListChange"
         />
       </el-form-item>
       <template v-if="currentSchema.SALE_PRICE_SUM">
         <el-row>
           <el-col :span="6">
-            <el-form-item label="所有卡套餐变更前总价" >
-              {{calculateMoney(formData.salePriceChangeDTOList, 'origTotalMoney')}}
+            <el-form-item label="所有卡套餐变更前总价">
+              {{ calculateMoney(formData.salePriceChangeDTOList, 'origTotalMoney') }}
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="所有卡套餐变更后总价">
-              {{calculateMoney(formData.salePriceChangeDTOList, 'targetTotalMoney')}}
+              {{ calculateMoney(formData.salePriceChangeDTOList, 'targetTotalMoney') }}
 
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="所有卡套餐变更总计变更金额">
-              {{calculateMoney(formData.salePriceChangeDTOList, 'changeMoney')}}
+              <span :style="flowData.freePlanChange ? {textDecoration:' line-through'} : {}">
+                 {{ calculateMoney(formData.salePriceChangeDTOList, 'changeMoney') }}
+              </span>
+              <span style="margin-left: 10px" v-if="flowData.freePlanChange">0.00</span>
             </el-form-item>
           </el-col>
         </el-row>
@@ -53,43 +56,54 @@
         <h4 style="margin-bottom: 12px; color: #666">{{ currentProcessStatusSchema.title }}</h4>
         <el-form-item prop="processStatus">
           <el-radio-group
-            v-model="formData.processStatus"
-            :disabled="isHistory"
-            @change="handleProcessStatusChange"
+              v-model="formData.processStatus"
+              :disabled="isHistory"
+              @change="handleProcessStatusChange"
           >
             <el-radio label="PASS">{{ currentProcessStatusSchema.pass }}</el-radio>
             <el-radio label="NOT_PASS">{{ currentProcessStatusSchema.reject }}</el-radio>
           </el-radio-group>
           <span v-if="formData.processStatus === 'NOT_PASS'" style="margin-left: 12px"
-            >驳回到：<strong>{{ currentProcessStatusSchema.rejectTo }}</strong></span
+          >驳回到：<strong>{{ currentProcessStatusSchema.rejectTo }}</strong></span
           >
         </el-form-item>
       </template>
-
+      <!--      <template v-if="currentSchema.IS_FREE">-->
+      <!--        <h4 style="margin-bottom: 12px; color: #666">是否免单</h4>-->
+      <!--        <el-form-item prop="isFree">-->
+      <!--          <el-radio-group-->
+      <!--              v-model="formData.isFree"-->
+      <!--              :disabled="isHistory"-->
+      <!--          >-->
+      <!--            <el-radio :label="1">是</el-radio>-->
+      <!--            <el-radio :label="0">否</el-radio>-->
+      <!--          </el-radio-group>-->
+      <!--        </el-form-item>-->
+      <!--      </template>-->
       <template v-if="formData.processStatus !== 'NOT_PASS'">
         <template v-if="currentSchema.GROUP_NO_LIST">
           <group-no-list
-            :data="formData.extWhiteGroupNoDTOList"
-            :flow-no="flowNo"
-            :form-data="formData"
-            :is-history="isHistory"
-            @change="groupNoListChange"
+              :data="formData.extWhiteGroupNoDTOList"
+              :flow-no="flowNo"
+              :form-data="formData"
+              :is-history="isHistory"
+              @change="groupNoListChange"
           />
         </template>
         <package-alert-group
-          v-if="currentSchema.PACKAGE_ALERT_GROUP"
-          :form-data="formData"
-          :flow-no="flowNo"
-          :is-history="isHistory"
-          @change="packageGroupChange"
+            v-if="currentSchema.PACKAGE_ALERT_GROUP"
+            :form-data="formData"
+            :flow-no="flowNo"
+            :is-history="isHistory"
+            @change="packageGroupChange"
         />
         <package-alert-group-whitehouse
-          v-if="currentSchema.PACKAGE_ALERT_GROUP_WH"
-          :form-data="formData"
-          :flow-no="flowNo"
-          :flow-type="flowData.type"
-          :is-history="isHistory"
-          @change="packageGroupWHChange"
+            v-if="currentSchema.PACKAGE_ALERT_GROUP_WH"
+            :form-data="formData"
+            :flow-no="flowNo"
+            :flow-type="flowData.type"
+            :is-history="isHistory"
+            @change="packageGroupWHChange"
         />
         <template v-if="currentSchema.AUDIT_REMARK">
           <h4 style="margin-bottom: 12px; color: #666">
@@ -99,33 +113,36 @@
       </template>
       <el-form-item :label="currentProcessStatusSchema.infoSubTitle" prop="remark">
         <el-input
-          v-model="formData.remark"
-          :disabled="isHistory"
-          style="width: 300px"
-          type="textarea"
-          rows="4"
-          placeholder="请输入审核的理由和说明信息"
+            v-model="formData.remark"
+            :disabled="isHistory"
+            style="width: 300px"
+            type="textarea"
+            rows="4"
+            placeholder="请输入审核的理由和说明信息"
         />
       </el-form-item>
       <el-form-item v-if="!isHistory && !['FINISHED', 'CLOSED'].includes(currentStatus)">
         <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
-        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"
-          >关闭</el-button
-        >
+<!--        <el-button v-if="canClose" type="danger" :loading="loading" @click="handleFlowClose"-->
+<!--          >关闭</el-button-->
+<!--        >-->
       </el-form-item>
     </el-form>
   </el-card>
 </template>
 <script>
 import FileList from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/file-list.vue'
-import SalePriceAlertList from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/sale-price-alert-list.vue'
-import PackageAlertGroupWhitehouse from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/package-alert-group-whitehouse.vue'
-import PackageAlertGroup from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/package-alert-group.vue'
-import ProcessHistory from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/history/process-history.vue'
-import { iccidsTransfer } from '@/global/function/iccids-tool'
+import SalePriceAlertList
+  from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/sale-price-alert-list.vue'
+import PackageAlertGroupWhitehouse
+  from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/package-alert-group-whitehouse.vue'
+import PackageAlertGroup
+  from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/package-alert-group.vue'
+import {iccidsTransfer} from '@/global/function/iccids-tool'
 import current from '../../../../../components/card-lifecycle/current.vue'
 import GroupNoList from '@/page/compliance/ext-whitelist/change-list/update-and-detail/components/group-no-list.vue'
 import mixins from '@/page/compliance/ext-whitelist/mixins'
+
 const processSchemas = {
   OPERATION_CHANGE_CONFIRMATION: {
     AUDIT_RESULT: 1,
@@ -157,7 +174,9 @@ const processSchemas = {
     SALE_PRICE_ALERT_LIST: 1,
     SALE_PRICE_SUM: 1,
     AUDIT_RESULT: 1,
-    AUDIT_REMARK: 1
+    AUDIT_REMARK: 1,
+    // IS_FREE: 1,
+
   }, // 销售修改变更后价格
   SALES_CONFIRMATION: {
     AUDIT_RESULT: 1,
@@ -291,16 +310,17 @@ export default {
   data() {
     return {
       formRules: {
-        iccids: [{ required: true, message: '请输入ICCID', trigger: 'submit' }],
-        processStatus: [{ required: true, message: '请选择', trigger: 'submit' }],
-        remark: [{ required: true, message: '请输入审核的理由和说明信息', trigger: 'submit' }]
+        iccids: [{required: true, message: '请输入ICCID', trigger: 'submit'}],
+        processStatus: [{required: true, message: '请选择', trigger: 'submit'}],
+        remark: [{required: true, message: '请输入审核的理由和说明信息', trigger: 'submit'}]
       },
       activeName: 'first',
       formData: {
         cardPriceOfferChangeDTOList: [],
         whiteHousePriceChangeDTOList: [],
         salePriceChangeDTOList: [],
-        remark: ''
+        remark: '',
+        // isFree: 0
       }
     }
   },
@@ -323,6 +343,10 @@ export default {
       this.formData = {
         ...this.flowData
       }
+      // if (this.flowData.salePriceChangeDTOList && this.flowData.salePriceChangeDTOList.length > 0) {
+      //   const data = this.flowData.salePriceChangeDTOList
+      //   this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
+      // }
     } else {
       this.formData = {
         ...this.formData,
@@ -344,13 +368,6 @@ export default {
       // Return the total, rounded to 2 decimal places
       return (total / 10000).toFixed(2)
     },
-    // async handleFlowClose() {
-    //   const res = await this.jaxLib.whitelist.forceClose({ flowNo: this.flowNo })
-    //   if (res && res.success) {
-    //     this.$message.success('关闭成功')
-    //     this.$router.go(-1)
-    //   }
-    // },
     handleProcessStatusChange(v) {
       if (v === 'PASS' && !this.formData.remark) {
         this.formData.remark = '同意'
@@ -364,6 +381,7 @@ export default {
     },
     salePriceAlertListChange(data) {
       this.formData.salePriceChangeDTOList = data
+      // this.formData.isFree = data[0] && data[0].isFree ? data[0].isFree : 0
     },
     packageGroupWHChange(data) {
       this.formData.whiteHousePriceChangeDTOList = data
@@ -379,6 +397,14 @@ export default {
             params[key] = item[key]
           })
           return params
+        })
+      }
+      if (key === 'salePriceChangeDTOList') {
+        return data.map((item) => {
+          return {
+            ...item,
+            // isFree: this.formData.isFree
+          }
         })
       }
       if (key === 'iccids') {
