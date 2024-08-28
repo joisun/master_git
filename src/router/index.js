@@ -160,6 +160,18 @@ export default [
         path: '/international/finance-manage/transaction-history',
         name: 'international-finance-manage-transaction-history',
         component: LadyLiberty
+      },
+      // 工具-客户改套餐
+      {
+        path: '/international/tools/customer-package-modify-list',
+        name: 'international-tools-customer-package-modify-list',
+        component: LadyLiberty
+      },
+      // 工具-运营商改套餐
+      {
+        path: '/international/tools/carrier-package-modify-list',
+        name: 'international-tools-carrier-package-modify-list',
+        component: LadyLiberty
       }
     ]
   }
