@@ -475,7 +475,7 @@ export default {
                   <el-tooltip content="国际卡设置报价" placement="top" effect="light">
                     <el-button
                         size="mini"
-                        @click="goIntlPriceSetting('ota-admin-platform-service-client-price-set', org)"
+                        @click="goIntlPriceSetting('international-client-price-set', org)"
                     >
                       <span class="el-icon-money" style="font-size: 20px"></span>
                     </el-button>
