@@ -141,7 +141,7 @@ export default {
         this.resetSameIccidSearch('batchIccids')
       }
 
-      if (!this.form.iccids && (!this.form.gmtCreated || this.form.gmtCreated.length !== 2)) {
+      if (!this.form.iccids && !this.iccidsOssKey && !this.batchIccids && (!this.form.gmtCreated || this.form.gmtCreated.length !== 2)) {
         this.$message.warning('数据量过大，请选择时间范围或者指定ICCIDs查询')
         return
       }
