@@ -15,6 +15,7 @@ import H5Manage from '@/page/manage/children/client/children/h5-manage/h5-manage
 import PicCheck from '@/page/manage/children/client/children/client-verify/pic-check.vue'
 import LadyLiberty from '@/page/lady-liberty.vue'
 import Gotham from '@/page/gotham.vue'
+import IntlClientPriceSet from "@/page/manage/children/client/children/intl-client-price-set/intl-client-price-set.vue";
 
 export default {
   path: 'client',
@@ -83,6 +84,23 @@ export default {
           name: 'client-price-combine',
           component: clientPriceCombine
         },
+        // {
+        //   path: '/international/price-manage/client-price-set',
+        //   name: 'international-client-price-set',
+        //   component: LadyLiberty
+        // },
+        // {
+        //   path: '/ota-admin/price-manage/client-price-set',
+        //   name: 'ota-admin-client-price-set',
+        //   component: Gotham
+        // }
+      ]
+    },
+    {
+      path: 'intl-client-price-set',
+      name: 'intl-client-price-set',
+      component: IntlClientPriceSet,
+      children: [
         {
           path: '/international/price-manage/client-price-set',
           name: 'international-client-price-set',
@@ -91,6 +109,16 @@ export default {
         {
           path: '/ota-admin/price-manage/client-price-set',
           name: 'ota-admin-client-price-set',
+          component: Gotham
+        },
+        {
+          path: '/ota-admin/price-manage/no-formal-client-price-set',
+          name: 'ota-admin-no-formal-client-price-set',
+          component: Gotham
+        },
+        {
+          path: '/ota-admin/price-manage/platform-service-client-price-set',
+          name: 'ota-admin-platform-service-client-price-set',
           component: Gotham
         }
       ]
