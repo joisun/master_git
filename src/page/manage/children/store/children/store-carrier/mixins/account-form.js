@@ -34,6 +34,7 @@ class AccountForm {
     this.carrierRealName = false
     this.resaleSupplier = false
     this.extWhiteList = false
+    this.voiceCardAccount = false
   }
 }
 

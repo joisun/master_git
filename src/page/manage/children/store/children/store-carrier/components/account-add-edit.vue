@@ -238,6 +238,9 @@ export default {
         <el-form-item>
           <el-checkbox v-model="form.extWhiteList">公网白名单账号</el-checkbox>
         </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="form.voiceCardAccount">语音账号</el-checkbox>
+        </el-form-item>
       </div>
       <el-form-item>
         <el-button type="primary" @click="save">保存</el-button>
