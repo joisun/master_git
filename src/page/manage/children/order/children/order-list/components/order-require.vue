@@ -411,6 +411,10 @@ export default {
             }}</span>
             <span v-else>{{ i.locationService }}</span>
           </div>
+          <div class="order-require__item">
+            语音功能:
+            <span>{{i.voiceCard ? '支持': '不支持'}}</span>
+          </div>
         </div>
         <div class="wh__card--body-item order-require__line">
           <div class="order-require__item">
