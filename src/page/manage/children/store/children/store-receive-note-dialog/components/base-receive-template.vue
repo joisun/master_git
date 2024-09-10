@@ -538,8 +538,15 @@ export default {
       if (this.loading) return false
       const lastTime = (time) => moment(time).endOf('Day').format('YYYY-MM-DD')
       try {
+
         const valid = await this.$refs.form.validate()
         if (valid) {
+          const {voiceFunction} = this.form
+          if (voiceFunction) {
+            this.form.tags = this.form.tags ? [...this.form.tags, 'VOICE_CARD'] : ['VOICE_CARD']
+          } else {
+            this.form.tags = this.form.tags ? this.form.tags.filter(t => t!== 'VOICE_CARD') : this.form.tags
+          }
           let postData = {
             chargeType: this.form.type,
             chargeEntryId: this.chooseType.chargeEntryId,
@@ -666,6 +673,9 @@ export default {
             {{ item.chargeTypeName }}
           </el-radio>
         </el-radio-group>
+      </el-form-item>
+      <el-form-item label="支持功能">
+        <el-checkbox v-model="form.voiceFunction">语音功能</el-checkbox>
       </el-form-item>
       <div v-if="computedFormSchema.openCardDate.show" class="form-group-wrap">
         <el-form-item label="开卡日期" prop="openCardDate">
