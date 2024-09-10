@@ -202,7 +202,7 @@ export default {
 </script>
 
 <template>
-  <div class="record-bill-carrier">
+  <div class="record-bill-carrier" style="margin-bottom: 50px">
     <div class="wh__tools">
       <div class="wh__tools--mix">
         <el-select v-model="search.carrier" placeholder="请选择运营商" @change="handleCarrierChange">
@@ -264,7 +264,6 @@ export default {
         <div class="wh__body--table">
           <el-table
             :data="tableData"
-            height="calc(100vh - 260px)"
             default-expand-all
             :row-key="row => row.id"
             :tree-props="{ children: 'list', hasChildren: 'hasChildren' }"
