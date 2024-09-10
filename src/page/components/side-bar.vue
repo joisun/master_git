@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="left-strip" @mouseenter="stripEnter" @mouseleave="stripLeave">
       <div
-        style="
+          style="
           color: #fff;
           font-size: 16px;
           text-align: center;
@@ -19,36 +19,36 @@
       </div>
     </div>
     <el-drawer
-      :show-close="false"
-      :with-header="false"
-      :visible.sync="drawer"
-      :modal="false"
-      direction="ltr"
-      class="menu-drawer"
-      custom-class="menu-in"
+        :show-close="false"
+        :with-header="false"
+        :visible.sync="drawer"
+        :modal="false"
+        direction="ltr"
+        class="menu-drawer"
+        custom-class="menu-in"
     >
       <div>
         <div class="side-menu">
           <div
-            v-for="(topMenu, index) in navMenu"
-            :key="`${topMenu.code}${index}`"
-            class="top-menu"
-            @mouseenter="topMenuHover(topMenu)"
-            @mouseleave="handleLeave"
+              v-for="(topMenu, index) in navMenu"
+              :key="`${topMenu.code}${index}`"
+              class="top-menu"
+              @mouseenter="topMenuHover(topMenu)"
+              @mouseleave="handleLeave"
           >
             <wh-std-icon :sign="menuToIcon[topMenu.code]" style="margin-right: 8px" />
             <a
-              v-if="topMenu.name.indexOf('external-link') !== -1"
-              :href="topMenu.value"
-              style="height: 100%; width: 100%"
-              target="_blank"
+                v-if="topMenu.name.indexOf('external-link') !== -1"
+                :href="topMenu.value"
+                style="height: 100%; width: 100%"
+                target="_blank"
             >
               {{ topMenu.name }}</a
             >
             <router-link
-              v-else-if="!topMenu.children || !topMenu.children.length"
-              style="height: 100%; width: 100%"
-              :to="{
+                v-else-if="!topMenu.children || !topMenu.children.length"
+                style="height: 100%; width: 100%"
+                :to="{
                 name: topMenu.code,
                 params: topMenu.params,
                 query: { enter: true, ...(topMenu.query || {}) }
@@ -62,36 +62,36 @@
           </div>
         </div>
         <el-drawer
-          :show-close="false"
-          :with-header="false"
-          :visible.sync="drawer2"
-          :modal="false"
-          direction="ltr"
-          class="menu-drawer-2"
-          custom-class="menu-in-2"
+            :show-close="false"
+            :with-header="false"
+            :visible.sync="drawer2"
+            :modal="false"
+            direction="ltr"
+            class="menu-drawer-2"
+            custom-class="menu-in-2"
         >
           <div class="side-menu" @mouseleave="() => drawerLeave(200)">
             <div
-              v-for="(subMenu, index) in currentTopMenu.children"
-              :key="`${subMenu.name}${index}`"
+                v-for="(subMenu, index) in currentTopMenu.children"
+                :key="`${subMenu.name}${index}`"
             >
               <a
-                v-if="subMenu.code.indexOf('external-link') !== -1"
-                :href="subMenu.value"
-                class="sub-menu"
-                style="height: 100%; width: 100%"
-                target="_blank"
-                >{{ subMenu.name }}</a
+                  v-if="subMenu.code.indexOf('external-link') !== -1"
+                  :href="subMenu.value"
+                  class="sub-menu"
+                  style="height: 100%; width: 100%"
+                  target="_blank"
+              >{{ subMenu.name }}</a
               >
               <router-link
-                v-else-if="!subMenu.children || !subMenu.children.length"
-                class="sub-menu"
-                :to="{
+                  v-else-if="!subMenu.children || !subMenu.children.length"
+                  class="sub-menu"
+                  :to="{
                   name: subMenu.code,
                   params: subMenu.params,
                   query: { enter: true, ...(subMenu.query || {}) }
                 }"
-                :class="{ active: $route.name === subMenu.code }"
+                  :class="{ active: $route.name === subMenu.code }"
               >
                 {{ subMenu.name }}
               </router-link>
@@ -99,15 +99,15 @@
                 <div class="sub-menu-group-title">{{ subMenu.name }}</div>
                 <div class="sub-menu-group-content">
                   <router-link
-                    v-for="(i, index) in subMenu.children"
-                    :key="`${i.code}${index}`"
-                    class="sub-menu third-level"
-                    :to="{
+                      v-for="(i, index) in subMenu.children"
+                      :key="`${i.code}${index}`"
+                      class="sub-menu third-level"
+                      :to="{
                       name: i.code,
                       params: i.params,
                       query: { enter: true, ...(i.query || {}) }
                     }"
-                    :class="{ active: isThirdActive(i) }"
+                      :class="{ active: isThirdActive(i) }"
                   >
                     {{ i.name }}
                   </router-link>
@@ -173,9 +173,9 @@ export default {
       const params = { ...this.$route.params }
       delete query.enter
       return (
-        item.code === this.$route.name &&
-        (JSON.stringify(query) === JSON.stringify(safeParse(item.value).query) ||
-          JSON.stringify(params) === JSON.stringify(safeParse(item.value).params))
+          item.code === this.$route.name &&
+          (JSON.stringify(query) === JSON.stringify(safeParse(item.value).query) ||
+              JSON.stringify(params) === JSON.stringify(safeParse(item.value).params))
       )
     },
     drawerLeave(wait) {
@@ -281,7 +281,9 @@ export default {
   background-color: #f6f6f6;
 }
 .sidebar {
+  overflow: hidden;
   .left-strip {
+    overflow: hidden;
     z-index: 99;
     display: block;
     position: absolute;
@@ -316,14 +318,14 @@ export default {
 }
 .menu-drawer-2 {
   top: 62px !important;
-  left: 120px !important;
+  left: 125px !important;
   .el-drawer__header {
     display: none;
   }
 }
 .menu-in {
   background: rgb(48, 65, 86) !important;
-  width: 120px !important;
+  width: 125px !important;
 }
 .menu-in-2 {
   overflow-y: auto;
