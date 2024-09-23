@@ -1,12 +1,12 @@
 <script>
 import WhVolumeInput from '@/page/components/wh-volume-input.vue'
 import volumeFormat from '@/global/filters/volume-format'
-import { PLAN_TYPE, METERIAL_NAME } from '../mixins/const'
-import { iccidsTransfer } from '@/global/function/iccids-tool'
+import {METERIAL_NAME, PLAN_TYPE} from '../mixins/const'
+import {iccidsTransfer} from '@/global/function/iccids-tool'
 import reg from '@/constant/regexps'
 import moment from 'moment'
-import { pcData } from '@/constant/address'
-import IccidRangeInput, { getAllIccidByRange } from '@/page/components/iccid-range-input'
+import {pcData} from '@/constant/address'
+import IccidRangeInput, {getAllIccidByRange} from '@/page/components/iccid-range-input'
 
 // 需要保存到DB 和 回显的表单字段
 const FORM_CONFIG_TO_RESTORE = {
@@ -25,7 +25,8 @@ const FORM_CONFIG_TO_RESTORE = {
   freeForFirstMonth: 'freeForFirstMonth', // 首月不计入套餐时间
   cardIssuer: 'cardIssuer',
   protocolStack: 'protocolStack',
-  productionBatch: 'productionBatch'
+  productionBatch: 'productionBatch',
+  voiceCard: 'voiceCard'
 }
 const FORM_CONFIG_TO_STORE = {
   testingEndType: 'testingEndType', // 测试期结束方式
@@ -43,7 +44,9 @@ const FORM_CONFIG_TO_STORE = {
   freeForFirstMonth: 'freeForFirstMonth', // 首月不计入套餐时间
   openCardDate: 'openCardDate',
   cardIssuer: 'cardIssuer',
-  protocolStack: 'protocolStack'
+  protocolStack: 'protocolStack',
+  voiceCard: 'voiceCard'
+
 }
 const FORM_SCHEME = {
   openCardDate: {
@@ -139,7 +142,7 @@ export default {
       carrierAccountId: '',
       batchPrefix: '',
       carrierChargeId: '',
-      carrierRealName: '',
+      carrierRealName: false,
       carrierType: '',
       DB: null,
       PLAN_TYPE,
@@ -178,7 +181,8 @@ export default {
         importBatchNo: '',
         iccids: '',
         locationService: true,
-        freeForFirstMonth: false
+        freeForFirstMonth: false,
+        voiceCard: false
       },
 
       iccidPostWay: '1'
@@ -361,8 +365,8 @@ export default {
         'isNBIoTAccount',
         'carrierAccountId',
         'batchPrefix',
-        'carrierChargeId',
         'carrierRealName',
+        'carrierChargeId',
         'carrierType'
       ].forEach((item) => {
         this[item] = this.config[item]
@@ -377,9 +381,9 @@ export default {
             this.config[this.formConfigToRestore[key]] !== undefined
               ? this.config[this.formConfigToRestore[key]]
               : this.form[key]
-          this.specialFormValueSetting()
           this.calcDeadlineDays(this.config)
         })
+        this.specialFormValueSetting()
       } else {
         const db = await this.restoreDbData()
         dbData = db.restoreData
@@ -404,9 +408,11 @@ export default {
       if (this.config.specialLimit) {
         this.form.tags = this.config.specialLimit.split(',')
       }
-      this.form.tags = this.form.tags.concat(
-        this.config.carrierSpecialLimit ? this.config.carrierSpecialLimit.split(',') : []
-      )
+      this.form.tags =  [
+          ...new Set(this.form.tags.concat(
+              this.config.carrierSpecialLimit ? this.config.carrierSpecialLimit.split(',') : []
+          ))
+      ]
       this.form.type =
         (
           this.baseContent.offerTypeList.find(
@@ -539,8 +545,15 @@ export default {
       if (this.loading) return false
       const lastTime = (time) => moment(time).endOf('Day').format('YYYY-MM-DD')
       try {
+
         const valid = await this.$refs.form.validate()
         if (valid) {
+          const {voiceCard} = this.form
+          if (voiceCard) {
+            this.form.tags = this.form.tags ? [...this.form.tags, 'VOICE_CARD'] : ['VOICE_CARD']
+          } else {
+            this.form.tags = this.form.tags ? this.form.tags.filter(t => t!== 'VOICE_CARD') : this.form.tags
+          }
           let postData = {
             cardColor: this.form.cardColor,
             chargeType: this.form.type,
@@ -639,7 +652,9 @@ export default {
         { name: 'CARRIER_IMEI_BIND', desc: '机卡绑定', disabled: false },
         { name: 'CARRIER_REAL_NAME', desc: '实名认证', disabled: this.carrierRealName }
       ]
-      if (this.carrierRealName) this.form.tags.push('CARRIER_REAL_NAME')
+      if (this.carrierRealName) {
+        this.form.tags = this.form.tags ? [...new Set(this.form.tags.concat(['CARRIER_REAL_NAME']))] : ['CARRIER_REAL_NAME']
+      }
       this.realTags = tags
     }
   }
@@ -668,6 +683,9 @@ export default {
             {{ item.chargeTypeName }}
           </el-radio>
         </el-radio-group>
+      </el-form-item>
+      <el-form-item label="支持功能">
+        <el-checkbox v-model="form.voiceCard">语音功能</el-checkbox>
       </el-form-item>
       <div v-if="computedFormSchema.openCardDate.show" class="form-group-wrap">
         <el-form-item label="开卡日期" prop="openCardDate">

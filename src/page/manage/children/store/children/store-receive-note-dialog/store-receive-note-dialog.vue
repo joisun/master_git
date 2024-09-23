@@ -93,6 +93,7 @@ export default {
         this.config = {
           ...this.config,
           carrierAccountId: v,
+          carrierRealName: item.carrierRealName,
           ...(item || {}),
           carrierType: item && item.type,
           isNBIoTAccount: item && item.nbIoTAccount
@@ -221,8 +222,9 @@ export default {
               cardMaterialId: 'cardMaterialId', // TODO 卡片材质，需要返回材质id (chargeEntryId)
               specification: 'cardSpecification', // 规格
               featureFee: 'featureFee', // TODO 功能费(如果有则返回)
-              tags: 'specialLimit', // TODO 运营商特殊限， 特殊限制
+              tags: 'tags', // TODO 运营商特殊限， 特殊限制
               locationService: 'locationService', // TODO 定位功能
+              voiceCard: 'voiceCard',
               freeForFirstMonth: 'freeForFirstMonth', // TODO 首月不计入套餐时间
               ...(options.extraRestore || {})
             }"
