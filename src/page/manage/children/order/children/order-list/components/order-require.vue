@@ -156,6 +156,7 @@ export default {
           realnameRequire: { name: 'realnameRequire', helper: (v) => (v ? '需要' : '不需要') },
           carrierRealName: { name: 'carrierRealName', helper: (v) => (v ? '需要' : '不需要') },
           locationService: { name: 'locationService', helper: (v) => (v ? '支持' : '不支持') }, // 定位支持
+          voiceCard: { name: 'voiceCard', helper: (v) => (v ? '支持' : '不支持') }, // 定位支持
           ALLOW_CHANGE_RATE_PLAN: {
             name: 'priceOfferCategory',
             helper: (v) => (_hasTag(v, 'ALLOW_CHANGE_RATE_PLAN') ? '支持' : '不支持')
@@ -410,6 +411,13 @@ export default {
               i.locationService
             }}</span>
             <span v-else>{{ i.locationService }}</span>
+          </div>
+          <div class="order-require__item">
+            语音功能:
+            <span v-if="i.voiceCard === '支持'" style="color: red">{{
+                i.voiceCard
+              }}</span>
+            <span v-else>{{ i.voiceCard }}</span>
           </div>
         </div>
         <div class="wh__card--body-item order-require__line">
