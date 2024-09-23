@@ -542,11 +542,11 @@ export default {
                 </p>
                 <p >
                   <span class="card-manage__table--tips">运营商阈值: </span>
-                  <span class="card-manage__table--content"></span>
+                  <span class="card-manage__table--content">{{scope.row.telecomUpperLimit}}</span>
                 </p>
                 <p >
                   <span class="card-manage__table--tips">颜色: </span>
-                  <span class="card-manage__table--content"></span>
+                  <span class="card-manage__table--content"> {{scope.row.cardColor }}</span>
                 </p>
               </div>
             </template>

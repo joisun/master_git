@@ -5,6 +5,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import NbParams from '@/page/components/nb-params/nb-params'
+import checkAlertDialog from './check-alert-dialog.vue'
 
 const iccidHelper = (iccids) =>
   iccids
@@ -15,7 +16,8 @@ const iccidHelper = (iccids) =>
     : ''
 export default {
   components: {
-    NbParams
+    NbParams,
+    checkAlertDialog
   },
   filters: {
     dateCalculator(val) {
@@ -241,7 +243,7 @@ export default {
         })
     },
     // 确认
-    onSubmit() {
+   async onSubmit() {
       if (!this.validator()) {
         return false
       }
@@ -273,8 +275,19 @@ export default {
           return o
         })
       }
+     this.postLoading = true
+
+     const res = await this.jaxLib.card.beforeCheckDeviceOutput(postData)
+     this.postLoading = false
+     if (!res.data.passCheck) {
+        this.$refs.checkAlertDialog.open(res.data, postData)
+      }
       this.postOutPut(postData)
     },
+    checkOk(data) {
+      this.postOutPut(data)
+    },
+
     // 提交及反应
     async postOutPut(data) {
       this.postLoading = true
@@ -338,6 +351,7 @@ export default {
 
 <template>
   <div class="card-export-actor">
+    <check-alert-dialog ref="checkAlertDialog" @ok="checkOk"/>
     <div class="wh__warp">
       <div class="wh__header">
         <h2 class="wh__header--title">卡出库</h2>
@@ -718,7 +732,7 @@ export default {
           </div>
         </div>
         <div class="card-export-actor__enter">
-          <el-button type="primary" :disabled="postLoading" @click="onSubmit">确认出库</el-button>
+          <el-button type="primary" :disabled="postLoading" @click="onSubmit()">确认出库</el-button>
           <el-button @click="onCancel">取消</el-button>
         </div>
       </div>
