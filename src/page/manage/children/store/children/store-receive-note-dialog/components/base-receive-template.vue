@@ -151,6 +151,7 @@ export default {
       fileData: '',
       loading: false,
       form: {
+        cardColor: '',
         refCategory: [],
         activationDeadlineMonths: '',
         openCardDate: new Date(),
@@ -541,6 +542,7 @@ export default {
         const valid = await this.$refs.form.validate()
         if (valid) {
           let postData = {
+            cardColor: this.form.cardColor,
             chargeType: this.form.type,
             chargeEntryId: this.chooseType.chargeEntryId,
             carrier: this.carrier,
@@ -783,6 +785,18 @@ export default {
                 )
               "
               clearable
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="颜色" prop="cardColor">
+          <el-select v-model="form.cardColor" placeholder="请选择">
+            <el-option
+                v-for="item in baseContent.materialList"
+                :key="item.chargeEntryId"
+                :value="item.chargeEntryId"
+                :label="METERIAL_NAME[item.chargeType]"
+                clearable
             >
             </el-option>
           </el-select>
