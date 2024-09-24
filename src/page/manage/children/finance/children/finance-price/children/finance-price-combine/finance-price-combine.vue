@@ -27,6 +27,11 @@
               {{ row.chinanetOfferName }}
             </template>
           </el-table-column>
+          <el-table-column prop="offerTag" label="套餐标签">
+            <template #default="{ row }">
+              {{ row.offerTag | combineOfferTagFilter }}
+            </template>
+          </el-table-column>
           <el-table-column label="操作" min-width="80">
             <template slot-scope="scope">
               <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
