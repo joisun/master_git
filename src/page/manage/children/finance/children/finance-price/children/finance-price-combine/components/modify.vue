@@ -153,14 +153,15 @@ export default {
       this.content = content
       this.formData = {
         ...this.formData,
-        ...content
+        ...content,
+        offerTag: content.offerTag || ''
       }
       if (!this.isAdd) {
         this.formData = {
           ...this.formData,
           chinanetOfferText: `${content.chinanetOfferName}`,
           unicomOfferText: `${content.unicomOfferName}`,
-          cmccOfferText: `${content.cmccOfferName}`
+          cmccOfferText: `${content.cmccOfferName}`,
         }
       }
       this.visible = true
