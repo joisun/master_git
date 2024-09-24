@@ -540,7 +540,7 @@ export default {
                     >网络状态
                   </router-link>
                 </p>
-                <p >
+                <p v-if="scope.row.carrier === 'chinanet'">
                   <span class="card-manage__table--tips">运营商阈值: </span>
                   <span class="card-manage__table--content">{{scope.row.telecomUpperLimit}}</span>
                 </p>

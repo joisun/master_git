@@ -807,8 +807,8 @@ export default {
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="颜色" prop="cardColor">
-          <el-select v-model="form.cardColor" placeholder="请选择">
+        <el-form-item label="颜色" prop="cardColor" :rules="[{ required: true, message: '请选择颜色' }]">
+          <el-select v-model="form.cardColor" placeholder="请选择" >
             <el-option
                 v-for="(key, val) in enums.cardColor.maps()"
                 :key="val"
