@@ -810,13 +810,11 @@ export default {
         <el-form-item label="颜色" prop="cardColor">
           <el-select v-model="form.cardColor" placeholder="请选择">
             <el-option
-                v-for="item in baseContent.materialList"
-                :key="item.chargeEntryId"
-                :value="item.chargeEntryId"
-                :label="METERIAL_NAME[item.chargeType]"
-                clearable
-            >
-            </el-option>
+                v-for="(key, val) in enums.cardColor.maps()"
+                :key="val"
+                :label="key"
+                :value="val"
+            />
           </el-select>
         </el-form-item>
       </div>
