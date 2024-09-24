@@ -371,6 +371,13 @@ export default {
             i.planSpecification
           }}
           {{ i.cardAmount }}张
+
+          <span style="color: orange;margin-left: 20px">
+            发卡颜色： {{i.cardColor || '-'}}
+            <span style="margin-left: 10px">
+               其他备注: {{i.otherRequirement || '-'}}
+            </span>
+          </span>
         </span>
         <span class="float-right"
           >仓储剩余:

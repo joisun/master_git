@@ -20,6 +20,7 @@ module.exports = defineConfig({
     //   //   pathRewrite: { '^/international': '' }    // Remove the '/api' prefix
     //   // }
     // },
+    compress: false,
     port: 8090,
     headers: {
       "Access-Control-Allow-Origin": "*",

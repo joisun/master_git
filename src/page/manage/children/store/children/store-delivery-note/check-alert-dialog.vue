@@ -9,12 +9,12 @@
       卡片运营商阈值不符合客户要求，建议修改阈值，是否需要导出不符合要求的卡片？
       <el-button type="text" @click="handleDownload(3)">导出</el-button>
     </p>
-    <p v-if="content.colorCheck">
+    <p v-if="!content.colorCheck">
       出库失败，卡片颜色不符合客户要求，是否需要导出不符合要求的卡片？
       <el-button type="text" @click="handleDownload(1)">导出</el-button>
 
     </p>
-    <p v-if="content.imsiCheck">
+    <p v-if="!content.imsiCheck">
       出库失败，卡片imsi号段不符合客户要求，请选择其他卡片出库！
       <el-button type="text" @click="handleDownload(2)">导出</el-button>
     </p>
