@@ -520,7 +520,7 @@ export default {
                         <span class="export-choose__item--body-content">{{ item.buyCount }}张</span>
                         <p>
                           <span style="color: orange;margin-left: 20px">
-                            发卡颜色： {{ item.cardColor || '-' }}
+                            发卡颜色： {{ item.cardColor | cardColorFilter }}
                             <span style="margin-left: 10px">
                                其他备注: {{ item.otherRequirement || '-' }}
                             </span>
