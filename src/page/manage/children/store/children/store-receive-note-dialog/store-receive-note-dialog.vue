@@ -226,6 +226,9 @@ export default {
               locationService: 'locationService', // TODO 定位功能
               voiceCard: 'voiceCard',
               cardColor: 'cardColor',
+              cmccMccRequirement: 'cmccMccRequirement',
+              telecomUpperLimit: 'telecomUpperLimit',
+              otherRequirement: 'otherRequirement',
               freeForFirstMonth: 'freeForFirstMonth', // TODO 首月不计入套餐时间
               ...(options.extraRestore || {})
             }"

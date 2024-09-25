@@ -159,6 +159,8 @@ export default {
             locationService: {name: 'locationService', helper: (v) => (v ? '支持' : '不支持')}, // 定位支持
             voiceCard: {name: 'voiceCard', helper: (v) => (v ? '支持' : '不支持')}, // 定位支持
             cardColor: 'cardColor',
+            cmccMccRequirement: 'cmccMccRequirement',
+            telecomUpperLimit: 'telecomUpperLimit',
             otherRequirement: 'otherRequirement',
             ALLOW_CHANGE_RATE_PLAN: {
               name: 'priceOfferCategory',

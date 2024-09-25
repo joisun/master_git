@@ -281,6 +281,7 @@ export default {
       this.postLoading = false
       if (!res.data.passCheck) {
         this.$refs.checkAlertDialog.open(res.data, postData)
+        return
       }
       this.postOutPut(postData)
     },
