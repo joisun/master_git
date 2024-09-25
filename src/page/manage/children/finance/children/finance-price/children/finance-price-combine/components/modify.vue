@@ -61,7 +61,7 @@
       </el-form-item>
       <el-form-item label="套餐标签" prop="offerTag">
         <el-select v-model="formData.offerTag" placeholder="选择套餐标签" clearable >
-          <el-option :label="key" :value="val" v-for="(key, val) in enums.combineOfferTag.maps()" :key="val">
+          <el-option :label="key" :value="+val" v-for="(key, val) in enums.combineOfferTag.maps()" :key="val">
           </el-option>
         </el-select>
       </el-form-item>
