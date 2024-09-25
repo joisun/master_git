@@ -546,7 +546,7 @@ export default {
                 </p>
                 <p >
                   <span class="card-manage__table--tips">颜色: </span>
-                  <span class="card-manage__table--content"> {{scope.row.cardColor }}</span>
+                  <span class="card-manage__table--content"> {{scope.row.cardColor | cardColorFilter }}</span>
                 </p>
               </div>
             </template>
