@@ -279,13 +279,13 @@ export default {
 
       const res = await this.jaxLib.card.beforeCheckDeviceOutput(postData)
       this.postLoading = false
-      // if (!res.data.passCheck) {
+      if (!res.data.passCheck) {
         this.$refs.checkAlertDialog.open(res.data, postData)
-      // }
-      // this.postOutPut(postData)
+      }
+      this.postOutPut(postData)
     },
     checkOk(data) {
-      // this.postOutPut(data)
+      this.postOutPut(data)
     },
 
     // 提交及反应
@@ -519,11 +519,21 @@ export default {
                           }}</span>
                         <span class="export-choose__item--body-content">{{ item.buyCount }}张</span>
                         <p>
-                          <span style="color: orange;margin-left: 20px">
-                            发卡颜色： {{ item.cardColor | cardColorFilter }}
-                            <span style="margin-left: 10px">
-                               其他备注: {{ item.otherRequirement || '-' }}
+                          <span style="color: orange;">
+                           <span>发卡颜色： {{ item.cardColor | cardColorFilter }}</span>
+                            <el-divider direction="vertical"/>
+                            <span>
+                              电信阀值要求: {{item.telecomUpperLimit ? `${item.telecomUpperLimit}MB` : '无'}}
                             </span>
+                            <p>
+                              <span>
+                              移动号段要求: {{item.cmccMccRequirement ? '要08' : '无要求'}}
+                            </span>
+                            <el-divider direction="vertical"/>
+                            <span style="margin-left: 10px">
+                               其他备注: {{ item.otherRequirement || '无' }}
+                            </span>
+                            </p>
                           </span>
                         </p>
                       </el-form-item>

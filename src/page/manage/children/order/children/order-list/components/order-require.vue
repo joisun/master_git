@@ -378,10 +378,21 @@ export default {
           }}
           {{ i.cardAmount }}张
 
+          <el-divider direction="vertical"/>
+
           <span style="color: orange;margin-left: 20px">
-            发卡颜色： {{ i.cardColor | cardColorFilter }}
+            <span>发卡颜色： {{ i.cardColor | cardColorFilter }}</span>
+            <el-divider direction="vertical"/>
+            <span>
+              电信阀值要求: {{i.telecomUpperLimit ? `${i.telecomUpperLimit}MB` : '无'}}
+            </span>
+            <el-divider direction="vertical"/>
+            <span>
+              移动号段要求: {{i.cmccMccRequirement ? '要08' : '无要求'}}
+            </span>
+            <el-divider direction="vertical"/>
             <span style="margin-left: 10px">
-               其他备注: {{ i.otherRequirement || '-' }}
+               其他备注: {{ i.otherRequirement || '无' }}
             </span>
           </span>
         </span>
