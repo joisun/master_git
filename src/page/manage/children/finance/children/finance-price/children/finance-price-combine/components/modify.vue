@@ -154,7 +154,7 @@ export default {
       this.formData = {
         ...this.formData,
         ...content,
-        offerTag: content.offerTag || ''
+        offerTag: content ? content.offerTag : ''
       }
       if (!this.isAdd) {
         this.formData = {
