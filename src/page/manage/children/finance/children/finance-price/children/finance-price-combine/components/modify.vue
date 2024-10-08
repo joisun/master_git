@@ -59,6 +59,12 @@
           >清除</el-button
         >
       </el-form-item>
+      <el-form-item label="套餐标签" prop="offerTag">
+        <el-select v-model="formData.offerTag" placeholder="选择套餐标签" clearable >
+          <el-option :label="key" :value="+val" v-for="(key, val) in enums.combineOfferTag.maps()" :key="val">
+          </el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
     <div slot="footer">
       <el-button v-loading="sureLoading" type="primary" @click="onSubmit">提交</el-button>
@@ -100,6 +106,7 @@ export default {
       formData: {
         id: '',
         name: '',
+        offerTag: '',
         unicomOfferId: '',
         chinanetOfferId: '',
         cmccOfferId: '',
@@ -146,14 +153,15 @@ export default {
       this.content = content
       this.formData = {
         ...this.formData,
-        ...content
+        ...content,
+        offerTag: content ? content.offerTag : ''
       }
       if (!this.isAdd) {
         this.formData = {
           ...this.formData,
           chinanetOfferText: `${content.chinanetOfferName}`,
           unicomOfferText: `${content.unicomOfferName}`,
-          cmccOfferText: `${content.cmccOfferName}`
+          cmccOfferText: `${content.cmccOfferName}`,
         }
       }
       this.visible = true
@@ -161,13 +169,14 @@ export default {
     onSubmit() {
       this.$refs.form.validate(async (valid) => {
         if (!valid) return
-        const { id, name, cmccOfferId, chinanetOfferId, unicomOfferId } = this.formData
+        const { id, name, cmccOfferId, chinanetOfferId, unicomOfferId, offerTag } = this.formData
         const params = {
           id,
           name,
           cmccOfferId,
           chinanetOfferId,
-          unicomOfferId
+          unicomOfferId,
+          offerTag
         }
         const res = await this.jaxLib.financial.combine[this.isAdd ? 'save' : 'update'](
           filterQueryParams(params)
