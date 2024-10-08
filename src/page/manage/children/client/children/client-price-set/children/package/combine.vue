@@ -74,6 +74,11 @@
               {{ row.chinanetOfferName }}
             </template>
           </el-table-column>
+          <el-table-column prop="offerTag" label="套餐标签">
+            <template #default="{ row }">
+              {{ row.offerTag | combineOfferTagFilter }}
+            </template>
+          </el-table-column>
           <el-table-column label="套餐状态" width="140">
             <template slot-scope="scope">
               <el-switch
