@@ -718,7 +718,7 @@ export default {
           <el-form-item label="测试期流量" prop="testDataVolume">
             <wh-volume-input v-model="form.testDataVolume" placeholder="测试期流量" />
           </el-form-item>
-          <el-form-item label="测试期结束方式" label-width="140px">
+          <el-form-item label="测试期结束方式" label-width="140px" prop="testingEndType" :rules="[{required: true, message: '请选择测试期结束方式'}]">
             <el-radio-group v-model="form.testingEndType" @change="testingEndTypeChange">
               <el-radio label="months">按自然月</el-radio>
               <el-radio label="days">按天</el-radio>
