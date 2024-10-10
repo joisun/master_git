@@ -1,8 +1,5 @@
 <template>
   <div class="services-selector">
-<!--    <div class="status-bar">-->
-<!--&lt;!&ndash;      <span v-for="item in aliaList" :key="item.apiKey">{{item.name}}: {{formData[item.apiKey]}}</span>&ndash;&gt;-->
-<!--    </div>-->
     <div class="handle" @click="open">
       <i class="el-icon-s-tools"/>
     </div>
@@ -16,18 +13,20 @@
         class="services-selector"
         :before-close="handleClose">
       <template #title>
-        服务选择
-        <p style="font-size: 12px; margin-left: 20px;">注：前端项目默认使用 master 分支， 后端项目默认使用服务发现获取到的分支</p>
-
+        <span>服务选择</span>
       </template>
       <el-form :model="formData" :rules="rules" ref="form" label-width="100px" class="demo-formData" inline>
-        <el-form-item :label="item.name" :prop="item.apiKey" v-for="item in aliaList" :key="item.apiKey">
-          <el-select v-model="formData[item.apiKey]" placeholder="请选择服务地址" :name="item.apiKey" allow-create
-                     clearable>
-            <el-option v-for="a in apis.filter(i => i.name === item.apiKey)" :key="a.id" :label="a.meta.branch"
-                       :value="`http://${a.meta.publicAddress}:${a.meta.publicPort}`"/>
-          </el-select>
-        </el-form-item>
+        <template v-for="item in aliaList">
+          <el-divider v-if="item.name === 'divider'" />
+          <el-form-item v-else :label="item.name" :prop="item.apiKey"  :key="item.apiKey">
+            <el-select v-model="formData[item.apiKey]" placeholder="请选择服务地址" :name="item.apiKey" allow-create
+                       clearable>
+              <el-option v-for="a in apis.filter(i => i.name === item.apiKey)" :key="a.id" :label="a.meta.branch"
+                         :value="`http://${a.meta.publicAddress}:${a.meta.publicPort}`"/>
+            </el-select>
+          </el-form-item>
+        </template>
+
       </el-form>
       <div style="text-align: center;margin-top: 20px">
         <el-button @click="getServers">刷新</el-button>
@@ -62,20 +61,8 @@ export default {
         apiKey: 'simboss-whitehouse-client',
       },
         {
-          name: '国际卡前端',
-          apiKey: 'simboss-avatar-lady-liberty',
-        },
-        {
-          name: 'OTA前端',
-          apiKey: 'simboss-avatar-ota-gotham',
-        },
-        {
           name: 'Captain',
           apiKey: 'simboss-captain-america',
-        },
-        {
-          name: 'Superman',
-          apiKey: 'simboss-avatar-superman',
         },
         {
           name: 'Crm',
@@ -93,27 +80,36 @@ export default {
           name: 'Tool',
           apiKey: 'simboss-awesome-tools',
         },
+        {
+          name: 'divider'
+        },
+        {
+          name: '国际卡前端',
+          apiKey: 'simboss-avatar-lady-liberty',
+        },
+        {
+          name: 'OTA前端',
+          apiKey: 'simboss-avatar-ota-gotham',
+        },
+        {
+          name: 'Superman',
+          apiKey: 'simboss-avatar-superman',
+        },
       ]
     }
   },
   created() {
     this.aliaList.forEach(item => {
-      this.formData[item.apiKey] = getCookie(item.apiKey) || ''
+      this.formData[item.apiKey] = getCookie(item.apiKey) || 'master'
     })
   },
   methods: {
     open() {
       this.visible = true
-      // this.formData.client = getCookie('wh-client')
-      // this.formData.captain = getCookie('captain')
-      // this.aliaList.forEach(item => {
-      //   this.formData[item.apiKey] = getCookie(item.apiKey) || ''
-      // })
       this.getServers()
     },
     async getServers() {
       const res = await ajax.apiSelector.getApiServer({})
-      console.log('🎸 DEBUG_57 services-selector.vue 👉', res)
       this.apis = res.data
     },
     handleClose() {
@@ -122,15 +118,10 @@ export default {
     submitForm() {
       this.$refs.form.validate(async (valid) => {
         if (!valid) return false
-        console.log('🎸 DEBUG_46 services-selector.vue 👉', this.formData)
         Object.keys(this.formData).forEach(key => {
           setCookie(key, this.formData[key])
         })
-
-        this.$message.success('设置成功，最好刷新下页面哦')
-        // setCookie('wh-client', this.formData.client)
-        // setCookie('captain', this.formData.captain)
-
+        this.$message.success('设置成功，建议刷新下页面哦')
       })
     },
   },
@@ -143,15 +134,16 @@ export default {
   position: fixed;
   bottom: 0;
   right: 0;
-  width: calc(100vw  - 30px);
+  width: calc(100vw - 30px);
   height: 30px;
   border: 1px solid #cdcdcd;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   color: #333;
   font-size: 12px;
   padding: 0 20px;
   line-height: 30px;
 }
+
 .handle {
   position: fixed;
   bottom: 0;
@@ -170,18 +162,21 @@ export default {
 .services-selector {
   .el-drawer {
     color: #333;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
-    .el-drawer__header, .el-form-item__label{
-      color: #fff;
+
+    .el-drawer__header, .el-form-item__label {
+      color: #333;
     }
-    .el-drawer__body{
+
+    .el-drawer__body {
       padding-bottom: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+
     .el-input__inner {
     }
   }
