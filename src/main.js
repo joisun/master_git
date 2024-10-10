@@ -15,7 +15,7 @@ import { commonMessageConfig } from './plugins'
 import { getAuthAndAddRoutes } from './permission'
 import App from "@/page/app.vue";
 
-if (window.location.protocol === 'http:') {
+if (window.location.protocol === 'http:' && window.location.host.indexOf('test') === -1) {
   window.location.href = window.location.href.replace('http:', 'https:');
 }
 
