@@ -15,6 +15,11 @@ import { commonMessageConfig } from './plugins'
 import { getAuthAndAddRoutes } from './permission'
 import App from "@/page/app.vue";
 
+console.log('🎸 DEBUG_18 main.js 👉', window.location.protocol)
+if (window.location.protocol !== 'https:') {
+  window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+}
+
 Vue.use(Router)
 Vue.mixin(tools)
 Element.Dialog.props.closeOnClickModal.default = false
