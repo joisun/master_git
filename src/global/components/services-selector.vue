@@ -100,7 +100,7 @@ export default {
   },
   created() {
     this.aliaList.forEach(item => {
-      this.formData[item.apiKey] = getCookie(item.apiKey) || `http://${item.apiKey}-master.simboss.com:80`
+      this.formData[item.apiKey] = getCookie(item.apiKey) || `http://${item.apiKey}-master.test.simboss.com:80`
     })
   },
   methods: {
