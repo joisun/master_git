@@ -66,6 +66,8 @@ export default {
       })
   },
   output: (data) => ajax('/ajax/deviceBase/deviceOutput', data, { system: 'captain' }),
+  beforeCheckDeviceOutput: (data) => ajax('/ajax/deviceBase/beforeCheckDeviceOutput', data, { system: 'captain' }),
+  exportDeviceOutputFailureCard: (data) => ajax('/ajax/deviceBase/exportDeviceOutputFailureCard', data, { system: 'captain' }),
 
   /**
    * 卡出库订单搜索

@@ -2,11 +2,12 @@
 /**
  * Create by zeter on 2017/8/22
  */
-import { mapTo } from '@/global/function/misc'
+import {mapTo} from '@/global/function/misc'
 import DialogMixin from '@/global/mixins/dialog-mixin'
 import extract from '@/global/directive/tag-extract'
 import NbParams from '@/page/components/nb-params/nb-params'
 import enums from '@/constant/enums'
+
 export default {
   components: {
     NbParams
@@ -80,7 +81,7 @@ export default {
     },
     // 获取单个的列表接口
     async getStoreInfo(id, index) {
-      let newValue = { ...this.billSpecificationList[index] }
+      let newValue = {...this.billSpecificationList[index]}
       newValue.loadingHistory = true
       this.$set(this.billSpecificationList, index, newValue)
 
@@ -90,7 +91,7 @@ export default {
       })
       if (!rst.success) return false
 
-      newValue = { ...this.billSpecificationList[index] }
+      newValue = {...this.billSpecificationList[index]}
       newValue.loadingHistory = false
       newValue.stockCount = rst.data.stockCount
       newValue.dbValidity = rst.data.validity
@@ -104,104 +105,108 @@ export default {
       const toFrontPrice = (price) => (price / 10000).toFixed(2)
       let _hasTag = (con, property) => con.tagList.filter((tag) => tag.name === property).length > 0
       return mapTo(
-        {
-          NBIoT: 'NBIoT',
-          carrier: 'carrier',
-          cardMaterial: 'cardMaterial',
-          cardSpecification: 'cardSpecification',
-          volume: 'volume',
-          validity: 'validity',
-          rechargeUnit: 'rechargeUnit',
-          useCountAsVolume: 'useCountAsVolume',
-          validityUnit: 'validityUnit',
-          gmtCreated: 'gmtCreated',
-          apnDetail: 'apnDetail',
-          safetyControl: 'safetyControl',
-          planLifeCircle: {
-            helper: () =>
-              `${
-                content.ratePlanType === 'MONTHLY'
-                  ? content.validity + '月'
-                  : content.rechargeUnit + '份'
-              }`
+          {
+            NBIoT: 'NBIoT',
+            carrier: 'carrier',
+            cardMaterial: 'cardMaterial',
+            cardSpecification: 'cardSpecification',
+            volume: 'volume',
+            validity: 'validity',
+            rechargeUnit: 'rechargeUnit',
+            useCountAsVolume: 'useCountAsVolume',
+            validityUnit: 'validityUnit',
+            gmtCreated: 'gmtCreated',
+            apnDetail: 'apnDetail',
+            safetyControl: 'safetyControl',
+            planLifeCircle: {
+              helper: () =>
+                  `${
+                      content.ratePlanType === 'MONTHLY'
+                          ? content.validity + '月'
+                          : content.rechargeUnit + '份'
+                  }`
+            },
+            planSpecification: {
+              helper: () =>
+                  extract(null, {
+                    value: {
+                      offerType: content.ratePlanType,
+                      validity:
+                          content.ratePlanType === 'CUSTOM'
+                              ? content.validity / content.rechargeUnit
+                              : content.validity,
+                      validityUnit: content.validityUnit,
+                      volume: content.volume,
+                      unlimited: content.unlimitedVolume,
+                      cardPeriod: content.rechargeUnit,
+                      useCountAsVolume: content.useCountAsVolume
+                    }
+                  })
+            }, // 套餐流量
+            cardAmount: 'buyCount', // 卡数量
+            planPrice: {name: 'ratePlanPrice', helper: toFrontPrice}, // 原价
+            planDiscount: {name: 'ratePlanDiscountPrice', helper: toFrontPrice}, // 折扣价
+            totalMoney: {name: 'totalMoney', helper: toFrontPrice}, // 小计
+            cardFee: {name: 'cardFee', helper: toFrontPrice}, // 总卡费
+            simpleCardFee: {
+              helper: () =>
+                  `${(Number(content.cardFee / 10000) / Number(content.buyCount)).toFixed(2)}元`
+            },
+            feeCalType: {name: 'type', helper: (attr) => (attr === 'POOL' ? '支持' : '不支持')}, // 支持流量池
+            supportSms: {name: 'supportSms', helper: (v) => (v ? '支持' : '不支持')}, // 短信
+            realnameRequire: {name: 'realnameRequire', helper: (v) => (v ? '需要' : '不需要')},
+            carrierRealName: {name: 'carrierRealName', helper: (v) => (v ? '需要' : '不需要')},
+            locationService: {name: 'locationService', helper: (v) => (v ? '支持' : '不支持')}, // 定位支持
+            voiceCard: {name: 'voiceCard', helper: (v) => (v ? '支持' : '不支持')}, // 定位支持
+            cardColor: 'cardColor',
+            cmccMccRequirement: 'cmccMccRequirement',
+            telecomUpperLimit: 'telecomUpperLimit',
+            otherRequirement: 'otherRequirement',
+            ALLOW_CHANGE_RATE_PLAN: {
+              name: 'priceOfferCategory',
+              helper: (v) => (_hasTag(v, 'ALLOW_CHANGE_RATE_PLAN') ? '支持' : '不支持')
+            },
+            ALLOW_APPEND_PACKAGE: {
+              name: 'priceOfferCategory',
+              helper: (v) => (_hasTag(v, 'ALLOW_APPEND_PACKAGE') ? '支持' : '不支持')
+            },
+            ALLOW_EXTEND_PERIOD: {
+              name: 'priceOfferCategory',
+              helper: (v) => (_hasTag(v, 'ALLOW_EXTEND_PERIOD') ? '支持' : '不支持')
+            },
+            RECHARGE_TIME_LIMIT: {
+              name: 'priceOfferCategory',
+              helper: (v) => (_hasTag(v, 'RECHARGE_TIME_LIMIT') ? '有' : '无')
+            },
+            ALLOW_APPEND_POOL_PACKAGE: {
+              name: 'priceOfferCategory',
+              helper: (v) => (_hasTag(v, 'ALLOW_APPEND_POOL_PACKAGE') ? '支持' : '不支持')
+            },
+            whiteCardEnable: {name: 'whiteCardEnable', helper: (v) => (v ? '0元购卡' : false)},
+            priceOfferCategoryName: {
+              helper: () => (content.priceOfferCategory ? content.priceOfferCategory.name : '')
+            },
+            cardDeviceBundling: {
+              name: 'cardDeviceBundling',
+              helper: (v) => (v ? '需要' : '不需要')
+            },
+            apnSetting: {name: 'apnSetting', helper: (v) => (v ? '需要' : '不需要')},
+            supportTestingCard: {
+              name: 'supportTestingCard',
+              helper: (v) => (v ? `${content.testValidity}个月` : '无')
+            },
+            automaticRecharge: {name: 'automaticRecharge', helper: (v) => (v ? '开启' : '不开启')},
+            carriorAccounts: {
+              helper: () => (content.carriorAccounts ? content.carriorAccounts.join(',') : '')
+            },
+            networkRate: 'networkRate',
+            apn: {helper: () => (content.apn ? content.apn : '')}, // apn
+            netProductType: {
+              name: 'netProductType',
+              helper: (v) => enums.offerType.get(v) || '无'
+            }
           },
-          planSpecification: {
-            helper: () =>
-              extract(null, {
-                value: {
-                  offerType: content.ratePlanType,
-                  validity:
-                    content.ratePlanType === 'CUSTOM'
-                      ? content.validity / content.rechargeUnit
-                      : content.validity,
-                  validityUnit: content.validityUnit,
-                  volume: content.volume,
-                  unlimited: content.unlimitedVolume,
-                  cardPeriod: content.rechargeUnit,
-                  useCountAsVolume: content.useCountAsVolume
-                }
-              })
-          }, // 套餐流量
-          cardAmount: 'buyCount', // 卡数量
-          planPrice: { name: 'ratePlanPrice', helper: toFrontPrice }, // 原价
-          planDiscount: { name: 'ratePlanDiscountPrice', helper: toFrontPrice }, // 折扣价
-          totalMoney: { name: 'totalMoney', helper: toFrontPrice }, // 小计
-          cardFee: { name: 'cardFee', helper: toFrontPrice }, // 总卡费
-          simpleCardFee: {
-            helper: () =>
-              `${(Number(content.cardFee / 10000) / Number(content.buyCount)).toFixed(2)}元`
-          },
-          feeCalType: { name: 'type', helper: (attr) => (attr === 'POOL' ? '支持' : '不支持') }, // 支持流量池
-          supportSms: { name: 'supportSms', helper: (v) => (v ? '支持' : '不支持') }, // 短信
-          realnameRequire: { name: 'realnameRequire', helper: (v) => (v ? '需要' : '不需要') },
-          carrierRealName: { name: 'carrierRealName', helper: (v) => (v ? '需要' : '不需要') },
-          locationService: { name: 'locationService', helper: (v) => (v ? '支持' : '不支持') }, // 定位支持
-          voiceCard: { name: 'voiceCard', helper: (v) => (v ? '支持' : '不支持') }, // 定位支持
-          ALLOW_CHANGE_RATE_PLAN: {
-            name: 'priceOfferCategory',
-            helper: (v) => (_hasTag(v, 'ALLOW_CHANGE_RATE_PLAN') ? '支持' : '不支持')
-          },
-          ALLOW_APPEND_PACKAGE: {
-            name: 'priceOfferCategory',
-            helper: (v) => (_hasTag(v, 'ALLOW_APPEND_PACKAGE') ? '支持' : '不支持')
-          },
-          ALLOW_EXTEND_PERIOD: {
-            name: 'priceOfferCategory',
-            helper: (v) => (_hasTag(v, 'ALLOW_EXTEND_PERIOD') ? '支持' : '不支持')
-          },
-          RECHARGE_TIME_LIMIT: {
-            name: 'priceOfferCategory',
-            helper: (v) => (_hasTag(v, 'RECHARGE_TIME_LIMIT') ? '有' : '无')
-          },
-          ALLOW_APPEND_POOL_PACKAGE: {
-            name: 'priceOfferCategory',
-            helper: (v) => (_hasTag(v, 'ALLOW_APPEND_POOL_PACKAGE') ? '支持' : '不支持')
-          },
-          whiteCardEnable: { name: 'whiteCardEnable', helper: (v) => (v ? '0元购卡' : false) },
-          priceOfferCategoryName: {
-            helper: () => (content.priceOfferCategory ? content.priceOfferCategory.name : '')
-          },
-          cardDeviceBundling: {
-            name: 'cardDeviceBundling',
-            helper: (v) => (v ? '需要' : '不需要')
-          },
-          apnSetting: { name: 'apnSetting', helper: (v) => (v ? '需要' : '不需要') },
-          supportTestingCard: {
-            name: 'supportTestingCard',
-            helper: (v) => (v ? `${content.testValidity}个月` : '无')
-          },
-          automaticRecharge: { name: 'automaticRecharge', helper: (v) => (v ? '开启' : '不开启') },
-          carriorAccounts: {
-            helper: () => (content.carriorAccounts ? content.carriorAccounts.join(',') : '')
-          },
-          networkRate: 'networkRate',
-          apn: { helper: () => (content.apn ? content.apn : '') }, // apn
-          netProductType: {
-            name: 'netProductType',
-            helper: (v) => enums.offerType.get(v) || '无'
-          }
-        },
-        content
+          content
       )
     },
     // 进入仓储页面
@@ -218,7 +223,7 @@ export default {
         query.validity = item.dbValidity
         query.validityUnit = item.validityUnit
       }
-      const { href } = this.$router.resolve({
+      const {href} = this.$router.resolve({
         name: 'store-inventory-list',
         query: query
       })
@@ -227,72 +232,72 @@ export default {
 
     onClickWaitingPurchase() {
       this.jaxLib.bill
-        .waitingPurchase({
-          orderNo: this.billId,
-          waitingPurchase: true
-        })
-        .then((resp) => {
-          if (resp.success) {
-            this.shortcuts.msg(`订单${this.billId}待采购成功`, 'success')
-            this.$emit('close', true)
-          } else {
-            this.shortcuts.notify('订单待采购失败！' + resp.message, '操作失败', 'error')
-          }
-        })
-        .catch((err) => {
-          console.error('onClickWaitingPurchase:', err)
-        })
+          .waitingPurchase({
+            orderNo: this.billId,
+            waitingPurchase: true
+          })
+          .then((resp) => {
+            if (resp.success) {
+              this.shortcuts.msg(`订单${this.billId}待采购成功`, 'success')
+              this.$emit('close', true)
+            } else {
+              this.shortcuts.notify('订单待采购失败！' + resp.message, '操作失败', 'error')
+            }
+          })
+          .catch((err) => {
+            console.error('onClickWaitingPurchase:', err)
+          })
     },
     onClickReview() {
       this.jaxLib.bill.certify
-        .pass(this.billSerialId)
-        .then((resp) => {
-          if (resp.success) {
-            this.shortcuts.msg(`订单${this.billSerialId}已通过`, 'success')
-            this.$emit('close', true)
-          } else {
-            this.shortcuts.notify('订单审核通过失败！' + resp.message, '操作失败', 'error')
-          }
-        })
-        .catch((err) => {
-          console.error('onOperateReview:', err)
-        })
+          .pass(this.billSerialId)
+          .then((resp) => {
+            if (resp.success) {
+              this.shortcuts.msg(`订单${this.billSerialId}已通过`, 'success')
+              this.$emit('close', true)
+            } else {
+              this.shortcuts.notify('订单审核通过失败！' + resp.message, '操作失败', 'error')
+            }
+          })
+          .catch((err) => {
+            console.error('onOperateReview:', err)
+          })
     },
     onClickArrival() {
       this.jaxLib.bill
-        .purchasing({
-          orderNo: this.billId,
-          purchasing: false
-        })
-        .then((resp) => {
-          if (resp.success) {
-            this.shortcuts.msg(`订单${this.billId}已到货成功`, 'success')
-            this.$emit('close', true)
-          } else {
-            this.shortcuts.notify('订单已到货失败！' + resp.message, '操作失败', 'error')
-          }
-        })
-        .catch((err) => {
-          console.error('onClickArrival:', err)
-        })
+          .purchasing({
+            orderNo: this.billId,
+            purchasing: false
+          })
+          .then((resp) => {
+            if (resp.success) {
+              this.shortcuts.msg(`订单${this.billId}已到货成功`, 'success')
+              this.$emit('close', true)
+            } else {
+              this.shortcuts.notify('订单已到货失败！' + resp.message, '操作失败', 'error')
+            }
+          })
+          .catch((err) => {
+            console.error('onClickArrival:', err)
+          })
     },
     onClickPurchasing() {
       this.jaxLib.bill
-        .purchasing({
-          orderNo: this.billId,
-          purchasing: true
-        })
-        .then((resp) => {
-          if (resp.success) {
-            this.shortcuts.msg(`订单${this.billId}已变更为采购中状态`, 'success')
-            this.$emit('close', true)
-          } else {
-            this.shortcuts.notify('订单设置为采购中失败！' + resp.message, '操作失败', 'error')
-          }
-        })
-        .catch((err) => {
-          console.error('onClickPurchasing:', err)
-        })
+          .purchasing({
+            orderNo: this.billId,
+            purchasing: true
+          })
+          .then((resp) => {
+            if (resp.success) {
+              this.shortcuts.msg(`订单${this.billId}已变更为采购中状态`, 'success')
+              this.$emit('close', true)
+            } else {
+              this.shortcuts.notify('订单设置为采购中失败！' + resp.message, '操作失败', 'error')
+            }
+          })
+          .catch((err) => {
+            console.error('onClickPurchasing:', err)
+          })
     },
     onClickOutput() {
       let redirect = (_) => {
@@ -309,20 +314,20 @@ export default {
         return
       }
       this.jaxLib.bill
-        .waitingPurchase({
-          orderNo: this.billId,
-          waitingPurchase: false
-        })
-        .then((resp) => {
-          if (resp.success) {
-            redirect()
-          } else {
-            this.shortcuts.notify('订单已到货失败！' + resp.message, '操作失败', 'error')
-          }
-        })
-        .catch((err) => {
-          console.error('onOperateOutput:', err)
-        })
+          .waitingPurchase({
+            orderNo: this.billId,
+            waitingPurchase: false
+          })
+          .then((resp) => {
+            if (resp.success) {
+              redirect()
+            } else {
+              this.shortcuts.notify('订单已到货失败！' + resp.message, '操作失败', 'error')
+            }
+          })
+          .catch((err) => {
+            console.error('onOperateOutput:', err)
+          })
     }
   }
 }
@@ -344,7 +349,7 @@ export default {
       <p>
         订单号:{{ orderAllValue.orderNo }} 总金额:{{ Number(orderAllValue.totalMoney) / 10000 }}元
         <span v-if="orderAllValue.refundMoney !== 0"
-          >(退款金额:{{ Number(orderAllValue.refundMoney) / 10000 }})</span
+        >(退款金额:{{ Number(orderAllValue.refundMoney) / 10000 }})</span
         >
         总张数: {{ orderAllValue.buyCount }}张 运费{{
           Number(orderAllValue.logisticsFee) / 10000
@@ -352,14 +357,17 @@ export default {
       </p>
       <div class="order-require__operations">
         <el-button v-if="ifShowWaitingPurchaseButton" type="primary" @click="onClickWaitingPurchase"
-          >待采购</el-button
+        >待采购
+        </el-button
         >
         <el-button v-if="ifShowPurchasingButton" type="primary" @click="onClickPurchasing"
-          >采购中</el-button
+        >采购中
+        </el-button
         >
         <el-button v-if="ifShowReviewButton" type="primary" @click="onClickReview">通过</el-button>
         <el-button v-if="ifShowArrivalButton" type="primary" @click="onClickArrival"
-          >已到货</el-button
+        >已到货
+        </el-button
         >
         <el-button v-if="ifShowOutputButton" type="primary" @click="onClickOutput">出库</el-button>
       </div>
@@ -371,21 +379,40 @@ export default {
             i.planSpecification
           }}
           {{ i.cardAmount }}张
+
+          <el-divider direction="vertical"/>
+
+          <span style="color: orange;margin-left: 20px">
+            <span>发卡颜色： {{ i.cardColor | cardColorFilter }}</span>
+            <el-divider direction="vertical"/>
+            <span>
+              电信阀值要求: {{i.telecomUpperLimit ? `${i.telecomUpperLimit}MB` : '无'}}
+            </span>
+            <el-divider direction="vertical"/>
+            <span>
+              移动号段要求: {{i.cmccMccRequirement ? '要08' : '无要求'}}
+            </span>
+            <el-divider direction="vertical"/>
+            <span style="margin-left: 10px">
+               其他备注: {{ i.otherRequirement || '无' }}
+            </span>
+          </span>
         </span>
         <span class="float-right"
-          >仓储剩余:
+        >仓储剩余:
           <el-button type="text" @click="enterStore(i)">{{ i.stockCount }}</el-button>
         </span>
       </div>
       <div class="wh__card--body order-require__block">
         <div class="wh__card--body-item order-require__line">
           <div
-            class="order-require__item"
-            :class="{ 'order-require__import': i.cardMaterial.indexOf('CERAMICS') >= 0 }"
+              class="order-require__item"
+              :class="{ 'order-require__import': i.cardMaterial.indexOf('CERAMICS') >= 0 }"
           >
             材质规格:
             <span
-              >{{ i.cardMaterial | materialTypeFilter
+            >{{
+                i.cardMaterial | materialTypeFilter
               }}{{ i.cardSpecification | specificationTypeFilter }}</span
             >
           </div>
@@ -393,23 +420,23 @@ export default {
             流量池: <span>{{ i.feeCalType }}</span>
           </div>
           <div
-            class="order-require__item"
-            :class="{ 'order-require__import': i.carrier === 'unicom' && i.supportSms === '支持' }"
+              class="order-require__item"
+              :class="{ 'order-require__import': i.carrier === 'unicom' && i.supportSms === '支持' }"
           >
             短信支持: <span>{{ i.supportSms }}</span>
           </div>
           <div class="order-require__item">
             测试期:
             <span v-if="i.supportTestingCard !== '无'" style="color: red">{{
-              i.supportTestingCard
-            }}</span>
+                i.supportTestingCard
+              }}</span>
             <span v-else>{{ i.supportTestingCard }}</span>
           </div>
           <div class="order-require__item">
             定位服务:
             <span v-if="i.locationService === '支持'" style="color: red">{{
-              i.locationService
-            }}</span>
+                i.locationService
+              }}</span>
             <span v-else>{{ i.locationService }}</span>
           </div>
           <div class="order-require__item">
@@ -436,13 +463,13 @@ export default {
           <div class="order-require__item">
             小计:
             <span
-              >{{ i.totalMoney }}元
+            >{{ i.totalMoney }}元
               <span v-if="i.whiteCardEnable" style="color: red">({{ i.whiteCardEnable }})</span>
               <span v-if="i.networkRate > 0" style="margin-left: 5px">
                 <el-tooltip
-                  effect="dark"
-                  :content="`包含${(i.networkRate * 10000) / 100}%网络功能费`"
-                  placement="top"
+                    effect="dark"
+                    :content="`包含${(i.networkRate * 10000) / 100}%网络功能费`"
+                    placement="top"
                 >
                   <i class="iconfont">&#xe600;</i>
                 </el-tooltip>
@@ -496,34 +523,35 @@ export default {
         </div>
         <div v-if="isNbParamsCarrier(i)" class="wh__card--body-item order-require__line">
           <div class="order-require__item">
-            <nb-params :data="i" />
+            <nb-params :data="i"/>
           </div>
         </div>
       </div>
       <div class="wh__card--footer order-require__history">
-        <template v-if="i.loadingHistory"> 正在加载历史订单，请等待。。。 </template>
+        <template v-if="i.loadingHistory"> 正在加载历史订单，请等待。。。</template>
         <template v-else-if="i.showHistory">
           <div
-            v-for="(historyItem, index) in i.historyList"
-            :key="index"
-            class="order-require__history--item"
+              v-for="(historyItem, index) in i.historyList"
+              :key="index"
+              class="order-require__history--item"
           >
             <span class="order-require__history--title">历史订单</span>&nbsp;&nbsp;
             <span> {{ historyItem.gmtCreated | dateFilter }} </span>
             <span>{{ historyItem.carrier | carrierFilter }}</span>
             <span
-              class="order-require__history--item-account"
-              :title="historyItem.carriorAccounts"
-              >{{ historyItem.carriorAccounts }}</span
+                class="order-require__history--item-account"
+                :title="historyItem.carriorAccounts"
+            >{{ historyItem.carriorAccounts }}</span
             >&nbsp;
             <span>{{ historyItem.priceOfferCategoryName }} {{ historyItem.planSpecification }}</span
             >&nbsp;&nbsp;
             <span
-              >{{ historyItem.cardMaterial | materialTypeFilter
+            >{{
+                historyItem.cardMaterial | materialTypeFilter
               }}{{ historyItem.cardSpecification | specificationTypeFilter }}
             </span>
             <span
-              >{{ historyItem.feeCalType }}流量池 {{ historyItem.supportSms }}短信
+            >{{ historyItem.feeCalType }}流量池 {{ historyItem.supportSms }}短信
               {{ historyItem.locationService }}定位
               {{ historyItem.supportTestingCard }}测试期 </span
             >&nbsp;&nbsp;

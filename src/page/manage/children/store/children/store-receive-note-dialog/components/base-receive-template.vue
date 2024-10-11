@@ -154,6 +154,7 @@ export default {
       fileData: '',
       loading: false,
       form: {
+        cardColor: '',
         refCategory: [],
         activationDeadlineMonths: '',
         openCardDate: new Date(),
@@ -554,6 +555,7 @@ export default {
             this.form.tags = this.form.tags ? this.form.tags.filter(t => t!== 'VOICE_CARD') : this.form.tags
           }
           let postData = {
+            cardColor: this.form.cardColor,
             chargeType: this.form.type,
             chargeEntryId: this.chooseType.chargeEntryId,
             carrier: this.carrier,
@@ -716,7 +718,7 @@ export default {
           <el-form-item label="测试期流量" prop="testDataVolume">
             <wh-volume-input v-model="form.testDataVolume" placeholder="测试期流量" />
           </el-form-item>
-          <el-form-item label="测试期结束方式" label-width="140px">
+          <el-form-item label="测试期结束方式" label-width="140px" prop="testingEndType" :rules="[{required: true, message: '请选择测试期结束方式'}]">
             <el-radio-group v-model="form.testingEndType" @change="testingEndTypeChange">
               <el-radio label="months">按自然月</el-radio>
               <el-radio label="days">按天</el-radio>
@@ -803,6 +805,16 @@ export default {
               clearable
             >
             </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="颜色" prop="cardColor" :rules="[{ required: true, message: '请选择颜色' }]">
+          <el-select v-model="form.cardColor" placeholder="请选择" >
+            <el-option
+                v-for="(key, val) in enums.cardColor.maps()"
+                :key="val"
+                :label="key"
+                :value="val"
+            />
           </el-select>
         </el-form-item>
       </div>
