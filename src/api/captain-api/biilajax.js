@@ -141,6 +141,16 @@ export default {
   },
 
   remark: {
+    // 添加发货要求
+    deliveryRequirementCreate(data) {
+      const url = '/ajax/deliveryRequirement/create'
+      return ajax(url, data)
+    },
+    // 查询发货要求
+    deliveryRequirementQuery(data) {
+      const url = '/ajax/deliveryRequirement/query'
+      return ajax(url, data)
+    },
     addSalerRemark(data) {
       const url = '/ajax/cardOrder/addSalerRemark'
       return ajax(url, data)

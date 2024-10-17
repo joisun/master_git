@@ -72,8 +72,34 @@ export default [
         component: Gotham
       },
       {
-        path: '/ota-admin/price-manage/price-list',
+        // 菜单 高亮 问题，/price-list
+        path: '/ota-admin/price-manage/price-list-index/price-list',
+        name: 'ota-admin-price-list-index',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/price-manage/price-list-index/price-list',
         name: 'ota-admin-price-list',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/price-manage/price-list-index/price-list-no-formal',
+        name: 'ota-admin-price-list-no-formal',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/price-manage/price-list-index/platform-service',
+        name: 'ota-admin-platform-service',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/price-manage/package-group-index/package-group',
+        name: 'ota-admin-package-group-list',
+        component: Gotham
+      },
+      {
+        path: '/ota-admin/price-manage/package-group-index/package-group-add',
+        name: 'ota-admin-package-group-add',
         component: Gotham
       }
     ]
@@ -133,6 +159,18 @@ export default [
       {
         path: '/international/finance-manage/transaction-history',
         name: 'international-finance-manage-transaction-history',
+        component: LadyLiberty
+      },
+      // 工具-客户改套餐
+      {
+        path: '/international/tools/customer-package-modify-list',
+        name: 'international-tools-customer-package-modify-list',
+        component: LadyLiberty
+      },
+      // 工具-运营商改套餐
+      {
+        path: '/international/tools/carrier-package-modify-list',
+        name: 'international-tools-carrier-package-modify-list',
         component: LadyLiberty
       },
       // 佣金管理
