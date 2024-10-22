@@ -172,6 +172,24 @@ export default [
         path: '/international/tools/carrier-package-modify-list',
         name: 'international-tools-carrier-package-modify-list',
         component: LadyLiberty
+      },
+      // 佣金管理
+      {
+        path: '/international/finance-manage/rebate-manage/commission-settlement-list',
+        name: 'international-finance-manage-rebate-manage',
+        component: LadyLiberty
+      },
+      // 佣金结算
+      {
+        path: '/international/finance-manage/rebate-manage/commission-settlement-list',
+        name: 'international-rebate-manage-commission-settlement-list',
+        component: LadyLiberty
+      },
+      // 佣金明细
+      {
+        path: '/international/finance-manage/rebate-manage/commission-detail',
+        name: 'international-rebate-manage-commission-detail',
+        component: LadyLiberty
       }
     ]
   }
