@@ -96,7 +96,7 @@ export default {
     }
   },
   mounted() {
-    this.onSearch()
+    // this.onSearch()
   },
   methods: {
     onDateChange() {
@@ -162,6 +162,10 @@ export default {
       this.onSearch()
     },
     changeIndex(val) {
+      if (val > 5000) {
+        this.$message.warning('请联系技术获取数据')
+        return
+      }
       this.page.pageIndex = val
       this.onSearch()
     },
