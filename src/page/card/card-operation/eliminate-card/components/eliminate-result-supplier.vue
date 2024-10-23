@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    this.simpleSearch()
+    // this.simpleSearch()
   },
   methods: {
     onIccidChange(v) {
@@ -137,6 +137,10 @@ export default {
       this.simpleSearch()
     },
     changeIndex(val) {
+      if (val > 5000) {
+        this.$message.warning('请联系技术获取数据')
+        return
+      }
       this.page.pageIndex = val
       this.simpleSearch()
     },
