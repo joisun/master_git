@@ -6,7 +6,13 @@ export default {
   data() {
     return {
       vpdnApnFormat,
-      formData: {},
+      formData: {
+        carrier: '',
+        carrierName: '',
+        apn: '',
+        type: '',
+        services: []
+      },
       visible: false,
       content: null,
       formRules: {
@@ -14,21 +20,32 @@ export default {
         carrierName: [{ required: true, message: '请填写运营商账号', trigger: 'change' }],
         apn: [{ required: true, message: '请填写APN名称', trigger: 'change' }],
         type: [{ required: true, message: '请选择APN类型', trigger: 'change' }],
-        enable: [{ required: true, message: '请选择是否可开卡', trigger: 'change' }]
+        services: [{ required: true, message: '请至少选一个配置服务', trigger: 'change' }]
       }
     }
   },
-  created() {},
   methods: {
     open(content) {
       this.content = content
       this.formData = {
+        ...this.formData,
         ...content
       }
       this.visible = true
     },
     handleClose() {
+      this.reset()
       this.visible = false
+    },
+    reset() {
+      this.formData = {
+        carrier: '',
+        carrierName: '',
+        apn: '',
+        type: '',
+        services: []
+      }
+      this.$refs.form.resetFields()
     },
     async submit() {
       await this.$refs.form.validate(async (valid) => {
@@ -39,6 +56,7 @@ export default {
           if (safeGet(res, 'success', false)) {
             this.$message.success('操作成功')
             this.$emit('confirm')
+            this.reset()
             this.visible = false
           }
         }
@@ -83,11 +101,15 @@ export default {
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="是否可开卡" prop="enable">
-          <el-radio-group v-model="formData.enable">
-            <el-radio :label="false">不可开卡</el-radio>
-            <el-radio :label="true">可开卡</el-radio>
-          </el-radio-group>
+        <el-form-item label="配置服务" prop="services">
+          <el-checkbox-group v-model="formData.services">
+            <el-checkbox
+                v-for="(key, val) in enums.vpdnTag.maps()"
+                :key="key"
+                :label="key"
+                :name="val"
+            />
+          </el-checkbox-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="formData.remark" type="textarea" />

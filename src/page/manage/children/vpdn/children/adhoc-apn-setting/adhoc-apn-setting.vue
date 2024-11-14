@@ -121,13 +121,12 @@ export default {
         <el-table-column label="APN类型" width="200px">
           <template #default="{ row }">{{ row.type }} （{{ row.type | vpdnApnFormat }}）</template>
         </el-table-column>
-        <el-table-column label="是否可开卡" width="100px" align="center">
-          <template slot="header">
-            是否可开卡
-            <el-tooltip class="item" effect="dark" content="目前只针对卡卡自组网" placement="top">
-              <i class="el-icon-warning" style="color: #3d3e3f" />
-            </el-tooltip>
+        <el-table-column label="配置服务" width="200px">
+          <template #default="{ row}">
+            {{row.services ? row.services[0] : '' | vpdnTagFilter }}
           </template>
+        </el-table-column>
+        <el-table-column label="上架状态" width="100px" align="center">
           <template #default="{ row }">
             <el-switch v-model="row.enable" @change="handleEnableChange(row)" />
           </template>
