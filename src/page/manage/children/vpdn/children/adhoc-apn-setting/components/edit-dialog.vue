@@ -73,6 +73,7 @@ export default {
       :visible.sync="visible"
       width="50%"
       @close="handleClose"
+      destroy-on-close
     >
       <el-form ref="form" label-width="160px" :model="formData" :rules="formRules">
         <el-form-item label="运营商" prop="carrier">
@@ -105,10 +106,11 @@ export default {
           <el-checkbox-group v-model="formData.services">
             <el-checkbox
                 v-for="(key, val) in enums.vpdnTag.maps()"
-                :key="key"
-                :label="key"
-                :name="val"
-            />
+                :key="val"
+                :label="val"
+            >
+              {{key}}
+            </el-checkbox>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
