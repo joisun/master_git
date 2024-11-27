@@ -491,7 +491,7 @@ export default {
                       <wh-std-icon sign="xe6c7"></wh-std-icon>
                     </el-button>
                   </el-tooltip>
-                  <el-tooltip content="客户收款URL设置" placement="top" effect="light">
+                  <el-tooltip content="客户收款域名设置" placement="top" effect="light">
                     <el-button size="mini" @click.native="customerChargeUrlSetting(org)">
                       <span class="el-icon-link" style="font-size: 20px" />
                     </el-button>

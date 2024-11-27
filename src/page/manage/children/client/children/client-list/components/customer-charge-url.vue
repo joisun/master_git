@@ -30,9 +30,9 @@ export default {
                 domain = domain
                     .toLowerCase()
                     .replace(/[^a-z0-9.-]/g, "")
-                    .replace(/^[.-]+|[.-]+$/g, "");
-
+                    // .replace(/^[.-]+|[.-]+$/g, "");
                 if (domainRegex.test(domain)) {
+					this.formData.domain = domain; // Update with converted domain
                     // Check for duplicates in tableData
                     const isDuplicate = this.tableData.some(
                         (item) => item.domain === domain
@@ -42,7 +42,6 @@ export default {
                         return;
                     }
 
-                    this.formData.domain = domain; // Update with converted domain
                     callback();
                 } else {
                     callback(new Error("请输入有效的域名格式"));
@@ -109,7 +108,7 @@ export default {
                     label="H5续费域名"
                     :rules="[
                         { required: true, message: '续费域名不能为空' },
-                        { validator: validateDomain, trigger: 'blur' },
+                        { validator: validateDomain },
                     ]"
                     prop="domain"
                 >
