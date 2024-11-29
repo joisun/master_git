@@ -7,11 +7,11 @@ const cpeUserLogin = async (item, { system = {}, netboxPath = '' }) => {
     const { data } = await apis.common.getManageInfo({})
     Cookies.setItem('netbox-userAccount', item.orgName, { domain: '.simboss.com', expires: 1 })
     const match = window.location.host.match(
-      /simboss-whitehouse-([a-zA-Z0-9\-]+)\.test\.simboss\.com/
+      /simboss-whitehouse-node-([a-zA-Z0-9\-]+)\.test\.simboss\.com/
     )
     let url = ''
     if (match && match[1]) {
-      url = `https://simboss-banner-${match[1]}.test.simboss.com/api/superLogin?orgId=${item.orgId}&superToken=${system.token}&key=${data}&netboxUrl=simboss-banner-${match[1]}.test.simboss.com`
+      url = `http://simboss-banner-${match[1]}.test.simboss.com/api/superLogin?orgId=${item.orgId}&superToken=${system.token}&key=${data}&netboxUrl=simboss-banner-${match[1]}.test.simboss.com`
     } else {
       const netboxHost =
         window.location.host.indexOf('prepare') > -1
