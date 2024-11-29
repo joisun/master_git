@@ -1,4 +1,3 @@
-# vue ```vue
 <script>
 import { iccidsTransfer } from '@/global/function/iccids-tool'
 
