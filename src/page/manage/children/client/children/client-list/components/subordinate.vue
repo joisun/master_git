@@ -143,6 +143,7 @@ import ReverseAssignDialog
       },
       // 配额工具
       async toQuota(val) {
+        console.log('🎸 DEBUG_146 subordinate.vue 👉', val)
         let vNode = function(h, name) {
           return (<div>
           <div> 确认为子账号进行配额吗？</div>
@@ -153,9 +154,13 @@ import ReverseAssignDialog
           </div>
           <div> 该分销用户账户余额为: {name.nowMoney} 元</div>
           <el-form
-            model={name.moneyValidateForm}
-            value={name.moneyValidateForm}
-            onInput={value => (name.moneyValidateForm.money = value)} rules={name.moneyRules} ref="moneyValidateForm">
+            {...{
+              props: {
+                model: name.moneyValidateForm,
+                rules: name.moneyRules
+              },
+              ref: 'moneyValidateForm'
+            }}>
             <el-form-item prop="money">
               <el-input value={name.moneyValidateForm.money} ref="moneyValidateRef" onInput={value => {
                 name.moneyValidateForm.money = value
@@ -216,10 +221,13 @@ import ReverseAssignDialog
             <div class="tac subordinate__box--side"> {name.orgContent.orgName}(ID:{name.orgContent.id})</div>
           </div>
           <el-form
-            model={name.transferValidateForm}
-            value={name.transferValidateForm}
-            onInput={value => (name.transferValidateForm = value)} rules={name.transferRules}
-            ref="transferValidateForm">
+            {...{
+              props: {
+                model: name.transferValidateForm,
+                rules: name.transferRules
+              },
+              ref: 'transferValidateForm'
+            }}>
             <el-form-item prop="iccids">
               <el-input type="textarea" disabled={true} value={name.transferValidateForm.iccids}
                 onInput={value => (name.transferValidateForm.iccids = value)} placeholder="请输入iccid,用逗号或者换行分割"
@@ -314,10 +322,13 @@ import ReverseAssignDialog
         let vNode = function(h, name) {
           return (<div class="wechat-set" key={name.wxKey++}>
           <el-form
-            model={name.wechatForm}
-            value={name.wechatForm}
-            onInput={value => (name.wechatForm = value)}
-            ref="wechatForm">
+            {...{
+              props: {
+                model: name.wechatForm,
+                rules: {}
+              },
+              ref: 'wechatForm'
+            }}>
             <el-form-item label="公众号ID" label-width="98px">
                <el-input value={name.wechatForm.app_id} ref="wechatAppIdRef" onInput={value => {
                  name.wechatForm.app_id = value
