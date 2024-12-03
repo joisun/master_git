@@ -89,6 +89,10 @@ export default {
                   <el-option value="ACL_POLICY_WHITE" label="白名单">白名单</el-option>
                   <el-option value="ADHOC" label="卡卡自组网">卡卡自组网</el-option>
                   <el-option value="EPNET" label="企业专网">企业专网</el-option>
+                  <el-option value="IPSEC_VPN_TUNNEL" label="ipsecvpn隧道">ipsecvpn隧道</el-option>
+                  <el-option value="PUBLIC_NETWORK_PORT_MAPPING" label="公网端口映射">公网端口映射</el-option>
+                  <el-option value="DATA_REDIRECT" label="数据重定向">数据重定向</el-option>
+                  <el-option value="OPEN_VPN" label="openvpn">openvpn</el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="选择卡片">
