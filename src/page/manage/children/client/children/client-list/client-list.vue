@@ -18,11 +18,13 @@ import industryDialog from './components/industry-dialog.vue'
 import openService from './components/open-service'
 import H5ConfigDialog from '@/page/manage/children/client/components/h5-config-dialog'
 import ResetPwdDialog from '@/global/components/reset-pwd-dialog.vue'
+import CustomerChargeUrl from './components/customer-charge-url.vue'
 
 export default {
   name: 'client-list',
   components: {
     InternationalAssign,
+    CustomerChargeUrl,
     ResetPwdDialog,
     'industry-dialog': industryDialog,
     'wh-sales-select': whSaleSelect,
@@ -131,6 +133,9 @@ export default {
         orgId: org.id
       })
     },
+    customerChargeUrlSetting(org) {
+      this.$refs.customerChargeUrl.open(org)
+    },
     handleInternationalDis(org) {
       this.$refs.internationalAssign.open(org)
     },
@@ -229,6 +234,7 @@ export default {
   <div class="l-customers">
     <h5-config-dialog ref="h5ConfigDialog"/>
     <international-assign ref="internationalAssign"/>
+    <customer-charge-url ref="customerChargeUrl"/>
     <div class="wh-app-wrap">
       <div class="wh__header">
         <div class="wh__header--title">客户管理</div>
@@ -483,6 +489,11 @@ export default {
                   <el-tooltip content="国际卡分配额度" placement="top" effect="light">
                     <el-button size="mini" @click.native="handleInternationalDis(org)">
                       <wh-std-icon sign="xe6c7"></wh-std-icon>
+                    </el-button>
+                  </el-tooltip>
+                  <el-tooltip content="客户收款域名设置" placement="top" effect="light">
+                    <el-button size="mini" @click.native="customerChargeUrlSetting(org)">
+                      <span class="el-icon-link" style="font-size: 20px" />
                     </el-button>
                   </el-tooltip>
                 </div>
