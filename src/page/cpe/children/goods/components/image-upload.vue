@@ -39,6 +39,11 @@
         this.fileList.push({ name: url, url })
       },
       beforeUpload(file) {
+        const isImage = file.type.startsWith('image/');
+        if (!isImage) {
+          this.$message.error('只能上传图片文件!');
+          return false;
+        }
         const isLt2M = file.size / 1024 / 1024 < 2
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!')
