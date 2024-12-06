@@ -52,7 +52,7 @@ const afterSale = {
    * 验收列表
    * */
   getAfterSaleAcceptanceList: (data, type) =>
-    ajax(`ajax/device/afterSaleRequest/list/acceptance`, data, { system: 'ironman' }),
+    ajax(`/ajax/device/afterSaleRequest/list/acceptance`, data, { system: 'ironman' }),
   /**
    * 返厂维修列表
    * */
