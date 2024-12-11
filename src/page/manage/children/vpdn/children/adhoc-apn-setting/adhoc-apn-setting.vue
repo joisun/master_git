@@ -12,7 +12,9 @@ export default {
   data() {
     return {
       vpdnApnFormat,
-      searchForm: {},
+      searchForm: {
+        services: [],
+      },
       id: 0,
       isLoading: true,
       tableData: [{ id: 1 }]
@@ -96,15 +98,31 @@ export default {
         />
       </el-select>
       <el-select
+          v-model="searchForm.services"
+          clearable
+          multiple
+          placeholder="配置服务"
+          style="width: 200px"
+          @change="getTableData"
+          collapse-tags
+      >
+        <el-option
+            v-for="(key, val) in enums.vpdnTag.maps()"
+            :key="val"
+            :label="key"
+            :value="val"
+        />
+      </el-select>
+      <el-select
         v-model="searchForm.enable"
         clearable
-        placeholder="是否可开卡"
+        placeholder="上架状态"
         class="card-manage__search--select"
         style="width: 120px"
         @change="getTableData"
       >
-        <el-option label="是" :value="true" />
-        <el-option label="否" :value="false" />
+        <el-option label="上架" :value="true" />
+        <el-option label="下架" :value="false" />
       </el-select>
       <el-button icon="el-icon-search" @click="getTableData()" />
       <el-button class="float-right" type="primary" @click="openDialog()"> 新增 </el-button>
@@ -121,13 +139,12 @@ export default {
         <el-table-column label="APN类型" width="200px">
           <template #default="{ row }">{{ row.type }} （{{ row.type | vpdnApnFormat }}）</template>
         </el-table-column>
-        <el-table-column label="是否可开卡" width="100px" align="center">
-          <template slot="header">
-            是否可开卡
-            <el-tooltip class="item" effect="dark" content="目前只针对卡卡自组网" placement="top">
-              <i class="el-icon-warning" style="color: #3d3e3f" />
-            </el-tooltip>
+        <el-table-column label="配置服务" width="200px">
+          <template #default="{ row}">
+            <span v-for="(item, index) in row.services || []" :key="item">{{item | vpdnTagFilter}}{{index !== row.services.length -1 ? '、' : ''}}</span>
           </template>
+        </el-table-column>
+        <el-table-column label="上架状态" width="100px" align="center">
           <template #default="{ row }">
             <el-switch v-model="row.enable" @change="handleEnableChange(row)" />
           </template>
