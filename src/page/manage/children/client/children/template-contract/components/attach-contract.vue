@@ -486,12 +486,28 @@ export default {
       formatRMB,
       orgNameList: [],
       formData: JSON.parse(DEFAULT_FORM_DATA),
+      spOrderValidation: {
+        success: true
+      },
       rules: {
-        spOrder: {
-          required: true,
-          message: '请输入审批单号',
-          trigger: 'submit'
-        },
+        spOrder: [
+          {
+            required: true,
+            message: '请输入审批单号',
+            trigger: 'submit'
+          },
+          {
+            validator: (rule, value, callback) => {
+              if (!value) return callback()
+              if (!this.spOrderValidation.success) {
+                callback(new Error('审批单号无效'))
+              } else {
+                callback()
+              }
+            },
+            trigger: 'change'
+          }
+        ],
         requirementsForContract: {
           required: true,
           message: '请选择合同盖章要求',
@@ -679,10 +695,18 @@ export default {
         deliveryAddress: '',
         sendFirst: ''
       }
-      if (!value) return
+      if (!value) {
+        this.spOrderValidation.success = true
+        return
+      }
       const res = await this.jaxLib.customer.oaContract.getSpInfo({
         spOrder: this.formData.spOrder
       })
+      this.spOrderValidation.success = res.success
+      this.$refs.form.validateField('spOrder')
+      if (!res.success) {
+        return
+      }
       const contents = safeGet(res, 'data.apply_data.contents', [])
       const mapper = {
         客户ID: 'orgId',
