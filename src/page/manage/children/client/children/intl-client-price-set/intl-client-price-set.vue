@@ -37,8 +37,7 @@ export default {
       <div>客户名:{{ customerName }}</div>
       <div class="wh__tabs">
         <el-tabs v-model="activeName" @tab-click="changeRoute">
-          <el-tab-pane label="普通国际卡" name="international-client-price-set" />
-          <el-tab-pane label="OTA卡" name="ota-admin-client-price-set" />
+          <el-tab-pane label="普通套餐" name="international-client-price-set" />
           <el-tab-pane label="无正式期套餐" name="ota-admin-no-formal-client-price-set" />
           <el-tab-pane label="卡平台服务费" name="ota-admin-platform-service-client-price-set" />
         </el-tabs>
