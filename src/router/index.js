@@ -139,6 +139,11 @@ export default [
         name: 'international-in-store',
         component: LadyLiberty
       },
+	  {
+        path: '/international/profile-manage/usage-records',
+        name: 'international-profile-manage-usage-records',
+        component: LadyLiberty
+      },
       {
         path: '/international/store-manage/out-store-list',
         name: 'international-out-store',
