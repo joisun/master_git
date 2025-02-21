@@ -139,10 +139,10 @@ export default [
         name: "international-create-order",
         component: LadyLiberty,
       },
-	  {
-        path: '/international/profile-manage/usage-records',
-        name: 'international-profile-manage-usage-records',
-        component: LadyLiberty
+      {
+        path: "/international/profile-manage/usage-records",
+        name: "international-profile-manage-usage-records",
+        component: LadyLiberty,
       },
       {
         path: "/international/store-manage/in-store-list",
@@ -204,6 +204,18 @@ export default [
       {
         path: "/international/finance-manage/rebate-manage/commission-detail",
         name: "international-rebate-manage-commission-detail",
+        component: LadyLiberty,
+      },
+      // 使用地
+      {
+        path: "/international/use-location-manage/use-location-list",
+        name: "international-use-location-list",
+        component: LadyLiberty,
+      },
+      // 使用地组
+      {
+        path: "/international/use-location-manage/use-location-group-list",
+        name: "international-use-location-group-list",
         component: LadyLiberty,
       },
     ],
