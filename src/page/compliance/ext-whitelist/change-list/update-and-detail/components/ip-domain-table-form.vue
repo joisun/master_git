@@ -283,7 +283,7 @@ export default {
   },
   methods: {
     hasCountLimit(max) {
-      if (this.carrier === 'cmcc') {
+      if (['cmcc', 'chinanet'].includes(this.carrier) ) {
         return false
       }
       return max
