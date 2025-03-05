@@ -553,7 +553,7 @@ export default {
               this.formData.extWhitelistExplainOssKeys || []
             ).filter((file) => file && file.name);
 
-            if (this.formData.addressList.length >= 10) {
+            if (this.formData.addressList.length > 10) {
               if (validFileList.length === 0) {
                 callback(new Error("超过10个白名单需提交相关文件"));
                 return;
