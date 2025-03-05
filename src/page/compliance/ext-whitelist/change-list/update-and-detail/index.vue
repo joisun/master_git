@@ -171,7 +171,7 @@
             >
               <el-upload
                 ref="upload"
-                v-model="formData.excludeOssKey"
+                v-model="formData.iccidsOssKey"
                 :disabled="commonDisabled"
                 accept=".pdf,.xlsx,.docx"
                 :limit="1"
@@ -199,7 +199,10 @@
                   slot-scope="{ file }"
                   style="display: flex; justify-content: space-between"
                 >
-                  <span style="cursor: pointer" @click="downloadFile">
+                  <span
+                    style="cursor: pointer"
+                    @click="() => downloadFile(formData.iccidsOssKey)"
+                  >
                     <i class="el-icon-download"></i> {{ file.name }}</span
                   >
                   <i class="el-icon-close" @click="removeFile"></i>
@@ -306,6 +309,92 @@
             :disabled="disabledWithSellerRole"
             @change="ipDomainsChange"
           />
+
+          <el-form-item
+            prop="extWhitelistExplainOssKeys"
+            :rules="whiteListAddonsRule"
+          >
+            <p>
+              上传附件
+              <span style="font-weight: 600; color: red">
+                根据运营商要求，超过10个白名单则需要上传相关文件说明情况
+              </span>
+            </p>
+            <el-upload
+              ref="upload"
+              :disabled="commonDisabled"
+              accept=".pdf,.xlsx,.docx"
+              :limit="2"
+              drag
+              list-type="list"
+              action="/ajax/common/file/upload"
+              :on-success="onWhiteListUploadSuccess"
+              class="wh-file-upload"
+              :file-list="formData.extWhitelistExplainOssKeys"
+              :on-remove="whitelistFileRemove"
+            >
+              <i slot="default" class="el-icon-upload"></i>
+              <div class="el-upload__text">
+                将文件拖到此处，或<em>点击上传</em>
+              </div>
+              <div slot="tip" class="el-upload__tip">
+                <!-- v-if="!commonDisabled" -->
+                <ul style="text-decoration: underline;color:red;">
+                  <li>
+                    <a
+                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_manage_spec.xlsx"
+                      download
+                      target="_blank"
+                      >移动-工作表 在 定向流量白名单管理规范.xlsx</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_visiting_letter.xlsx"
+                      download
+                      target="_blank"
+                      >移动-物联网卡定向访问承诺函.docx</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_telecom_project_letter.xlsx"
+                      download
+                      target="_blank"
+                      >电信-定向地址客户项目说明函.docx</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_telecom_visiting_letter.xlsx"
+                      download
+                      target="_blank"
+                      >电信-定向地址访问说明函.docx</a
+                    >
+                  </li>
+                </ul>
+
+                <!-- </p> -->
+              </div>
+              <div
+                slot="file"
+                slot-scope="{ file }"
+                style="display: flex; justify-content: space-between"
+              >
+                <span
+                  style="cursor: pointer"
+                  @click="() => downloadFile(file.name)"
+                >
+                  <i class="el-icon-download"></i> {{ file.name }}</span
+                >
+                <i
+                  v-if="!commonDisabled"
+                  class="el-icon-close"
+                  @click="whitelistFileRemove(file)"
+                ></i>
+              </div>
+            </el-upload>
+          </el-form-item>
         </template>
         <el-form-item v-if="!disabledWithSellerRole">
           <el-button type="primary" :loading="loading" @click="onSubmit"
@@ -384,6 +473,7 @@ const submitSchemas = {
     remark: "",
     freePlanChange: false,
     priceOfferShows: [],
+    extWhitelistExplainOssKeys: [],
     extWhitelistWorkOrderSaveDTO: {
       carrier: "",
       submitterId: "",
@@ -455,6 +545,36 @@ export default {
         },
         trigger: "change",
       },
+      whiteListAddonsRule: [
+        {
+          validator: (rule, value, callback) => {
+            // 校验规则： 当白名单 ip 数量大于 10 的时候，需要上传 2 个相关文件
+            const validFileList = (
+              this.formData.extWhitelistExplainOssKeys || []
+            ).filter((file) => file && file.name);
+
+            if (this.formData.addressList.length >= 10) {
+              if (validFileList.length === 0) {
+                callback(new Error("超过10个白名单需提交相关文件"));
+                return;
+              }
+
+              if (validFileList.length === 1) {
+                callback(new Error("请上传两个文件"));
+                return;
+              }
+
+              if (validFileList.length > 2) {
+                callback(new Error("最多只能上传两个文件"));
+                return;
+              }
+            }
+
+            callback();
+          },
+          trigger: "submit",
+        },
+      ],
     };
   },
   watch: {
@@ -643,12 +763,12 @@ export default {
     removeFile() {
       this.$refs.upload.clearFiles();
     },
-    async downloadFile() {
+    async downloadFile(fileKey) {
       const {
         success,
         data: { fileUrl },
       } = await ajax.common.getDownloadUrlByNode({
-        fileKey: this.formData.iccidsOssKey,
+        fileKey,
       });
       if (!success) return false;
       window.open(fileUrl.replace("http", "https"));
@@ -661,6 +781,7 @@ export default {
         this.formData = {
           ...this.formData,
           ...res.data,
+          extWhitelistExplainOssKeys: [], // 在后面回显
         };
         const {
           iccids,
@@ -718,6 +839,27 @@ export default {
         this.$nextTick(() => {
           this.iccidsRulesCheck = true;
         });
+
+        // 白名单新增 ip 的附件文件回显
+        if (
+          res.data.extWhitelistExplainOssKeys &&
+          res.data.extWhitelistExplainOssKeys.length
+        ) {
+          const filePromises = res.data.extWhitelistExplainOssKeys.map(
+            async (fileKey) => {
+              const response = await ajax.common.getDownloadUrlByNode({
+                fileKey,
+              });
+              return {
+                name: fileKey,
+                url: response.data.fileUrl,
+              };
+            }
+          );
+          this.formData.extWhitelistExplainOssKeys = await Promise.all(
+            filePromises
+          );
+        }
       }
     },
     handleTypeChange(v) {
@@ -796,6 +938,7 @@ export default {
         remark,
         carrier,
         freePlanChange,
+        extWhitelistExplainOssKeys,
       } = this.formData;
       const params = {};
       if (type === "TW") {
@@ -830,6 +973,12 @@ export default {
         params.iccids = [];
         params.iccidsOssKey = "";
       }
+
+      if (type === "TW") {
+        params.extWhitelistExplainOssKeys = extWhitelistExplainOssKeys.map(
+          (item) => item.name
+        );
+      }
       return filterQueryParams(params);
     },
     async onSubmit() {
@@ -857,12 +1006,33 @@ export default {
       this.localFileList = [];
       this.formData.fileUrl = "";
     },
+
     async onSuccess(data) {
       if (data && data.data) {
         this.formData.fileUrl = data.data.filePosition;
+        this.formData.iccidsOssKey = data.data.filePosition;
         this.$refs.form.validateField("fileUrl");
       }
     },
+    whitelistFileRemove({ url }) {
+      this.formData.extWhitelistExplainOssKeys =
+        this.formData.extWhitelistExplainOssKeys.filter(
+          (item) => item.url !== url
+        );
+      // 手动触发验证
+      this.$refs.form.validateField("extWhitelistExplainOssKeys");
+    },
+    async onWhiteListUploadSuccess(response) {
+      if (response && response.data) {
+        this.formData.extWhitelistExplainOssKeys.push({
+          name: response.data.filePosition,
+          url: response.data.fileUrl,
+        });
+        // 手动触发验证
+        this.$refs.form.validateField("extWhitelistExplainOssKeys");
+      }
+    },
+
     ipDomainsChange(data, type) {
       this.formData.addressList = data;
       if (type === "DEL") {
