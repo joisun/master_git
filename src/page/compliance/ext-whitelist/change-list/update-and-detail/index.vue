@@ -309,7 +309,6 @@
             :disabled="disabledWithSellerRole"
             @change="ipDomainsChange"
           />
-
           <el-form-item
             prop="extWhitelistExplainOssKeys"
             :rules="whiteListAddonsRule"
@@ -338,8 +337,7 @@
                 将文件拖到此处，或<em>点击上传</em>
               </div>
               <div slot="tip" class="el-upload__tip">
-                <!-- v-if="!commonDisabled" -->
-                <ul style="text-decoration: underline;color:red;">
+                <ul v-if="!commonDisabled" style="text-decoration: underline; color: red">
                   <li>
                     <a
                       href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_manage_spec.xlsx"
@@ -553,7 +551,10 @@ export default {
               this.formData.extWhitelistExplainOssKeys || []
             ).filter((file) => file && file.name);
 
-            if (this.formData.addressList.length > 10) {
+            if (
+              this.formData.addressList.filter((item) => item.action !== "DEL")
+                .length > 10
+            ) {
               if (validFileList.length === 0) {
                 callback(new Error("超过10个白名单需提交相关文件"));
                 return;
