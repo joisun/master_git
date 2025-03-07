@@ -319,82 +319,85 @@
                 根据运营商要求，超过10个白名单则需要上传相关文件说明情况
               </span>
             </p>
-            <el-upload
-              ref="upload"
-              :disabled="commonDisabled"
-              accept=".pdf,.xlsx,.docx"
-              :limit="2"
-              drag
-              list-type="list"
-              action="/ajax/common/file/upload"
-              :on-success="onWhiteListUploadSuccess"
-              class="wh-file-upload"
-              :file-list="formData.extWhitelistExplainOssKeys"
-              :on-remove="whitelistFileRemove"
-            >
-              <i slot="default" class="el-icon-upload"></i>
-              <div class="el-upload__text">
-                将文件拖到此处，或<em>点击上传</em>
-              </div>
-              <div slot="tip" class="el-upload__tip">
-                <ul v-if="!commonDisabled" style="text-decoration: underline; color: red">
-                  <li>
-                    <a
-                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_manage_spec.xlsx"
-                      download
-                      target="_blank"
-                      >移动-工作表 在 定向流量白名单管理规范.xlsx</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_visiting_letter.xlsx"
-                      download
-                      target="_blank"
-                      >移动-物联网卡定向访问承诺函.docx</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_telecom_project_letter.xlsx"
-                      download
-                      target="_blank"
-                      >电信-定向地址客户项目说明函.docx</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_telecom_visiting_letter.xlsx"
-                      download
-                      target="_blank"
-                      >电信-定向地址访问说明函.docx</a
-                    >
-                  </li>
-                </ul>
-
-                <!-- </p> -->
-              </div>
-              <div
-                slot="file"
-                slot-scope="{ file }"
-                style="display: flex; justify-content: space-between"
+            <div style="display: flex; gap: 2rem">
+              <el-upload
+                ref="upload"
+                :disabled="commonDisabled"
+                accept=".pdf,.xlsx,.docx"
+                :limit="2"
+                drag
+                list-type="list"
+                action="/ajax/common/file/upload"
+                :on-success="onWhiteListUploadSuccess"
+                class="wh-file-upload"
+                :file-list="formData.extWhitelistExplainOssKeys"
+                :on-remove="whitelistFileRemove"
               >
-                <span
-                  style="cursor: pointer"
-                  @click="() => downloadFile(file.name)"
+                <i slot="default" class="el-icon-upload"></i>
+                <div class="el-upload__text">
+                  将文件拖到此处，或<em>点击上传</em>
+                </div>
+                <div slot="tip" class="el-upload__tip">
+                  <!-- </p> -->
+                </div>
+                <div
+                  slot="file"
+                  slot-scope="{ file }"
+                  style="display: flex; justify-content: space-between"
                 >
-                  <i class="el-icon-download"></i> {{ file.name }}</span
-                >
-                <i
-                  v-if="!commonDisabled"
-                  class="el-icon-close"
-                  @click="whitelistFileRemove(file)"
-                ></i>
-              </div>
-            </el-upload>
+                  <span
+                    style="cursor: pointer"
+                    @click="() => downloadFile(file.name)"
+                  >
+                    <i class="el-icon-download"></i> {{ file.name }}</span
+                  >
+                  <i
+                    v-if="!commonDisabled"
+                    class="el-icon-close"
+                    @click="whitelistFileRemove(file)"
+                  ></i>
+                </div>
+              </el-upload>
+              <ul style="color: red; line-height: 1.8; color: #909399">
+                <p style="color: #303133; font-weight: 600">模板文件</p>
+                <!-- <ul v-if="!commonDisabled" style="text-decoration: underline; color: red"> -->
+                <li style="text-decoration: underline">
+                  <a
+                    href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_manage_spec.xlsx"
+                    download
+                    target="_blank"
+                    >移动-工作表 在 定向流量白名单管理规范.xlsx</a
+                  >
+                </li>
+                <li style="text-decoration: underline">
+                  <a
+                    href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_cmcc_visiting_letter.xlsx"
+                    download
+                    target="_blank"
+                    >移动-物联网卡定向访问承诺函.docx</a
+                  >
+                </li>
+                <li style="text-decoration: underline">
+                  <a
+                    href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_telecom_project_letter.xlsx"
+                    download
+                    target="_blank"
+                    >电信-定向地址客户项目说明函.docx</a
+                  >
+                </li>
+                <li style="text-decoration: underline">
+                  <a
+                    href="https://simboss-public.oss-cn-hangzhou.aliyuncs.com/template/whitelist/compliance_telecom_visiting_letter.xlsx"
+                    download
+                    target="_blank"
+                    >电信-定向地址访问说明函.docx</a
+                  >
+                </li>
+              </ul>
+            </div>
           </el-form-item>
         </template>
-        <el-form-item v-if="!disabledWithSellerRole">
+        <el-form-item v-if="!disabledWithSellerRole" style="margin-top: 40px">
           <el-button type="primary" :loading="loading" @click="onSubmit"
             >提交</el-button
           >
@@ -556,7 +559,7 @@ export default {
                 .length > 10
             ) {
               if (validFileList.length === 0) {
-                callback(new Error("超过10个白名单需提交相关文件"));
+                callback(new Error("超过10个白名单请上传相关材料哦！"));
                 return;
               }
 
