@@ -22,6 +22,8 @@ import MissionList from '@/page/crm/children/mission/missionList.vue'
 import Kanban from '@/page/crm/children/kanban/kanban.vue'
 import OrderSetting from '@/page/crm/children/orderSetting/orderSetting.vue'
 
+import BoKanban from '@/page/crm/children/boKanban/boKanban.vue'
+
 export default {
   path: 'crm',
   name: 'crm',
@@ -127,6 +129,11 @@ export default {
       path: 'kanban',
       name: 'crm-kanban',
       component: Kanban
+    },
+    {
+      path: 'bokanban',
+      name: 'bo-kanban',
+      component: BoKanban
     },
     {
       path: 'order-setting',
