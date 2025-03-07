@@ -216,6 +216,14 @@ export default [
       {
         path: "/international/use-location-manage/use-location-group-list",
         name: "international-use-location-group-list",
+      {
+        path: "/international/version-manage/hardware",
+        name: "international-version-manage-hardware",
+        component: LadyLiberty,
+      },
+      {
+        path: "/international/version-manage/software",
+        name: "international-version-manage-software",
         component: LadyLiberty,
       },
     ],
